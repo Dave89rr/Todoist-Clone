@@ -1,4 +1,3 @@
-from turtle import color
 from flask import Blueprint, request
 from ..forms import ProjectForm
 from ..models import db, Project
