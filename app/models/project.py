@@ -18,6 +18,8 @@ class Project(db.Model):
             id=self.id,
             ownerId=self.ownerId,
             name=self.name,
+            color=self.color,
+            view=self.view,
             createdAt=self.createdAt,
             updatedAt=self.updatedAt,
         )
