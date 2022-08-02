@@ -109,6 +109,8 @@ const projects = (state = {}, action) => {
 
   switch (action.type) {
     case CREATE_PROJECT: {
+      const { project } = action;
+      newState[project.id] = project;
       return newState;
     }
     case GET_PROJECT: {
