@@ -117,12 +117,19 @@ const projects = (state = {}, action) => {
       return newState;
     }
     case GET_ALL_PROJECTS: {
+      const { projects } = action;
+      projects.forEach((project) => {
+        newState[project.id] = project;
+      });
       return newState;
     }
     case UPDATE_PROJECT: {
+      const { project } = action;
+      newState[project.id] = { ...newState[project.id], ...project };
       return newState;
     }
     case DELETE_PROJECT: {
+      delete newState[action.projectId];
       return newState;
     }
     default:
