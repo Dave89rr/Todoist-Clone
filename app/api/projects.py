@@ -32,3 +32,17 @@ def create():
     db.session.commit()
     return newProject.toDict()
     # return 400
+
+
+@project.route('/update', methods=['PATCH'])
+def update():
+    data = request.json
+    project = Project.query.get(data['id'])
+
+    project.ownerId = data['ownerId']
+    project.name = data['name']
+    project.color = data['color']
+    project.view = data['view']
+
+    db.session.commit()
+    return project.toDict()
