@@ -46,3 +46,10 @@ def update():
 
     db.session.commit()
     return project.toDict()
+
+@project.route('/delete', methods=['DELETE'])
+def delete():
+    data = request.json
+    Project.query.filter_by(id=data['id']).delete()
+    db.session.commit()
+    return data
