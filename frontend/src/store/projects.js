@@ -49,11 +49,76 @@ const actionDeleteProject = (projectId) => {
 
 //**************** THUNKS ***********************************//
 
+export const thunkCreateProject = (project) => async (dispatch) => {
+  const response = await fetch('/api/project/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(project),
+  });
+
+  if (response.ok) {
+    const project = await response.json();
+    dispatch(actionCreateProject(project));
+  }
+};
+
 export const thunkGetAllProjects = (ownerId) => async (dispatch) => {
   const response = await fetch(`/api/projects/all/${ownerId}`);
 
   if (response.ok) {
     const projects = await response.json();
     dispatch(actionGetAllProjects(projects));
+  }
+};
+
+export const thunkUpdateProject = (project) => async (dispatch) => {
+  const response = await fetch('/api/w/update', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(project),
+  });
+
+  if (response.ok) {
+    const project = await response.json();
+    dispatch(actionEditProject(project));
+  }
+};
+
+export const thunkDeleteProject = (projectId) => async (dispatch) => {
+  const response = await fetch('/api/w/delete', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ projectId }),
+  });
+
+  if (response.ok) {
+    dispatch(actionDeleteProject(projectId));
+  }
+};
+
+//**************** REDUCER **********************************//
+
+const projects = (state = {}, action) => {
+  let newState = JSON.parse(JSON.stringify(state));
+
+  switch (action.type) {
+    case CREATE_PROJECT: {
+    }
+    case GET_PROJECT: {
+    }
+    case GET_ALL_PROJECTS: {
+    }
+    case UPDATE_PROJECT: {
+    }
+    case DELETE_PROJECT: {
+    }
+    default:
+      return state;
   }
 };
