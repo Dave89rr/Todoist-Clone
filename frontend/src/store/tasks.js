@@ -109,18 +109,27 @@ const tasks = (state = {}, action) => {
 
   switch (action.type) {
     case CREATE_TASK: {
+      const { task } = action;
+      newState[task.id] = task;
       return newState;
     }
     case GET_TASK: {
       return newState;
     }
     case GET_ALL_TASKS: {
+      const { tasks } = action;
+      tasks.forEach((task) => {
+        newState[task.id] = task;
+      });
       return newState;
     }
     case UPDATE_TASK: {
+      const { task } = action;
+      newState[task.id] = { ...newState[task.id], ...task };
       return newState;
     }
     case DELETE_TASK: {
+      delete newState[action.taskId];
       return newState;
     }
     default:
