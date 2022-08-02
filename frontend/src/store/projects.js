@@ -33,7 +33,7 @@ const actionGetAllProjects = (projects) => {
   };
 };
 
-const actionEditProject = (project) => {
+const actionUpdateProject = (project) => {
   return {
     type: UPDATE_PROJECT,
     project,
@@ -84,7 +84,7 @@ export const thunkUpdateProject = (project) => async (dispatch) => {
 
   if (response.ok) {
     const project = await response.json();
-    dispatch(actionEditProject(project));
+    dispatch(actionUpdateProject(project));
   }
 };
 
@@ -122,3 +122,5 @@ const projects = (state = {}, action) => {
       return state;
   }
 };
+
+export default projects;
