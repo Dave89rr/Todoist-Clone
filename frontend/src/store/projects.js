@@ -109,14 +109,19 @@ const projects = (state = {}, action) => {
 
   switch (action.type) {
     case CREATE_PROJECT: {
+      return newState;
     }
     case GET_PROJECT: {
+      return newState;
     }
     case GET_ALL_PROJECTS: {
+      return newState;
     }
     case UPDATE_PROJECT: {
+      return newState;
     }
     case DELETE_PROJECT: {
+      return newState;
     }
     default:
       return state;
