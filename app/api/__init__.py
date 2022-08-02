@@ -1,3 +1,3 @@
-from .auth_routes import auth_route
-from .user_routes import user_route
+from .auth_routes import auth_routes
+from .user_routes import user_routes
 from .projects import project
