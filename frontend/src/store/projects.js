@@ -69,7 +69,7 @@ export const thunkGetAllProjects = (ownerId) => async (dispatch) => {
 
   if (response.ok) {
     const projects = await response.json();
-    dispatch(actionGetAllProjects(projects));
+    dispatch(actionGetAllProjects(projects.projects));
   }
 };
 
