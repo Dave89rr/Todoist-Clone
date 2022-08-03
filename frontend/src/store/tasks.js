@@ -2,7 +2,7 @@
 
 const CREATE_TASK = 'task/CREATE_TASK';
 
-const GET_TASK = 'task/GET_TASK';
+// const GET_TASK = 'task/GET_TASK';
 
 const GET_ALL_TASKS = 'task/GET_ALL_TASKS';
 
@@ -19,12 +19,12 @@ const actionCreateTask = (task) => {
   };
 };
 
-const actionGetTask = (task) => {
-  return {
-    type: GET_TASK,
-    task,
-  };
-};
+// const actionGetTask = (task) => {
+//   return {
+//     type: GET_TASK,
+//     task,
+//   };
+// };
 
 const actionGetAllTasks = (tasks) => {
   return {
@@ -88,17 +88,17 @@ export const thunkUpdateTask = (task) => async (dispatch) => {
   }
 };
 
-export const thunkDeleteTask = (taskId) => async (dispatch) => {
+export const thunkDeleteTask = (id) => async (dispatch) => {
   const response = await fetch('/api/tasks/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ taskId }),
+    body: JSON.stringify({ id }),
   });
 
   if (response.ok) {
-    dispatch(actionDeleteTask(taskId));
+    dispatch(actionDeleteTask(id));
   }
 };
 
@@ -113,9 +113,9 @@ const tasks = (state = {}, action) => {
       newState[task.id] = task;
       return newState;
     }
-    case GET_TASK: {
-      return newState;
-    }
+    // case GET_TASK: {
+    //   return newState;
+    // }
     case GET_ALL_TASKS: {
       const { tasks } = action;
       tasks.forEach((task) => {

@@ -39,6 +39,10 @@ def create():
 @task.route('/update', methods=['PATCH'])
 def update():
     data = request.json
+    print('************************')
+    print('************************')
+    print('************************')
+    print(data)
     task = Task.query.get(data['id'])
 
     task.ownerId = data['ownerId'],

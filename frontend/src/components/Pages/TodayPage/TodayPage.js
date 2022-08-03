@@ -1,22 +1,19 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetAllProjects } from '../../../store/projects';
-import { thunkGetAllTasks } from '../../../store/tasks';
+import { thunkDeleteProject } from '../../../store/projects';
+import { thunkDeleteTask } from '../../../store/tasks';
+import EditTaskForm from '../../Forms/EditTaskForm';
+import EditProjectForm from '../../Forms/EditProjectForm';
 import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 
 function TodayPage() {
-  const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(thunkGetAllProjects(user.id));
-  }, []);
-  useEffect(() => {
-    dispatch(thunkGetAllTasks(user.id));
-  }, []);
+  const [viewEditTask, setViewEditTask] = useState(false);
+  const [viewEditProject, setViewEditProject] = useState(false);
 
   let projArr;
   if (projects) {
@@ -35,14 +32,40 @@ function TodayPage() {
       {projArr.length > 0 &&
         projArr.map((project) => {
           return (
-            <div>
-              <span>{project.name}</span>
+            <div key={project.id}>
+              <span>
+                {project.name} - {project.id}{' '}
+                <button
+                  onClick={() => dispatch(thunkDeleteProject(project.id))}
+                >
+                  Del Proj
+                </button>
+                <button onClick={() => setViewEditProject(true)}>
+                  Edit Project
+                </button>{' '}
+              </span>
+              {viewEditProject && <EditProjectForm projectProp={project} />}
               <ul>
                 {taskArr.map((task) => {
-                  console.log('task', task);
                   if (task.projectId === project.id) {
-                    return <li>{task.name}</li>;
+                    return (
+                      <li key={task.id}>
+                        {task.name}{' '}
+                        <span>
+                          <button
+                            onClick={() => dispatch(thunkDeleteTask(task.id))}
+                          >
+                            Delete
+                          </button>
+                          <button onClick={() => setViewEditTask(true)}>
+                            Edit Task
+                          </button>
+                          {viewEditTask && <EditTaskForm taskProp={task} />}
+                        </span>
+                      </li>
+                    );
                   }
+                  return null;
                 })}
               </ul>
             </div>
