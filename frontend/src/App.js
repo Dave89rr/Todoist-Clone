@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/Forms/LoginForm';
+import LoginPage from './components/Pages/LoginPage';
+import TodayPage from './components/Pages/TodayPage';
 import SignUpForm from './components/Forms/SignUpForm';
 import NavBar from './components/Elements/NavBar';
 import ProtectedRoute from './components/utils/ProtectedRoute';
@@ -28,8 +29,8 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
+        <Route path="/" exact={true}>
+          <LoginPage />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
@@ -40,8 +41,8 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+        <ProtectedRoute path="/today" exact={true}>
+          <TodayPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
