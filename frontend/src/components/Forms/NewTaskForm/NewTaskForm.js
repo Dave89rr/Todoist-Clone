@@ -4,6 +4,7 @@ import { thunkCreateTask } from '../../../store/tasks';
 
 function NewTaskForm() {
   const user = useSelector((state) => state.session.user);
+  const projects = useSelector((state) => state.projects);
   const dispatch = useDispatch();
 
   const [validationErrors, setValidationErrors] = useState([]);
@@ -13,6 +14,9 @@ function NewTaskForm() {
   const [projectId, setProjectId] = useState('');
   const [priority, setPriority] = useState(2);
   const [dueDate, setDueDate] = useState(new Date());
+
+  const projArr = Object.values(projects);
+  console.log(projArr);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +90,16 @@ function NewTaskForm() {
         />
       </div>
       <div>
-        <label htmlFor="projectId">ProjectId</label>
+        <label htmlFor="projectId">Project</label>
+        <select onChange={(e) => setProjectId(e.target.value)}>
+          {projArr.map((project, id) => {
+            return (
+              <option key={id} value={project.id}>
+                {project.name}
+              </option>
+            );
+          })}
+        </select>
         <input
           name="projectId"
           type="text"

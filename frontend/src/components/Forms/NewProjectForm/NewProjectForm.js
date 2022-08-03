@@ -13,7 +13,6 @@ function NewProjectForm() {
   const [view, setView] = useState('false');
 
   const colorsArr = Object.values(colors);
-  console.log(colorsArr);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,14 +69,13 @@ function NewProjectForm() {
       </div>
       <div>
         <label htmlFor="color">Color</label>
-        <select onChange={(e) => setColor(e.target.value)}>
+        <select
+          defaultValue={'#808080'}
+          onChange={(e) => setColor(e.target.value)}
+        >
           {colorsArr.map((color, id) => {
             return (
-              <option
-                key={id}
-                value={color[1]}
-                selected={color[1] === colorState}
-              >
+              <option key={id} value={color[1]}>
                 {color[0]}
               </option>
             );
