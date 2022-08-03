@@ -9,16 +9,23 @@ function NewProjectForm() {
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [color, setColor] = useState('Charcoal');
-  const [view, setView] = useState(false);
+  const [view, setView] = useState('false');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
-    const project = {
+    let viewBool;
+    if (view === 'false') {
+      viewBool = false;
+    } else {
+      viewBool = true;
+    }
+    let project;
+    project = {
       ownerId: user.id,
       name,
       color,
-      view,
+      view: viewBool,
     };
 
     if (name.length === 0) {
@@ -31,7 +38,7 @@ function NewProjectForm() {
       dispatch(thunkCreateProject(project));
       setName('');
       setColor('Charcoal');
-      setView(false);
+      setView('false');
     }
   };
 
@@ -66,13 +73,26 @@ function NewProjectForm() {
         />
       </div>
       <div>
-        <label htmlFor="view">View</label>
-        <input
-          name="view"
-          type="text"
-          value={view}
-          onChange={(e) => setView(e.target.value)}
-        />
+        <label htmlFor="viewList">
+          <span>List</span>
+          <input
+            name="viewList"
+            type="radio"
+            value="false"
+            checked={view === 'false'}
+            onChange={(e) => setView(e.target.value)}
+          />
+        </label>
+        <label htmlFor="viewSection">
+          <span>Section</span>
+          <input
+            name="viewSection"
+            type="radio"
+            value="true"
+            checked={view === 'true'}
+            onChange={(e) => setView(e.target.value)}
+          />
+        </label>
       </div>
       <button>Cancel</button>
       <button type="submit">Add</button>
