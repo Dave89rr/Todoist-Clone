@@ -107,7 +107,6 @@ function NewProjectForm() {
       <button
         onClick={(e) => {
           e.preventDefault();
-          console.log('Canceled');
         }}
       >
         Cancel

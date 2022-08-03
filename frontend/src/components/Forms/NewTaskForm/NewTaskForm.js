@@ -16,7 +16,6 @@ function NewTaskForm() {
   const [dueDate, setDueDate] = useState(new Date());
 
   const projArr = Object.values(projects);
-  console.log(projArr);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +47,7 @@ function NewTaskForm() {
       setPosition('');
       setProjectId('');
       setPriority(2);
-      setDueDate('');
+      setDueDate(new Date());
     }
   };
 
