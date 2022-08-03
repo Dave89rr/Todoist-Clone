@@ -74,7 +74,7 @@ export const thunkGetAllTasks = (ownerId) => async (dispatch) => {
 };
 
 export const thunkUpdateTask = (task) => async (dispatch) => {
-  const response = await fetch('/api/w/update', {
+  const response = await fetch('/api/tasks/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const thunkUpdateTask = (task) => async (dispatch) => {
 };
 
 export const thunkDeleteTask = (taskId) => async (dispatch) => {
-  const response = await fetch('/api/w/delete', {
+  const response = await fetch('/api/tasks/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

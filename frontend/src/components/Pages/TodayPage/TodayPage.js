@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProjects } from '../../../store/projects';
 import { thunkGetAllTasks } from '../../../store/tasks';
 import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
+import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 
 function TodayPage() {
   const user = useSelector((state) => state.session.user);
@@ -27,7 +28,10 @@ function TodayPage() {
   }
   return (
     <div>
+      <h1>New Project</h1>
       <NewProjectForm />
+      <h1>New Task</h1>
+      <NewTaskForm />
       {projArr.length > 0 &&
         projArr.map((project) => {
           return (
