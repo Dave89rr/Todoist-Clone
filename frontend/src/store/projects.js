@@ -50,7 +50,7 @@ const actionDeleteProject = (projectId) => {
 //**************** THUNKS ***********************************//
 
 export const thunkCreateProject = (project) => async (dispatch) => {
-  const response = await fetch('/api/project/create', {
+  const response = await fetch('/api/projects/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const thunkGetAllProjects = (ownerId) => async (dispatch) => {
 };
 
 export const thunkUpdateProject = (project) => async (dispatch) => {
-  const response = await fetch('/api/w/update', {
+  const response = await fetch('/api/projects/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const thunkUpdateProject = (project) => async (dispatch) => {
 };
 
 export const thunkDeleteProject = (projectId) => async (dispatch) => {
-  const response = await fetch('/api/w/delete', {
+  const response = await fetch('/api/projects/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
