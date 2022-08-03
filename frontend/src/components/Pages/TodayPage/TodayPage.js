@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllProjects } from '../../../store/projects';
-import { thunkGetAllTasks } from '../../../store/tasks';
+import { thunkGetAllTasks, thunkDeleteTask } from '../../../store/tasks';
 import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 
@@ -36,12 +36,25 @@ function TodayPage() {
         projArr.map((project) => {
           return (
             <div>
-              <span>{project.name}</span>
+              <span>
+                {project.name} - {project.id}
+              </span>
               <ul>
                 {taskArr.map((task) => {
                   console.log('task', task);
                   if (task.projectId === project.id) {
-                    return <li>{task.name}</li>;
+                    return (
+                      <li>
+                        {task.name}{' '}
+                        <span>
+                          <button
+                            onClick={() => dispatch(thunkDeleteTask(task.id))}
+                          >
+                            Delete
+                          </button>
+                        </span>
+                      </li>
+                    );
                   }
                 })}
               </ul>

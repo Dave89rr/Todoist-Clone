@@ -88,17 +88,17 @@ export const thunkUpdateTask = (task) => async (dispatch) => {
   }
 };
 
-export const thunkDeleteTask = (taskId) => async (dispatch) => {
+export const thunkDeleteTask = (id) => async (dispatch) => {
   const response = await fetch('/api/tasks/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ taskId }),
+    body: JSON.stringify({ id }),
   });
 
   if (response.ok) {
-    dispatch(actionDeleteTask(taskId));
+    dispatch(actionDeleteTask(id));
   }
 };
 
