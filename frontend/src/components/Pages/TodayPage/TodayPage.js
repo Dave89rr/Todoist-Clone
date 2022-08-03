@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkDeleteProject } from '../../../store/projects';
 import { thunkDeleteTask } from '../../../store/tasks';
+import EditTaskForm from '../../Forms/EditTaskForm';
 import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 
@@ -8,6 +10,8 @@ function TodayPage() {
   const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
+
+  const [viewEdit, setViewEdit] = useState(false);
 
   let projArr;
   if (projects) {
@@ -47,6 +51,10 @@ function TodayPage() {
                           >
                             Delete
                           </button>
+                          <button onClick={() => setViewEdit(true)}>
+                            Edit Task
+                          </button>
+                          {viewEdit && <EditTaskForm taskProp={task} />}
                         </span>
                       </li>
                     );

@@ -39,6 +39,10 @@ def create():
 @task.route('/update', methods=['PATCH'])
 def update():
     data = request.json
+    print('************************')
+    print('************************')
+    print('************************')
+    print(data)
     task = Task.query.get(data['id'])
 
     task.ownerId = data['ownerId'],
@@ -55,10 +59,6 @@ def update():
 @task.route('/delete', methods=['DELETE'])
 def delete():
     data = request.json
-    print('************************')
-    print('************************')
-    print('************************')
-    print(data)
     Task.query.filter_by(id=data['id']).delete()
     db.session.commit()
     return data
