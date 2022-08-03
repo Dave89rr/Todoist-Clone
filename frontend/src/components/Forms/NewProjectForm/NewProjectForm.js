@@ -4,15 +4,20 @@ import { thunkCreateProject } from '../../../store/projects';
 
 function NewProjectForm() {
   const user = useSelector((state) => state.session.user);
+  const colors = useSelector((state) => state.colors);
   const dispatch = useDispatch();
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
-  const [color, setColor] = useState('Charcoal');
+  const [colorState, setColor] = useState('#808080');
   const [view, setView] = useState('false');
+
+  const colorsArr = Object.values(colors);
+  console.log(colorsArr);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const errors = [];
     let viewBool;
     if (view === 'false') {
@@ -24,7 +29,7 @@ function NewProjectForm() {
     project = {
       ownerId: user.id,
       name,
-      color,
+      color: colorState,
       view: viewBool,
     };
 
@@ -37,7 +42,7 @@ function NewProjectForm() {
       setValidationErrors([]);
       dispatch(thunkCreateProject(project));
       setName('');
-      setColor('Charcoal');
+      setColor('#808080');
       setView('false');
     }
   };
@@ -65,12 +70,19 @@ function NewProjectForm() {
       </div>
       <div>
         <label htmlFor="color">Color</label>
-        <input
-          name="color"
-          type="text"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        />
+        <select onChange={(e) => setColor(e.target.value)}>
+          {colorsArr.map((color, id) => {
+            return (
+              <option
+                key={id}
+                value={color[1]}
+                selected={color[1] === colorState}
+              >
+                {color[0]}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div>
         <label htmlFor="viewList">
@@ -94,7 +106,14 @@ function NewProjectForm() {
           />
         </label>
       </div>
-      <button>Cancel</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          console.log('Canceled');
+        }}
+      >
+        Cancel
+      </button>
       <button type="submit">Add</button>
     </form>
   );
