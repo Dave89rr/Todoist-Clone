@@ -12,11 +12,15 @@ function NewTaskForm() {
   const [position, setPosition] = useState('');
   const [projectId, setProjectId] = useState('');
   const [priority, setPriority] = useState(2);
-  const [dueDate, setDueDate] = useState(Date.now());
+  const [dueDate, setDueDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
+    // TODO - this is just to avoid errors during testing submits
+    if (dueDate === '') {
+      setDueDate(new Date());
+    }
     const task = {
       ownerId: user.id,
       name,

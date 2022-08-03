@@ -4,8 +4,8 @@ import { thunkDeleteProject } from '../../../store/projects';
 import { thunkDeleteTask } from '../../../store/tasks';
 import EditTaskForm from '../../Forms/EditTaskForm';
 import EditProjectForm from '../../Forms/EditProjectForm';
-import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
-import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
+import NewProjectForm from '../../Forms/NewProjectForm/';
+import NewTaskForm from '../../Forms/NewTaskForm/';
 
 function TodayPage() {
   const projects = useSelector((state) => state.projects);
