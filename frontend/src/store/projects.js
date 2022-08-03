@@ -2,7 +2,7 @@
 
 const CREATE_PROJECT = 'project/CREATE_PROJECT';
 
-const GET_PROJECT = 'project/GET_PROJECT';
+// const GET_PROJECT = 'project/GET_PROJECT';
 
 const GET_ALL_PROJECTS = 'project/GET_ALL_PROJECTS';
 
@@ -19,12 +19,12 @@ const actionCreateProject = (project) => {
   };
 };
 
-const actionGetProject = (project) => {
-  return {
-    type: GET_PROJECT,
-    project,
-  };
-};
+// const actionGetProject = (project) => {
+//   return {
+//     type: GET_PROJECT,
+//     project,
+//   };
+// };
 
 const actionGetAllProjects = (projects) => {
   return {
@@ -113,9 +113,9 @@ const projects = (state = {}, action) => {
       newState[project.id] = project;
       return newState;
     }
-    case GET_PROJECT: {
-      return newState;
-    }
+    // case GET_PROJECT: {
+    //   return newState;
+    // }
     case GET_ALL_PROJECTS: {
       const { projects } = action;
       projects.forEach((project) => {

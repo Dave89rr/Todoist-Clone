@@ -2,7 +2,7 @@
 
 const CREATE_TASK = 'task/CREATE_TASK';
 
-const GET_TASK = 'task/GET_TASK';
+// const GET_TASK = 'task/GET_TASK';
 
 const GET_ALL_TASKS = 'task/GET_ALL_TASKS';
 
@@ -19,12 +19,12 @@ const actionCreateTask = (task) => {
   };
 };
 
-const actionGetTask = (task) => {
-  return {
-    type: GET_TASK,
-    task,
-  };
-};
+// const actionGetTask = (task) => {
+//   return {
+//     type: GET_TASK,
+//     task,
+//   };
+// };
 
 const actionGetAllTasks = (tasks) => {
   return {
@@ -113,9 +113,9 @@ const tasks = (state = {}, action) => {
       newState[task.id] = task;
       return newState;
     }
-    case GET_TASK: {
-      return newState;
-    }
+    // case GET_TASK: {
+    //   return newState;
+    // }
     case GET_ALL_TASKS: {
       const { tasks } = action;
       tasks.forEach((task) => {

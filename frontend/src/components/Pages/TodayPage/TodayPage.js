@@ -1,25 +1,13 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  thunkGetAllProjects,
-  thunkDeleteProject,
-} from '../../../store/projects';
-import { thunkGetAllTasks, thunkDeleteTask } from '../../../store/tasks';
+import { thunkDeleteProject } from '../../../store/projects';
+import { thunkDeleteTask } from '../../../store/tasks';
 import NewProjectForm from '../../Forms/NewProjectForm/NewProjectForm';
 import NewTaskForm from '../../Forms/NewTaskForm/NewTaskForm';
 
 function TodayPage() {
-  const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(thunkGetAllProjects(user.id));
-  }, []);
-  useEffect(() => {
-    dispatch(thunkGetAllTasks(user.id));
-  }, []);
 
   let projArr;
   if (projects) {
@@ -38,7 +26,7 @@ function TodayPage() {
       {projArr.length > 0 &&
         projArr.map((project) => {
           return (
-            <div>
+            <div key={project.id}>
               <span>
                 {project.name} - {project.id}{' '}
                 <button
@@ -49,10 +37,9 @@ function TodayPage() {
               </span>
               <ul>
                 {taskArr.map((task) => {
-                  console.log('task', task);
                   if (task.projectId === project.id) {
                     return (
-                      <li>
+                      <li key={task.id}>
                         {task.name}{' '}
                         <span>
                           <button
@@ -64,6 +51,7 @@ function TodayPage() {
                       </li>
                     );
                   }
+                  return null;
                 })}
               </ul>
             </div>
