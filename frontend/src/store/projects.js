@@ -88,17 +88,17 @@ export const thunkUpdateProject = (project) => async (dispatch) => {
   }
 };
 
-export const thunkDeleteProject = (projectId) => async (dispatch) => {
+export const thunkDeleteProject = (id) => async (dispatch) => {
   const response = await fetch('/api/projects/delete', {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ projectId }),
+    body: JSON.stringify({ id }),
   });
 
   if (response.ok) {
-    dispatch(actionDeleteProject(projectId));
+    dispatch(actionDeleteProject(id));
   }
 };
 
