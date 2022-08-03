@@ -69,7 +69,7 @@ export const thunkGetAllTasks = (ownerId) => async (dispatch) => {
 
   if (response.ok) {
     const tasks = await response.json();
-    dispatch(actionGetAllTasks(tasks));
+    dispatch(actionGetAllTasks(tasks.tasks));
   }
 };
 
