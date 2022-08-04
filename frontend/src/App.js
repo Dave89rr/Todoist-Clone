@@ -17,6 +17,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -40,7 +41,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar
+        setViewNewTaskForm={setViewNewTaskForm}
+        viewNewTaskForm={viewNewTaskForm}
+      />
       <Switch>
         <Route path="/" exact={true}>
           <HomePage />
@@ -58,7 +62,10 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/today" exact={true}>
-          <TodayPage />
+          <TodayPage
+            viewNewTaskForm={viewNewTaskForm}
+            setViewNewTaskForm={setViewNewTaskForm}
+          />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

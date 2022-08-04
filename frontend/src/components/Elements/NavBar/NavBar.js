@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/';
 import { useSelector } from 'react-redux';
 
-const NavBar = () => {
+const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
   const user = useSelector((state) => state.session.user);
 
   return (
@@ -29,9 +29,14 @@ const NavBar = () => {
             </div>
           </div>
         ) : (
-          <div>
-            <LogoutButton />
-          </div>
+          <>
+            <button onClick={() => setViewNewTaskForm(!viewNewTaskForm)}>
+              New Task
+            </button>
+            <div>
+              <LogoutButton />
+            </div>
+          </>
         )}
       </div>
     </nav>

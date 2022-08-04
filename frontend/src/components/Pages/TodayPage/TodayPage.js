@@ -10,7 +10,7 @@ import EditProjectForm from '../../Forms/EditProjectForm';
 import NewProjectForm from '../../Forms/NewProjectForm/';
 import NewTaskForm from '../../Forms/NewTaskForm/';
 
-function TodayPage() {
+function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
   const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ function TodayPage() {
   const [viewEditTask, setViewEditTask] = useState(false);
   const [viewEditProject, setViewEditProject] = useState(false);
   const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
-  const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
 
   let projArr;
   if (projects) {
@@ -37,9 +36,7 @@ function TodayPage() {
       <button onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
         New Project
       </button>
-      <button onClick={() => setViewNewTaskForm(!viewNewTaskForm)}>
-        New Task
-      </button>
+
       {viewNewProjectForm ? (
         <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
       ) : null}
