@@ -99,7 +99,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
           />
         </label>
         <label htmlFor="viewSection">
-          <span>Section</span>
+          <span>Boards</span>
           <input
             name="viewSection"
             type="radio"
