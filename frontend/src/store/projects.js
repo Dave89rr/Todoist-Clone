@@ -70,6 +70,15 @@ export const thunkCreateProject = (project) => async (dispatch) => {
   if (response.ok) {
     const project = await response.json();
     dispatch(actionCreateProject(project));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    console.log(data);
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.'];
   }
 };
 
