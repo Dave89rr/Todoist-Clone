@@ -18,7 +18,7 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
             to="/"
             exact={true}
             activeClassName="active"
-            className={`${theme('Font')}`}
+            className={classes.navText}
           >
             Home
           </NavLink>

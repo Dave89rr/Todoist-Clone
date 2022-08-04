@@ -1,5 +1,5 @@
 .nav {
-  height: 5vh;
+  height: 4.1vh;
   display: flex;
   justify-content: center;
 }
@@ -29,4 +29,7 @@
 }
 .falseFont {
   color: var(--font-color-light);
+}
+.navText {
+  color: white;
 }
