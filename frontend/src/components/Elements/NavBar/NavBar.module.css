@@ -1,0 +1,19 @@
+.nav {
+  height: 7.95vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  width: 80%;
+}
+.userInteractions {
+  display: flex;
+  width: 10%;
+  flex-direction: row;
+  gap: 5%;
+}
