@@ -10,6 +10,10 @@ const UPDATE_TASK = 'task/UPDATE_TASK';
 
 const DELETE_TASK = 'task/DELETE_TASK';
 
+const LOGOUT = 'task/LOGOUT';
+
+const DELETE_TASKS_BY_PROJID = 'task/DELETE_TASKS_BY_PROJID';
+
 //**************** ACTIONS **********************************//
 
 const actionCreateTask = (task) => {
@@ -47,6 +51,19 @@ const actionDeleteTask = (taskId) => {
   };
 };
 
+export const actionLogoutTasks = () => {
+  return {
+    type: LOGOUT,
+    payload: {},
+  };
+};
+
+export const actionDeleteTasksByProjId = (id) => {
+  return {
+    type: DELETE_TASKS_BY_PROJID,
+    id,
+  };
+};
 //**************** THUNKS ***********************************//
 
 export const thunkCreateTask = (task) => async (dispatch) => {
@@ -61,6 +78,14 @@ export const thunkCreateTask = (task) => async (dispatch) => {
   if (response.ok) {
     const task = await response.json();
     dispatch(actionCreateTask(task));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.'];
   }
 };
 
@@ -131,6 +156,17 @@ const tasks = (state = {}, action) => {
     case DELETE_TASK: {
       delete newState[action.taskId];
       return newState;
+    }
+    case DELETE_TASKS_BY_PROJID: {
+      for (let key in newState) {
+        if (newState[key].projectId === action.id) {
+          delete newState[key];
+        }
+      }
+      return newState;
+    }
+    case LOGOUT: {
+      return {};
     }
     default:
       return state;

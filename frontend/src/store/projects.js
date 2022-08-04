@@ -10,6 +10,8 @@ const UPDATE_PROJECT = 'project/UPDATE_PROJECT';
 
 const DELETE_PROJECT = 'project/DELETE_PROJECT';
 
+const LOGOUT = 'project/LOGOUT';
+
 //**************** ACTIONS **********************************//
 
 const actionCreateProject = (project) => {
@@ -47,6 +49,13 @@ const actionDeleteProject = (projectId) => {
   };
 };
 
+export const actionLogoutProjects = () => {
+  return {
+    type: LOGOUT,
+    payload: {},
+  };
+};
+
 //**************** THUNKS ***********************************//
 
 export const thunkCreateProject = (project) => async (dispatch) => {
@@ -61,6 +70,14 @@ export const thunkCreateProject = (project) => async (dispatch) => {
   if (response.ok) {
     const project = await response.json();
     dispatch(actionCreateProject(project));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.'];
   }
 };
 
@@ -131,6 +148,9 @@ const projects = (state = {}, action) => {
     case DELETE_PROJECT: {
       delete newState[action.projectId];
       return newState;
+    }
+    case LOGOUT: {
+      return {};
     }
     default:
       return state;

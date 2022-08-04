@@ -4,34 +4,49 @@ import { thunkCreateProject } from '../../../store/projects';
 
 function NewProjectForm() {
   const user = useSelector((state) => state.session.user);
+  const colors = useSelector((state) => state.colors);
   const dispatch = useDispatch();
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
-  const [color, setColor] = useState('Charcoal');
-  const [view, setView] = useState(false);
+  const [colorState, setColor] = useState('#808080');
+  const [view, setView] = useState('false');
+
+  const colorsArr = Object.values(colors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const errors = [];
-    const project = {
+    let viewBool;
+    if (view === 'false') {
+      viewBool = false;
+    } else {
+      viewBool = true;
+    }
+    let project;
+    project = {
       ownerId: user.id,
       name,
-      color,
-      view,
+      color: colorState,
+      view: viewBool,
     };
 
     if (name.length === 0) {
-      errors.push('Name for a project cannot be left blank');
+      errors.push('Name must be between 1 and 50 characters long.');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {
       setValidationErrors([]);
-      dispatch(thunkCreateProject(project));
-      setName('');
-      setColor('Charcoal');
-      setView(false);
+      const data = await dispatch(thunkCreateProject(project));
+      if (data) {
+        setValidationErrors(data);
+      } else {
+        setName('');
+        setColor('#808080');
+        setView('false');
+      }
     }
   };
 
@@ -58,23 +73,48 @@ function NewProjectForm() {
       </div>
       <div>
         <label htmlFor="color">Color</label>
-        <input
-          name="color"
-          type="text"
-          value={color}
+        <select
+          defaultValue={'#808080'}
           onChange={(e) => setColor(e.target.value)}
-        />
+        >
+          {colorsArr.map((color, id) => {
+            return (
+              <option key={id} value={color[1]}>
+                {color[0]}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div>
-        <label htmlFor="view">View</label>
-        <input
-          name="view"
-          type="text"
-          value={view}
-          onChange={(e) => setView(e.target.value)}
-        />
+        <label htmlFor="viewList">
+          <span>List</span>
+          <input
+            name="viewList"
+            type="radio"
+            value="false"
+            checked={view === 'false'}
+            onChange={(e) => setView(e.target.value)}
+          />
+        </label>
+        <label htmlFor="viewSection">
+          <span>Section</span>
+          <input
+            name="viewSection"
+            type="radio"
+            value="true"
+            checked={view === 'true'}
+            onChange={(e) => setView(e.target.value)}
+          />
+        </label>
       </div>
-      <button>Cancel</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        Cancel
+      </button>
       <button type="submit">Add</button>
     </form>
   );

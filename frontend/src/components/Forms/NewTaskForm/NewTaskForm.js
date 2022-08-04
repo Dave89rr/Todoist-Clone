@@ -4,6 +4,7 @@ import { thunkCreateTask } from '../../../store/tasks';
 
 function NewTaskForm() {
   const user = useSelector((state) => state.session.user);
+  const projects = useSelector((state) => state.projects);
   const dispatch = useDispatch();
 
   const [validationErrors, setValidationErrors] = useState([]);
@@ -11,12 +12,18 @@ function NewTaskForm() {
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState('');
   const [projectId, setProjectId] = useState('');
-  const [priority, setPriority] = useState(2);
-  const [dueDate, setDueDate] = useState(Date.now());
+  const [priority, setPriority] = useState(4);
+  const [dueDate, setDueDate] = useState(new Date());
 
+  const projArr = Object.values(projects);
+  let defaultId;
+  if (projArr.length > 0) {
+    defaultId = projArr[0].id;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
+
     const task = {
       ownerId: user.id,
       name,
@@ -28,19 +35,23 @@ function NewTaskForm() {
     };
 
     if (name.length === 0) {
-      errors.push('Name for a project cannot be left blank');
+      errors.push('Name must be between 1 and 30 characters long.');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {
       setValidationErrors([]);
-      dispatch(thunkCreateTask(task));
-      setName('');
-      setDescription('');
-      setPosition('');
-      setProjectId('');
-      setPriority(2);
-      setDueDate('');
+      const data = await dispatch(thunkCreateTask(task));
+      if (data) {
+        setValidationErrors(data);
+      } else {
+        setName('');
+        setDescription('');
+        setPosition('');
+        setProjectId(defaultId);
+        setPriority(2);
+        setDueDate(new Date());
+      }
     }
   };
 
@@ -82,7 +93,19 @@ function NewTaskForm() {
         />
       </div>
       <div>
-        <label htmlFor="projectId">ProjectId</label>
+        <label htmlFor="projectId">Project</label>
+        <select
+          defaultValue={defaultId}
+          onChange={(e) => setProjectId(e.target.value)}
+        >
+          {projArr.map((project, id) => {
+            return (
+              <option key={id} value={project.id}>
+                {project.name}
+              </option>
+            );
+          })}
+        </select>
         <input
           name="projectId"
           type="text"
@@ -103,9 +126,11 @@ function NewTaskForm() {
         <label htmlFor="due_date">Due Date</label>
         <input
           name="due_date"
-          type="text"
+          type="datetime-local"
           value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
+          onChange={(e) => {
+            setDueDate(e.target.value);
+          }}
         />
       </div>
       <button>Cancel</button>

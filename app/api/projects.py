@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from ..forms import ProjectForm
 from ..models import db, Project
+from .auth_routes import validation_errors_to_error_messages
 
 project = Blueprint("project", __name__, url_prefix='/api/projects')
 
@@ -16,36 +17,32 @@ def getEverything(ownerId):
 def create():
     form = ProjectForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # if form.validate_on_submit():
-    data = request.json
-    newProject = Project(
-        ownerId=data['ownerId'],
-        name=data['name'],
-        color=data['color'],
-        view=data['view']
-        # ownerId=form.data['ownerId'],
-        # name=form.data['name'],
-        # color=form.data['color'],
-        # view=form.data['view']
-    )
-    db.session.add(newProject)
-    db.session.commit()
-    return newProject.toDict()
-    # return 400
+    if form.validate_on_submit():
+        newProject = Project(
+            ownerId=form.data['ownerId'],
+            name=form.data['name'],
+            color=form.data['color'],
+            view=form.data['view']
+        )
+        db.session.add(newProject)
+        db.session.commit()
+        return newProject.toDict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @project.route('/update', methods=['PATCH'])
 def update():
-    data = request.json
-    project = Project.query.get(data['id'])
-
-    project.ownerId = data['ownerId']
-    project.name = data['name']
-    project.color = data['color']
-    project.view = data['view']
-
-    db.session.commit()
-    return project.toDict()
+    form = ProjectForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        project = Project.query.get(form.data['id'])
+        project.ownerId = form.data['ownerId']
+        project.name = form.data['name']
+        project.color = form.data['color']
+        project.view = form.data['view']
+        db.session.commit()
+        return project.toDict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @project.route('/delete', methods=['DELETE'])
 def delete():
