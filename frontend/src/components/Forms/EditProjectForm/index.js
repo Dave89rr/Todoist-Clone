@@ -1,3 +1,3 @@
-import EditProjectForm from './NewProjectForm';
+import EditProjectForm from './EditProjectForm';
 
 export default EditProjectForm;
