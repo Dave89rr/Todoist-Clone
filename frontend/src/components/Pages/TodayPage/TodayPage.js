@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkDeleteProject } from '../../../store/projects';
-import { thunkDeleteTask } from '../../../store/tasks';
+import {
+  thunkDeleteTask,
+  actionDeleteTasksByProjId,
+} from '../../../store/tasks';
 import EditTaskForm from '../../Forms/EditTaskForm';
 import EditProjectForm from '../../Forms/EditProjectForm';
 import NewProjectForm from '../../Forms/NewProjectForm/';
@@ -36,7 +39,10 @@ function TodayPage() {
               <span>
                 {project.name} - {project.id}{' '}
                 <button
-                  onClick={() => dispatch(thunkDeleteProject(project.id))}
+                  onClick={() => {
+                    dispatch(thunkDeleteProject(project.id));
+                    dispatch(actionDeleteTasksByProjId(project.id));
+                  }}
                 >
                   Del Proj
                 </button>

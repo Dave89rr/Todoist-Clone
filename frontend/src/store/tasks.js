@@ -12,6 +12,8 @@ const DELETE_TASK = 'task/DELETE_TASK';
 
 const LOGOUT = 'task/LOGOUT';
 
+const DELETE_TASKS_BY_PROJID = 'task/DELETE_TASKS_BY_PROJID';
+
 //**************** ACTIONS **********************************//
 
 const actionCreateTask = (task) => {
@@ -53,6 +55,13 @@ export const actionLogoutTasks = () => {
   return {
     type: LOGOUT,
     payload: {},
+  };
+};
+
+export const actionDeleteTasksByProjId = (id) => {
+  return {
+    type: DELETE_TASKS_BY_PROJID,
+    id,
   };
 };
 //**************** THUNKS ***********************************//
@@ -138,6 +147,14 @@ const tasks = (state = {}, action) => {
     }
     case DELETE_TASK: {
       delete newState[action.taskId];
+      return newState;
+    }
+    case DELETE_TASKS_BY_PROJID: {
+      for (let key in newState) {
+        if (newState[key].projectId === action.id) {
+          delete newState[key];
+        }
+      }
       return newState;
     }
     case LOGOUT: {
