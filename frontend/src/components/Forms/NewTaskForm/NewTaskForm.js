@@ -16,14 +16,14 @@ function NewTaskForm() {
   const [dueDate, setDueDate] = useState(new Date());
 
   const projArr = Object.values(projects);
-
+  let defaultId;
+  if (projArr.length > 0) {
+    defaultId = projArr[0].id;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
-    // TODO - this is just to avoid errors during testing submits
-    if (dueDate === '') {
-      setDueDate(new Date());
-    }
+
     const task = {
       ownerId: user.id,
       name,
@@ -35,19 +35,23 @@ function NewTaskForm() {
     };
 
     if (name.length === 0) {
-      errors.push('Name for a project cannot be left blank');
+      errors.push('Name must be between 1 and 30 characters long.');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {
       setValidationErrors([]);
-      dispatch(thunkCreateTask(task));
-      setName('');
-      setDescription('');
-      setPosition('');
-      setProjectId('');
-      setPriority(2);
-      setDueDate(new Date());
+      const data = dispatch(thunkCreateTask(task));
+      if (data) {
+        setValidationErrors(data);
+      } else {
+        setName('');
+        setDescription('');
+        setPosition('');
+        setProjectId(defaultId);
+        setPriority(2);
+        setDueDate(new Date());
+      }
     }
   };
 
@@ -90,7 +94,10 @@ function NewTaskForm() {
       </div>
       <div>
         <label htmlFor="projectId">Project</label>
-        <select onChange={(e) => setProjectId(e.target.value)}>
+        <select
+          defaultValue={defaultId}
+          onChange={(e) => setProjectId(e.target.value)}
+        >
           {projArr.map((project, id) => {
             return (
               <option key={id} value={project.id}>
