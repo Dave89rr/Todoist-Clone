@@ -12,7 +12,7 @@ function NewTaskForm() {
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState('');
   const [projectId, setProjectId] = useState('');
-  const [priority, setPriority] = useState(2);
+  const [priority, setPriority] = useState(4);
   const [dueDate, setDueDate] = useState(new Date());
 
   const projArr = Object.values(projects);
@@ -41,7 +41,7 @@ function NewTaskForm() {
       setValidationErrors(errors);
     } else {
       setValidationErrors([]);
-      const data = dispatch(thunkCreateTask(task));
+      const data = await dispatch(thunkCreateTask(task));
       if (data) {
         setValidationErrors(data);
       } else {

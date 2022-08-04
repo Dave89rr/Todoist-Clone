@@ -8,5 +8,6 @@ class TaskForm(FlaskForm):
     ownerId = IntegerField('ownerId', validators=[DataRequired(), ])
     description = StringField('description')
     position = IntegerField('position', validators=[DataRequired()])
+    priority = IntegerField('priority', validators=[DataRequired()])
     projectId = IntegerField('projectId', validators=[DataRequired()])
     due_date = DateTimeField('due_date')
