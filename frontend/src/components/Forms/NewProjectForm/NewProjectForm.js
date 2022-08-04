@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkCreateProject } from '../../../store/projects';
 
-function NewProjectForm() {
+function NewProjectForm({ setViewNewProjectForm }) {
   const user = useSelector((state) => state.session.user);
   const colors = useSelector((state) => state.colors);
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ function NewProjectForm() {
         setName('');
         setColor('#808080');
         setView('false');
+        setViewNewProjectForm(false);
       }
     }
   };

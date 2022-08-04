@@ -10,17 +10,22 @@ import EditProjectForm from '../../Forms/EditProjectForm';
 import NewProjectForm from '../../Forms/NewProjectForm/';
 import NewTaskForm from '../../Forms/NewTaskForm/';
 
-function TodayPage() {
+function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
   const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
   const [viewEditTask, setViewEditTask] = useState(false);
   const [viewEditProject, setViewEditProject] = useState(false);
+  const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
 
   let projArr;
   if (projects) {
     projArr = Object.values(projects);
+  }
+  let defaultId;
+  if (projArr.length > 0) {
+    defaultId = projArr[0].id;
   }
   let taskArr;
   if (tasks) {
@@ -28,10 +33,20 @@ function TodayPage() {
   }
   return (
     <div>
-      <h1>New Project</h1>
-      <NewProjectForm />
-      <h1>New Task</h1>
-      <NewTaskForm />
+      <button onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
+        New Project
+      </button>
+
+      {viewNewProjectForm ? (
+        <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
+      ) : null}
+      {viewNewTaskForm ? (
+        <NewTaskForm
+          defaultId={defaultId}
+          setViewNewTaskForm={setViewNewTaskForm}
+        />
+      ) : null}
+
       {projArr.length > 0 &&
         projArr.map((project) => {
           return (
