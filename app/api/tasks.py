@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from ..models import db, Task
 from ..forms import TaskForm
 from .auth_routes import validation_errors_to_error_messages
-
+from datetime import datetime
 
 task = Blueprint("task", __name__, url_prefix='/api/tasks')
 
@@ -18,6 +18,7 @@ def getEverything(ownerId):
 def create():
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    due_date = datetime.strptime(form.data['due_date'], '%Y-%m-%dT%H:%M')
     if form.validate_on_submit():
         newtask = Task(
             ownerId=form.data['ownerId'],
@@ -26,7 +27,7 @@ def create():
             position=form.data['position'],
             projectId=form.data['projectId'],
             priority=form.data['priority'],
-            due_date=form.data['due_date'],
+            due_date=due_date,
         )
         db.session.add(newtask)
         db.session.commit()

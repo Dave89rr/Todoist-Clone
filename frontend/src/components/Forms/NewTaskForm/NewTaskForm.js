@@ -126,9 +126,11 @@ function NewTaskForm() {
         <label htmlFor="due_date">Due Date</label>
         <input
           name="due_date"
-          type="text"
+          type="datetime-local"
           value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
+          onChange={(e) => {
+            setDueDate(e.target.value);
+          }}
         />
       </div>
       <button>Cancel</button>

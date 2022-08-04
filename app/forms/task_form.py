@@ -10,4 +10,4 @@ class TaskForm(FlaskForm):
     position = IntegerField('position', validators=[DataRequired()])
     priority = IntegerField('priority', validators=[DataRequired()])
     projectId = IntegerField('projectId', validators=[DataRequired()])
-    due_date = DateTimeField('due_date')
+    due_date = StringField('due_date')
