@@ -32,16 +32,17 @@ def create():
 
 @project.route('/update', methods=['PATCH'])
 def update():
-    data = request.json
-    project = Project.query.get(data['id'])
-
-    project.ownerId = data['ownerId']
-    project.name = data['name']
-    project.color = data['color']
-    project.view = data['view']
-
-    db.session.commit()
-    return project.toDict()
+    form = ProjectForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        project = Project.query.get(form.data['id'])
+        project.ownerId = form.data['ownerId']
+        project.name = form.data['name']
+        project.color = form.data['color']
+        project.view = form.data['view']
+        db.session.commit()
+        return project.toDict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @project.route('/delete', methods=['DELETE'])
 def delete():
