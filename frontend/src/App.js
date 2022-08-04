@@ -1,25 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import { useDispatch, useSelector } from 'react-redux';
+import LoginPage from './components/Pages/LoginPage';
+import TodayPage from './components/Pages/TodayPage';
+import SignUpForm from './components/Forms/SignUpForm';
+import NavBar from './components/Elements/NavBar';
+import ProtectedRoute from './components/utils/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import { thunkGetAllTasks } from '../src/store/tasks';
+import { thunkGetAllProjects } from '../src/store/projects';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
   }, [dispatch]);
-
+  useEffect(() => {
+    if (user) {
+      dispatch(thunkGetAllProjects(user.id));
+    }
+  }, [dispatch, user]);
+  useEffect(() => {
+    if (user) {
+      dispatch(thunkGetAllTasks(user.id));
+    }
+  }, [dispatch, user]);
   if (!loaded) {
     return null;
   }
@@ -28,20 +41,20 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
+        <Route path="/" exact={true}>
+          <LoginPage />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path="/users" exact={true}>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+        <ProtectedRoute path="/today" exact={true}>
+          <TodayPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
