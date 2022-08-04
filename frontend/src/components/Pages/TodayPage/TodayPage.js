@@ -17,10 +17,16 @@ function TodayPage() {
 
   const [viewEditTask, setViewEditTask] = useState(false);
   const [viewEditProject, setViewEditProject] = useState(false);
+  const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
+  const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
 
   let projArr;
   if (projects) {
     projArr = Object.values(projects);
+  }
+  let defaultId;
+  if (projArr.length > 0) {
+    defaultId = projArr[0].id;
   }
   let taskArr;
   if (tasks) {
@@ -28,10 +34,22 @@ function TodayPage() {
   }
   return (
     <div>
-      <h1>New Project</h1>
-      <NewProjectForm />
-      <h1>New Task</h1>
-      <NewTaskForm />
+      <button onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
+        New Project
+      </button>
+      <button onClick={() => setViewNewTaskForm(!viewNewTaskForm)}>
+        New Task
+      </button>
+      {viewNewProjectForm ? (
+        <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
+      ) : null}
+      {viewNewTaskForm ? (
+        <NewTaskForm
+          defaultId={defaultId}
+          setViewNewTaskForm={setViewNewTaskForm}
+        />
+      ) : null}
+
       {projArr.length > 0 &&
         projArr.map((project) => {
           return (
