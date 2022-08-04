@@ -33,16 +33,20 @@ function NewProjectForm() {
     };
 
     if (name.length === 0) {
-      errors.push('Name for a project cannot be left blank');
+      errors.push('Name must be between 1 and 50 characters long.');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {
       setValidationErrors([]);
-      dispatch(thunkCreateProject(project));
-      setName('');
-      setColor('#808080');
-      setView('false');
+      const data = await dispatch(thunkCreateProject(project));
+      if (data) {
+        setValidationErrors(data);
+      } else {
+        setName('');
+        setColor('#808080');
+        setView('false');
+      }
     }
   };
 
