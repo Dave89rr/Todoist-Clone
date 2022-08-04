@@ -10,6 +10,8 @@ const UPDATE_PROJECT = 'project/UPDATE_PROJECT';
 
 const DELETE_PROJECT = 'project/DELETE_PROJECT';
 
+const LOGOUT = 'project/LOGOUT';
+
 //**************** ACTIONS **********************************//
 
 const actionCreateProject = (project) => {
@@ -44,6 +46,13 @@ const actionDeleteProject = (projectId) => {
   return {
     type: DELETE_PROJECT,
     projectId,
+  };
+};
+
+export const actionLogoutProjects = () => {
+  return {
+    type: LOGOUT,
+    payload: {},
   };
 };
 
@@ -131,6 +140,9 @@ const projects = (state = {}, action) => {
     case DELETE_PROJECT: {
       delete newState[action.projectId];
       return newState;
+    }
+    case LOGOUT: {
+      return {};
     }
     default:
       return state;
