@@ -6,12 +6,20 @@ import { useSelector } from 'react-redux';
 
 const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
   const user = useSelector((state) => state.session.user);
+  const theme = (name) => {
+    return `${classes[`${user.theme}${name}`]}`;
+  };
 
   return (
-    <nav className={classes.nav}>
+    <nav className={`${classes.nav} ${theme('Nav')}`}>
       <div className={classes.container}>
         <div>
-          <NavLink to="/" exact={true} activeClassName="active">
+          <NavLink
+            to="/"
+            exact={true}
+            activeClassName="active"
+            className={`${theme('Font')}`}
+          >
             Home
           </NavLink>
         </div>

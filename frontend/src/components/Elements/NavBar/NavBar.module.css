@@ -1,9 +1,9 @@
 .nav {
-  height: 7.95vh;
-  background-color: white;
+  height: 5vh;
   display: flex;
   justify-content: center;
 }
+
 .container {
   justify-content: space-between;
   align-items: center;
@@ -16,4 +16,17 @@
   width: 10%;
   flex-direction: row;
   gap: 5%;
+}
+
+.trueNav {
+  background-color: var(--nav-bar-dark);
+}
+.falseNav {
+  background-color: var(--nav-bar-light);
+}
+.trueFont {
+  color: var(--font-color-dark);
+}
+.falseFont {
+  color: var(--font-color-light);
 }

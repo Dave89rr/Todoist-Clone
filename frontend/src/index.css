@@ -2,3 +2,20 @@ body {
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
+
+:root {
+  /****************** Light Mode ******************/
+  --nav-bar-light: #db4c3f;
+  --bg-light: #ffffff;
+  --sidebar-light: #fafafa;
+  --font-color-light: #202020;
+
+  /****************** Dark Mode *******************/
+  --nav-bar-dark: #282828;
+  --bg-dark: #1f1f1f;
+  --sidebar-dark: #242424;
+  --font-color-dark: #e2e2e2;
+}
