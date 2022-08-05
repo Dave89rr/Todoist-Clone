@@ -4,3 +4,25 @@
 .trueTaskTitle {
   color: var(--font-color-dark);
 }
+.taskContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.5%;
+}
+
+.taskTitle {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5%;
+  width: 70%;
+}
+
+.taskUserInteractions {
+  display: flex;
+  flex-direction: row;
+}
+.taskUserInteractions:hover {
+  opacity: 1;
+}

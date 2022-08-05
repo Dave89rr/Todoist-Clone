@@ -38,14 +38,12 @@ function ProjectView({ project, taskArr }) {
         </div>
       </div>
       {viewEditProject && <EditProjectForm projectProp={project} />}
-      <ul>
-        {taskArr.map((task) => {
-          if (task.projectId === project.id) {
-            return <TaskView task={task} />;
-          }
-          return null;
-        })}
-      </ul>
+      {taskArr.map((task) => {
+        if (task.projectId === project.id) {
+          return <TaskView task={task} />;
+        }
+        return null;
+      })}
     </div>
   );
 }

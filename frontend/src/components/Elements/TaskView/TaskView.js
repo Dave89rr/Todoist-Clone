@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function TaskView({ task }) {
+  const [showtaskUserInteractions, setShowtaskUserInteractions] =
+    useState(false);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [viewEditTask, setViewEditTask] = useState(false);
@@ -16,18 +18,34 @@ function TaskView({ task }) {
   };
 
   return (
-    <li key={task.id}>
-      <span className={`${theme('TaskTitle')}`}>{task.name}</span>
-      <span>
-        <button onClick={() => dispatch(thunkDeleteTask(task.id))}>
-          Delete
-        </button>
-        <button onClick={() => setViewEditTask(!viewEditTask)}>
-          Edit Task
-        </button>
-        {viewEditTask && <EditTaskForm taskProp={task} />}
-      </span>
-    </li>
+    <div
+      key={task.id}
+      className={classes.taskContainer}
+      onMouseEnter={() => setShowtaskUserInteractions(true)}
+      onMouseLeave={() => setShowtaskUserInteractions(false)}
+    >
+      <div className={classes.taskTitle}>
+        <input type="checkbox"></input>
+        <span className={`${theme('TaskTitle')}`}>{task.name}</span>
+      </div>
+      <div className={classes.taskUserInteractions}>
+        {showtaskUserInteractions && (
+          <span>
+            <button onClick={() => dispatch(thunkDeleteTask(task.id))}>
+              Delete
+            </button>
+            <button onClick={() => setViewEditTask(!viewEditTask)}>
+              Edit Task
+            </button>
+          </span>
+        )}
+      </div>
+      {viewEditTask && (
+        <div className={classes.editForm}>
+          <EditTaskForm taskProp={task} />
+        </div>
+      )}
+    </div>
   );
 }
 
