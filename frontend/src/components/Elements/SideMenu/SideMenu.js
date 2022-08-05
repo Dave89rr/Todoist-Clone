@@ -9,23 +9,20 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
     }
   };
   return (
-    //       <button onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
-    //     New Project
-    //   </button>
     <div className={classes.sideMenuContainer}>
       <div className={`${theme('Container')}`}>
         <div className={classes.sideInteractions}>
           <div className={classes.sideBtn}>
             <span>📥</span>
-            <span>Inbox</span>
+            <span className={`${theme('SideBtnText')}`}>Inbox</span>
           </div>
           <div className={classes.sideBtn}>
             <span>📅</span>
-            <span>Today</span>
+            <span className={`${theme('SideBtnText')}`}>Today</span>
           </div>
           <div className={classes.sideItem}>
-            <span>V</span>
-            <span>Projects</span>
+            <span className={`${theme('SideBtnText')}`}>V</span>
+            <span className={`${theme('SideBtnText')}`}>Projects</span>
             <div onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
               <img
                 className={classes.addProjBtn}

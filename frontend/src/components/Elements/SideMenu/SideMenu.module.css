@@ -55,3 +55,10 @@
 .addProjBtn:hover {
   background-color: slategray;
 }
+
+.falseSideBtnText {
+  color: var(--font-color-light);
+}
+.trueSideBtnText {
+  color: var(--font-color-dark);
+}
