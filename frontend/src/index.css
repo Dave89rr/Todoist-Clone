@@ -23,3 +23,15 @@ a {
   --sidebar-dark: #242424;
   --font-color-dark: #e2e2e2;
 }
+
+.falsesiteContainer,
+.truesiteContainer {
+  display: flex;
+  flex-direction: row;
+}
+.falsesiteContainer {
+  background-color: var(--bg-light);
+}
+.truesiteContainer {
+  background-color: var(--bg-dark);
+}

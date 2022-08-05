@@ -9,6 +9,7 @@ import NavBar from './components/Elements/NavBar';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import SideMenu from './components/Elements/SideMenu';
 import { authenticate } from './store/session';
 import { thunkGetAllTasks } from '../src/store/tasks';
 import { thunkGetAllProjects } from '../src/store/projects';
@@ -38,6 +39,11 @@ function App() {
   if (!loaded) {
     return null;
   }
+  const theme = (name) => {
+    if (user) {
+      return `${user.theme}${name}`;
+    }
+  };
 
   return (
     <BrowserRouter>
@@ -45,29 +51,32 @@ function App() {
         setViewNewTaskForm={setViewNewTaskForm}
         viewNewTaskForm={viewNewTaskForm}
       />
-      <Switch>
-        <Route path="/" exact={true}>
-          <HomePage />
-        </Route>
-        <Route path="/login" exact={true}>
-          <LoginPage />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/today" exact={true}>
-          <TodayPage
-            viewNewTaskForm={viewNewTaskForm}
-            setViewNewTaskForm={setViewNewTaskForm}
-          />
-        </ProtectedRoute>
-      </Switch>
+      <div className={`${theme('siteContainer')}`}>
+        {user ? <SideMenu /> : null}
+        <Switch>
+          <Route path="/" exact={true}>
+            <HomePage />
+          </Route>
+          <Route path="/login" exact={true}>
+            <LoginPage />
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path="/users" exact={true}>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true}>
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path="/today" exact={true}>
+            <TodayPage
+              viewNewTaskForm={viewNewTaskForm}
+              setViewNewTaskForm={setViewNewTaskForm}
+            />
+          </ProtectedRoute>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }

@@ -3,6 +3,9 @@
   height: 4.07vh;
   display: flex;
   justify-content: center;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
 }
 .trueNav {
   background-color: var(--nav-bar-dark);
