@@ -9,9 +9,7 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-}
-.taskContainer:hover {
-  background-color: rgba(210, 210, 210, 0.479);
+  padding: 0.5%;
 }
 
 .taskTitle {
@@ -24,7 +22,6 @@
 .taskUserInteractions {
   display: flex;
   flex-direction: row;
-  opacity: 0;
 }
 .taskUserInteractions:hover {
   opacity: 1;
