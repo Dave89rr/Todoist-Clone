@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import classes from './SideMenu.module.css';
 
-const SideMenu = () => {
+const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
   const user = useSelector((state) => state.session.user);
   const theme = (name) => {
     if (user) {
@@ -9,6 +9,9 @@ const SideMenu = () => {
     }
   };
   return (
+    //       <button onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
+    //     New Project
+    //   </button>
     <div className={classes.sideMenuContainer}>
       <div className={`${theme('Container')}`}>
         <div className={classes.sideInteractions}>
@@ -23,7 +26,7 @@ const SideMenu = () => {
           <div className={classes.sideItem}>
             <span>V</span>
             <span>Projects</span>
-            <div onClick={console.log('i was cliked')}>
+            <div onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
               <img
                 className={classes.addProjBtn}
                 src="/static/icons/plus.svg"

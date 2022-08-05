@@ -19,6 +19,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
+  const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -52,7 +53,12 @@ function App() {
         viewNewTaskForm={viewNewTaskForm}
       />
       <div className={`${theme('siteContainer')}`}>
-        {user ? <SideMenu /> : null}
+        {user ? (
+          <SideMenu
+            viewNewProjectForm={viewNewProjectForm}
+            setViewNewProjectForm={setViewNewProjectForm}
+          />
+        ) : null}
         <Switch>
           <Route path="/" exact={true}>
             <HomePage />
@@ -73,6 +79,8 @@ function App() {
             <TodayPage
               viewNewTaskForm={viewNewTaskForm}
               setViewNewTaskForm={setViewNewTaskForm}
+              viewNewProjectForm={viewNewProjectForm}
+              setViewNewProjectForm={setViewNewProjectForm}
             />
           </ProtectedRoute>
         </Switch>
