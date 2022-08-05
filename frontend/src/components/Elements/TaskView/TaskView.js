@@ -16,18 +16,28 @@ function TaskView({ task }) {
   };
 
   return (
-    <li key={task.id}>
-      <span className={`${theme('TaskTitle')}`}>{task.name}</span>
-      <span>
-        <button onClick={() => dispatch(thunkDeleteTask(task.id))}>
-          Delete
-        </button>
-        <button onClick={() => setViewEditTask(!viewEditTask)}>
-          Edit Task
-        </button>
-        {viewEditTask && <EditTaskForm taskProp={task} />}
-      </span>
-    </li>
+    <div key={task.id} className={classes.taskContainer}>
+      <div className={classes.taskTitle}>
+        <input type="checkbox"></input>
+        <span className={`${theme('TaskTitle')}`}>{task.name}</span>
+      </div>
+      <div className={classes.taskUserInteractions}>
+        <span>
+          <button onClick={() => dispatch(thunkDeleteTask(task.id))}>
+            Delete
+          </button>
+          <button onClick={() => setViewEditTask(!viewEditTask)}>
+            Edit Task
+          </button>
+        </span>
+      </div>
+      {viewEditTask && (
+        <div className={classes.editForm}>
+          {' '}
+          <EditTaskForm taskProp={task} />{' '}
+        </div>
+      )}
+    </div>
   );
 }
 

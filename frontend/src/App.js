@@ -72,8 +72,8 @@ function App() {
           <ProtectedRoute path="/users" exact={true}>
             <UsersList />
           </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId" exact={true}>
-            <User />
+          <ProtectedRoute path="/projects/:projectId" exact={true}>
+            {/* TODO - ProjectView will go here */}
           </ProtectedRoute>
           <ProtectedRoute path="/today" exact={true}>
             <TodayPage
