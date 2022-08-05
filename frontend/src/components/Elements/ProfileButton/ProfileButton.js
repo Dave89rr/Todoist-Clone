@@ -11,7 +11,6 @@ const ProfileButton = () => {
   let userUpdate;
   if (user) {
     letter = user.username[0].toUpperCase();
-    // console.log(user.theme);
     userUpdate = JSON.parse(JSON.stringify(user));
   }
   return (
