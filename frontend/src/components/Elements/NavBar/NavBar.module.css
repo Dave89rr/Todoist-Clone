@@ -1,5 +1,5 @@
 .nav {
-  height: 4.1vh;
+  height: 4.07vh;
   display: flex;
   justify-content: center;
 }
@@ -32,4 +32,7 @@
 }
 .navText {
   color: white;
+}
+.navSplash {
+  background-color: black;
 }

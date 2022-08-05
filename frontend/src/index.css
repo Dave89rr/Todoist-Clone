@@ -1,3 +1,7 @@
+@import url(//db.onlinewebfonts.com/c/105007d99d9df64c50cc24d696d79555?family=Graphik+Web+Regular);
+* {
+  font-family: 'Graphik Web Regular';
+}
 body {
   margin: 0;
   padding: 0;

@@ -3,11 +3,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/';
 import { useSelector } from 'react-redux';
+import ProfileButton from '../ProfileButton/ProfileButton';
 
 const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
   const user = useSelector((state) => state.session.user);
   const theme = (name) => {
-    return `${classes[`${user.theme}${name}`]}`;
+    if (user) {
+      return `${classes[`${user.theme}${name}`]}`;
+    }
   };
 
   return (
@@ -41,6 +44,7 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
             <button onClick={() => setViewNewTaskForm(!viewNewTaskForm)}>
               New Task
             </button>
+            <ProfileButton />
             <div>
               <LogoutButton />
             </div>
