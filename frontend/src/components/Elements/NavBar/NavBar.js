@@ -3,18 +3,44 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../LogoutButton/';
 import { useSelector } from 'react-redux';
+import ProfileButton from '../ProfileButton/ProfileButton';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
   const user = useSelector((state) => state.session.user);
+  const history = useHistory();
+  const theme = (name) => {
+    if (user) {
+      return `${classes[`${user.theme}${name}`]}`;
+    }
+    return `${classes.navSplash}`;
+  };
 
+  const logoLoggedout = (
+    <div
+      className={classes.logoContainer}
+      onClick={() => {
+        history.push('/');
+      }}
+    >
+      <img
+        className={classes.logo}
+        src="/static/icons/machenist-logo.svg"
+        alt="app icon"
+      />
+      <span>machenist</span>
+    </div>
+  );
+
+  const logoLoggedIn = (
+    <div className={classes.logoContainer}>
+      <span style={{ color: 'white' }}>Home</span>
+    </div>
+  );
   return (
-    <nav className={classes.nav}>
+    <nav className={`${theme('Nav')}`}>
       <div className={classes.container}>
-        <div>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
-          </NavLink>
-        </div>
+        {!user ? logoLoggedout : logoLoggedIn}
         {!user ? (
           <div className={classes.userInteractions}>
             <div>
@@ -29,14 +55,22 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
             </div>
           </div>
         ) : (
-          <>
-            <button onClick={() => setViewNewTaskForm(!viewNewTaskForm)}>
-              New Task
-            </button>
+          <div className={classes.userInteractions}>
+            <div
+              className={classes.addTaskContainer}
+              onClick={() => setViewNewTaskForm(!viewNewTaskForm)}
+            >
+              <img
+                className={classes.addTask}
+                src="/static/icons/plus.svg"
+                alt="add task icon"
+              />
+            </div>
+            <ProfileButton />
             <div>
               <LogoutButton />
             </div>
-          </>
+          </div>
         )}
       </div>
     </nav>

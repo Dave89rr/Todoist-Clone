@@ -1,0 +1,15 @@
+.profBtn {
+  cursor: pointer;
+  border-radius: 100%;
+  border: 1px solid #e8435a;
+  width: 28px;
+  height: 28px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 1px 0.5px white;
+}
+.profBtnLetter {
+  color: #e8435a;
+}

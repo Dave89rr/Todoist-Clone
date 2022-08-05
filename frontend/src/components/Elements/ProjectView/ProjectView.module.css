@@ -1,0 +1,23 @@
+.projContainer {
+}
+
+.projTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.falseProjHeader,
+.trueProjHeader {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.falseProjHeader {
+  color: var(--font-color-light);
+}
+.trueProjHeader {
+  color: var(--font-color-dark);
+}
+.projActions {
+  color: inherit;
+}

@@ -3,6 +3,7 @@ import { thunkCreateProject } from './projects';
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const UPDATE_THEME_USER = 'session/UPDATE_THEME_USER';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -11,6 +12,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
+});
+
+const updateTheme = (user) => ({
+  type: UPDATE_THEME_USER,
+  payload: user,
 });
 
 const initialState = { user: null };
@@ -106,12 +112,33 @@ export const signUp =
     }
   };
 
+export const updateUserTheme = (user) => async (dispatch) => {
+  const response = await fetch('/api/users/update-theme', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+
+  if (response.ok) {
+    const user = await response.json();
+    dispatch(updateTheme(user));
+  }
+};
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    case UPDATE_THEME_USER: {
+      const newState = JSON.parse(JSON.stringify(state));
+      const { theme } = action.payload;
+      newState.user.theme = theme;
+      return newState;
+    }
     default:
       return state;
   }
