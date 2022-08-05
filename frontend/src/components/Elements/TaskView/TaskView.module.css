@@ -1,0 +1,6 @@
+.falseTaskTitle {
+  color: var(--font-color-light);
+}
+.trueTaskTitle {
+  color: var(--font-color-dark);
+}
