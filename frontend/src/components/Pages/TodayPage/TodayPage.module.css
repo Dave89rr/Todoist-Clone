@@ -1,10 +1,14 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
+  height: calc(100vh - 4.07vh);
+  overflow-y: scroll;
 }
 .projectContainer {
   width: 50%;
-  margin-top: 2%;
+  margin-top: 5%;
   align-self: center;
+  margin-bottom: 2%;
 }
