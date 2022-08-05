@@ -1,4 +1,5 @@
 .profBtn {
+  cursor: pointer;
   border-radius: 100%;
   border: 1px solid #e8435a;
   width: 28px;
