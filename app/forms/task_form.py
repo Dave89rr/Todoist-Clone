@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length
 
 
 class TaskForm(FlaskForm):
-    name = StringField('name', validators=[Length(min=1, max=50, message='Name must be between 1 and 30 characters long.')])
+    name = StringField('name', validators=[Length(min=1, max=30, message='Name must be between 1 and 30 characters long.')])
     ownerId = IntegerField('ownerId', validators=[DataRequired(), ])
     description = StringField('description')
     position = IntegerField('position', validators=[DataRequired()])
