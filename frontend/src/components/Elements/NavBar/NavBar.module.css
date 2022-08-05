@@ -1,7 +1,14 @@
-.nav {
+.falseNav,
+.trueNav {
   height: 4.07vh;
   display: flex;
   justify-content: center;
+}
+.trueNav {
+  background-color: var(--nav-bar-dark);
+}
+.falseNav {
+  background-color: var(--nav-bar-light);
 }
 
 .container {
@@ -13,17 +20,13 @@
 }
 .userInteractions {
   display: flex;
-  width: 10%;
+  width: 20%;
+  height: 100%;
   flex-direction: row;
+  align-items: center;
   gap: 5%;
 }
 
-.trueNav {
-  background-color: var(--nav-bar-dark);
-}
-.falseNav {
-  background-color: var(--nav-bar-light);
-}
 .trueFont {
   color: var(--font-color-dark);
 }
@@ -34,5 +37,45 @@
   color: white;
 }
 .navSplash {
-  background-color: black;
+  display: flex;
+  background-color: white;
+  height: 5.29vh;
+  justify-content: center;
+}
+
+.logoContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 5%;
+}
+.logoContainer > span {
+  color: #e44332;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.logo {
+  height: 50%;
+}
+.addTaskContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 74.5%;
+  width: 32px;
+  cursor: pointer;
+}
+
+.addTask {
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  padding-right: 1%;
+}
+
+.addTask:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
