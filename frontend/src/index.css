@@ -1,6 +1,22 @@
-@import url(https://db.onlinewebfonts.com/c/105007d99d9df64c50cc24d696d79555?family=Graphik+Web+Regular);
+/* @import url(https://db.onlinewebfonts.com/c/105007d99d9df64c50cc24d696d79555?family=Graphik+Web+Regular); */
+@font-face {
+  font-family: 'Graphik Web Regular Regular';
+  src: url('./@font-face/105007d99d9df64c50cc24d696d79555.eot'); /* IE9*/
+  src: url('./@font-face/105007d99d9df64c50cc24d696d79555.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('./@font-face/105007d99d9df64c50cc24d696d79555.woff2')
+      format('woff2'),
+    /* chrome、firefox */
+      url('./@font-face/105007d99d9df64c50cc24d696d79555.woff') format('woff'),
+    /* chrome、firefox */
+      url('./@font-face/105007d99d9df64c50cc24d696d79555.ttf')
+      format('truetype'),
+    /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+      url('./@font-face/105007d99d9df64c50cc24d696d79555.svg#Graphik Web Regular Regular')
+      format('svg'); /* iOS 4.1- */
+}
 * {
-  font-family: 'Graphik Web Regular';
+  font-family: 'Graphik Web Regular Regular';
 }
 body {
   margin: 0;
