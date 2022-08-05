@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import classes from './TodayPage.module.css';
 import { useSelector } from 'react-redux';
 
 import ProjectView from '../../Elements/ProjectView';
@@ -26,21 +26,23 @@ function TodayPage({
     taskArr = Object.values(tasks);
   }
   return (
-    <div>
-      {viewNewProjectForm ? (
-        <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
-      ) : null}
-      {viewNewTaskForm ? (
-        <NewTaskForm
-          defaultId={defaultId}
-          setViewNewTaskForm={setViewNewTaskForm}
-        />
-      ) : null}
+    <div className={classes.mainContainer}>
+      <div className={classes.projectContainer}>
+        {viewNewProjectForm ? (
+          <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
+        ) : null}
+        {viewNewTaskForm ? (
+          <NewTaskForm
+            defaultId={defaultId}
+            setViewNewTaskForm={setViewNewTaskForm}
+          />
+        ) : null}
 
-      {projArr.length > 0 &&
-        projArr.map((project) => {
-          return <ProjectView project={project} taskArr={taskArr} />;
-        })}
+        {projArr.length > 0 &&
+          projArr.map((project) => {
+            return <ProjectView project={project} taskArr={taskArr} />;
+          })}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.projectContainer {
+  width: 50%;
+  margin-top: 2%;
+  align-self: center;
+}
