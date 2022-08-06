@@ -9,7 +9,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
-  const [colorState, setColor] = useState('#808080');
+  const [colorState, setColorState] = useState('#808080');
   const [view, setView] = useState('false');
 
   const colorsArr = Object.values(colors);
@@ -44,7 +44,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
         setValidationErrors(data);
       } else {
         setName('');
-        setColor('#808080');
+        setColorState('#808080');
         setView('false');
         setViewNewProjectForm(false);
       }
@@ -76,7 +76,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
         <label htmlFor="color">Color</label>
         <select
           defaultValue={'#808080'}
-          onChange={(e) => setColor(e.target.value)}
+          onChange={(e) => setColorState(e.target.value)}
         >
           {colorsArr.map((color, id) => {
             return (
@@ -112,6 +112,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
       <button
         onClick={(e) => {
           e.preventDefault();
+          setViewNewProjectForm(false);
         }}
       >
         Cancel
