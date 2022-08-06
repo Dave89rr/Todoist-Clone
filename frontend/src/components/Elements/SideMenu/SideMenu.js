@@ -28,7 +28,12 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
             <span>📥</span>
             <span className={`${theme('SideBtnText')}`}>Inbox</span>
           </div>
-          <div className={classes.sideBtn}>
+          <div
+            className={classes.sideBtn}
+            onClick={() => {
+              history.push('/today');
+            }}
+          >
             <span>📅</span>
             <span className={`${theme('SideBtnText')}`}>Today</span>
           </div>
@@ -50,7 +55,6 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
                   return (
                     <div
                       className={`${classes.sideItem} ${theme('SideBtnText')}`}
-                      // className={`${theme('SideBtnText')}`}
                       key={project.id}
                       onClick={() => history.push(`/projects/${project.id}`)}
                     >
