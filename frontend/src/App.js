@@ -13,13 +13,20 @@ import { authenticate } from './store/session';
 import { thunkGetAllTasks } from '../src/store/tasks';
 import { thunkGetAllProjects } from '../src/store/projects';
 import ProjectView from './components/Elements/ProjectView';
+import NewProjectForm from './components/Forms/NewProjectForm';
+import NewTaskForm from './components/Forms/NewTaskForm/';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const projects = useSelector((state) => state.projects);
   const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
   const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
+  let defaultId;
+  if (projects) {
+    defaultId = Object.keys(projects)[0];
+  }
 
   useEffect(() => {
     (async () => {
@@ -53,6 +60,15 @@ function App() {
         viewNewTaskForm={viewNewTaskForm}
       />
       <div className={`${theme('siteContainer')}`}>
+        {viewNewProjectForm ? (
+          <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
+        ) : null}
+        {viewNewTaskForm ? (
+          <NewTaskForm
+            defaultId={defaultId}
+            setViewNewTaskForm={setViewNewTaskForm}
+          />
+        ) : null}
         {user ? (
           <SideMenu
             viewNewProjectForm={viewNewProjectForm}
