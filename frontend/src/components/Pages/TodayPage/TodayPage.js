@@ -1,26 +1,10 @@
 import classes from './TodayPage.module.css';
 import { useSelector } from 'react-redux';
+import TaskView from '../../Elements/TaskView/TaskView';
 
-import ProjectView from '../../Elements/ProjectView';
-import NewProjectForm from '../../Forms/NewProjectForm/';
-import NewTaskForm from '../../Forms/NewTaskForm/';
-
-function TodayPage({
-  viewNewTaskForm,
-  setViewNewTaskForm,
-  viewNewProjectForm,
-  setViewNewProjectForm,
-}) {
-  const projects = useSelector((state) => state.projects);
+function TodayPage() {
+  // const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
-  let projArr;
-  if (projects) {
-    projArr = Object.values(projects);
-  }
-  let defaultId;
-  if (projArr.length > 0) {
-    defaultId = projArr[0].id;
-  }
   let taskArr;
   if (tasks) {
     taskArr = Object.values(tasks);
@@ -28,20 +12,12 @@ function TodayPage({
   return (
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
-        {viewNewProjectForm ? (
-          <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
-        ) : null}
-        {viewNewTaskForm ? (
-          <NewTaskForm
-            defaultId={defaultId}
-            setViewNewTaskForm={setViewNewTaskForm}
-          />
-        ) : null}
-
-        {projArr.length > 0 &&
-          projArr.map((project) => {
-            return <ProjectView project={project} taskArr={taskArr} />;
-          })}
+        {taskArr.map((task) => {
+          if (new Date() < new Date(task.due_date)) {
+            return <TaskView task={task} key={task.id} />;
+          }
+          return null;
+        })}
       </div>
     </div>
   );
