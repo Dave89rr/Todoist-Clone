@@ -7,7 +7,6 @@ import HomePage from './components/Pages/HomePage';
 import SignUpForm from './components/Forms/SignUpForm';
 import NavBar from './components/Elements/NavBar';
 import ProtectedRoute from './components/utils/ProtectedRoute';
-import UsersList from './components/UsersList';
 import SideMenu from './components/Elements/SideMenu';
 import { authenticate } from './store/session';
 import { thunkGetAllTasks } from '../src/store/tasks';
@@ -85,9 +84,6 @@ function App() {
           <Route path="/sign-up" exact={true}>
             <SignUpForm />
           </Route>
-          <ProtectedRoute path="/users" exact={true}>
-            <UsersList />
-          </ProtectedRoute>
           <ProtectedRoute path="/projects/:projectId" exact={true}>
             <ProjectView />
           </ProtectedRoute>
