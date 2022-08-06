@@ -1,18 +1,30 @@
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import classes from './SideMenu.module.css';
 
 const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
   const user = useSelector((state) => state.session.user);
+  const projects = useSelector((state) => state.projects);
+  const history = useHistory();
   const theme = (name) => {
     if (user) {
       return `${classes[`${user.theme}${name}`]}`;
     }
   };
+  let projArr;
+  if (projects) {
+    projArr = Object.values(projects);
+  }
   return (
     <div className={classes.sideMenuContainer}>
       <div className={`${theme('Container')}`}>
         <div className={classes.sideInteractions}>
-          <div className={classes.sideBtn}>
+          <div
+            className={classes.sideBtn}
+            onClick={() => {
+              history.push(`/projects/${projArr[0].id}`);
+            }}
+          >
             <span>📥</span>
             <span className={`${theme('SideBtnText')}`}>Inbox</span>
           </div>
@@ -31,6 +43,32 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
               />
             </div>
           </div>
+          {projArr &&
+            projArr.map((project) => {
+              if (project.name !== 'Inbox') {
+                if (project.name.length <= 14) {
+                  return (
+                    <div
+                      className={`${classes.sideItem} ${theme('SideBtnText')}`}
+                      // className={`${theme('SideBtnText')}`}
+                      key={project.id}
+                      onClick={() => history.push(`/projects/${project.id}`)}
+                    >
+                      {project.name}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      className={`${classes.sideItem} ${theme('SideBtnText')}`}
+                      key={project.id}
+                      onClick={() => history.push(`/projects/${project.id}`)}
+                    >{`${project.name.slice(0, 14)}...`}</div>
+                  );
+                }
+              }
+              return null;
+            })}
         </div>
       </div>
     </div>
