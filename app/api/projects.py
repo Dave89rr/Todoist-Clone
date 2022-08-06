@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from ..forms import ProjectForm
+from ..forms import ProjectForm, UpdateProjectForm
 from ..models import db, Project
 from .auth_routes import validation_errors_to_error_messages
 
@@ -32,7 +32,7 @@ def create():
 
 @project.route('/update', methods=['PATCH'])
 def update():
-    form = ProjectForm()
+    form = UpdateProjectForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(form.data['id'])

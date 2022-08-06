@@ -5,45 +5,62 @@ import { actionDeleteTasksByProjId } from '../../../store/tasks';
 import { thunkDeleteProject } from '../../../store/projects';
 import { useState } from 'react';
 import TaskView from '../TaskView/TaskView';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
-function ProjectView({ project, taskArr }) {
+function ProjectView() {
+  const { projectId } = useParams();
   const [viewEditProject, setViewEditProject] = useState(false);
+  const project = useSelector((state) => state.projects[projectId]);
+  const tasks = useSelector((state) => state.tasks);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
+  let taskArr;
+  if (tasks) {
+    taskArr = Object.values(tasks);
+  }
   const theme = (name) => {
     if (user) {
       return `${classes[`${user.theme}${name}`]}`;
     }
   };
-
+  if (!project) return null;
   return (
-    <div key={project.id} className={classes.projContainer}>
-      <div className={classes.projTitle}>
-        <span className={`${theme('ProjHeader')}`}>{project.name}</span>
-        <div className={classes.projActions}>
-          <span>
-            <button
-              onClick={() => {
-                dispatch(thunkDeleteProject(project.id));
-                dispatch(actionDeleteTasksByProjId(project.id));
-              }}
-            >
-              Del Proj
-            </button>
-            <button onClick={() => setViewEditProject(!viewEditProject)}>
-              Edit Project
-            </button>{' '}
-          </span>
+    <div className={classes.mainContainer}>
+      <div className={classes.projectContainer}>
+        {viewEditProject && (
+          <EditProjectForm
+            projectProp={project}
+            setViewEditProject={setViewEditProject}
+          />
+        )}
+        <div key={project.id} className={classes.projContainer}>
+          <div className={classes.projTitle}>
+            <span className={`${theme('ProjHeader')}`}>{project.name}</span>
+            <div className={classes.projActions}>
+              <span>
+                <button
+                  onClick={() => {
+                    dispatch(thunkDeleteProject(project.id));
+                    dispatch(actionDeleteTasksByProjId(project.id));
+                  }}
+                >
+                  Del Proj
+                </button>
+                <button onClick={() => setViewEditProject(!viewEditProject)}>
+                  Edit Project
+                </button>{' '}
+              </span>
+            </div>
+          </div>
+          {taskArr.map((task) => {
+            if (task.projectId === project.id) {
+              return <TaskView task={task} key={task.id} />;
+            }
+            return null;
+          })}
         </div>
       </div>
-      {viewEditProject && <EditProjectForm projectProp={project} />}
-      {taskArr.map((task) => {
-        if (task.projectId === project.id) {
-          return <TaskView task={task} />;
-        }
-        return null;
-      })}
     </div>
   );
 }

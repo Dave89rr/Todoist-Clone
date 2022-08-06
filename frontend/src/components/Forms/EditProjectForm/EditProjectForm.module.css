@@ -1,0 +1,135 @@
+.editContainer {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.falseFormContainer,
+.trueFormContainer {
+  background-color: white;
+  margin-top: 3vh;
+  height: fit-content;
+  width: 21.14vw;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+}
+
+.falseFormContainer {
+  background-color: var(--bg-light);
+}
+.trueFormContainer {
+  background-color: var(--nav-bar-dark);
+}
+
+.falseFormTitle,
+.trueFormTitle {
+  height: 5.09vh;
+  width: 100%;
+  border-radius: 9px 9px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.falseFormTitle > span,
+.trueFormTitle > span {
+  padding-left: 24px;
+  padding-right: 24px;
+  font-weight: bold;
+}
+
+.falseFormTitle > span {
+  color: var(--font-color-light);
+}
+.trueFormTitle > span {
+  color: var(--font-color-dark);
+}
+.falseFormTitle {
+  border-bottom: 1px solid #dddddd;
+  background-color: var(--modal-header-bg-light);
+}
+.trueFormTitle {
+  border-bottom: 1px solid #333333;
+  background-color: var(--modal-header-bg-dark);
+}
+
+.falseInputContainer,
+.trueInputContainer {
+  width: 100%;
+  height: 36.83vh;
+}
+.falseInput,
+.trueInput {
+  width: calc(100% - 2.1vw);
+  padding-left: 1.05vw;
+  padding-right: 1.05vw;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.falseInput > label,
+.trueInput > label {
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 3%;
+}
+.falseInput > label {
+  color: var(--font-color-light);
+}
+.trueInput > label {
+  color: var(--font-color-dark);
+}
+
+.falseInput > input,
+.trueInput > input,
+.falseInput > select,
+.trueInput > select {
+  height: 2em;
+  padding-left: 2%;
+  border-radius: 8px;
+}
+
+.trueInput > select {
+  background-color: var(--modal-input-bg-dark);
+  color: var(--font-color-dark);
+}
+.trueInput > input {
+  background-color: var(--modal-input-bg-dark);
+  color: var(--font-color-dark);
+}
+.trueInput > span {
+  color: var(--font-color-dark);
+}
+.trueView,
+.falseView {
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 3%;
+}
+.viewChoices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.viewImg {
+  height: 122px;
+  width: 162px;
+  margin-top: 4%;
+  border-radius: 8px;
+  border: 1px solid #3e3e3e;
+  background-color: var(--bg-dark);
+}
+.viewChoice:active > .viewImg {
+  border: 1px solid red;
+}
+.viewChoice {
+  margin: 1%;
+}
