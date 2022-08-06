@@ -8,11 +8,11 @@ import SignUpForm from './components/Forms/SignUpForm';
 import NavBar from './components/Elements/NavBar';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import UsersList from './components/UsersList';
-import User from './components/User';
 import SideMenu from './components/Elements/SideMenu';
 import { authenticate } from './store/session';
 import { thunkGetAllTasks } from '../src/store/tasks';
 import { thunkGetAllProjects } from '../src/store/projects';
+import ProjectView from './components/Elements/ProjectView';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,7 +73,7 @@ function App() {
             <UsersList />
           </ProtectedRoute>
           <ProtectedRoute path="/projects/:projectId" exact={true}>
-            {/* TODO - ProjectView will go here */}
+            <ProjectView />
           </ProtectedRoute>
           <ProtectedRoute path="/today" exact={true}>
             <TodayPage
