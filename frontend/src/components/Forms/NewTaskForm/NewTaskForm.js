@@ -6,12 +6,16 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
   const dispatch = useDispatch();
+  let recentProjId = defaultId;
+  if (localStorage.getItem('recentProjId') !== null) {
+    recentProjId = localStorage.getItem('recentProjId');
+  }
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState('');
-  const [projectId, setProjectId] = useState(defaultId);
+  const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState(4);
   const [dueDate, setDueDate] = useState(
     new Date().toISOString().split('.')[0]
@@ -19,6 +23,10 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
 
   const projArr = Object.values(projects);
 
+  const handleProjIdChange = (e) => {
+    setProjectId(e.target.value);
+    localStorage.setItem('recentProjId', e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
@@ -47,7 +55,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setName('');
         setDescription('');
         setPosition('');
-        setProjectId(defaultId);
+        setProjectId(recentProjId);
         setPriority(2);
         setDueDate(new Date().toISOString().split('.')[0]);
         setViewNewTaskForm(false);
@@ -96,10 +104,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         </div>
         <div>
           <label htmlFor="projectId">Project</label>
-          <select
-            defaultValue={defaultId}
-            onChange={(e) => setProjectId(e.target.value)}
-          >
+          <select defaultValue={recentProjId} onChange={handleProjIdChange}>
             <option value="">Select a project</option>
             {projArr.map((project, id) => {
               return (
