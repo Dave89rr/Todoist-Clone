@@ -16,6 +16,7 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
     return `${classes.navSplash}`;
   };
 
+  const home = <img src="/static/icons/home.svg" alt="" />;
   const logoLoggedout = (
     <div
       className={classes.logoContainer}
@@ -34,7 +35,9 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
 
   const logoLoggedIn = (
     <div className={classes.logoContainer}>
-      <span style={{ color: 'white' }}>Home</span>
+      <div className={classes.homeIcon} onClick={() => history.push('/today')}>
+        {home}
+      </div>
     </div>
   );
   return (
