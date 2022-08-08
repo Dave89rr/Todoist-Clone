@@ -19,7 +19,7 @@
   align-items: center;
   flex-direction: row;
   display: flex;
-  width: 95%;
+  width: 96%;
 }
 .userInteractions {
   display: flex;
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  gap: 5%;
+  width: fit-content;
 }
 .logoContainer > span {
   color: #e44332;
@@ -83,7 +83,16 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.homeIcon {
-  height: 24px;
-  width: 24px;
+.homeIcon,
+.menuIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 3px;
+}
+.homeIcon:hover,
+.menuIcon:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }

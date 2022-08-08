@@ -14,6 +14,8 @@ import { thunkGetAllProjects } from '../src/store/projects';
 import ProjectView from './components/Elements/ProjectView';
 import NewProjectForm from './components/Forms/NewProjectForm';
 import NewTaskForm from './components/Forms/NewTaskForm/';
+import { CSSTransition } from 'react-transition-group';
+import './index.css';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,6 +24,8 @@ function App() {
   const projects = useSelector((state) => state.projects);
   const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
   const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
+  const [viewSideMenu, setViewSideMenu] = useState(true);
+
   let defaultId;
   if (projects) {
     defaultId = Object.keys(projects)[0];
@@ -57,6 +61,8 @@ function App() {
       <NavBar
         setViewNewTaskForm={setViewNewTaskForm}
         viewNewTaskForm={viewNewTaskForm}
+        setViewSideMenu={setViewSideMenu}
+        viewSideMenu={viewSideMenu}
       />
       <div className={`${theme('siteContainer')}`}>
         {viewNewProjectForm ? (
@@ -68,12 +74,19 @@ function App() {
             setViewNewTaskForm={setViewNewTaskForm}
           />
         ) : null}
-        {user ? (
-          <SideMenu
-            viewNewProjectForm={viewNewProjectForm}
-            setViewNewProjectForm={setViewNewProjectForm}
-          />
-        ) : null}
+        {user && (
+          <CSSTransition
+            in={viewSideMenu}
+            timeout={500}
+            classNames={'sideMenu'}
+            unmountOnExit
+          >
+            <SideMenu
+              viewNewProjectForm={viewNewProjectForm}
+              setViewNewProjectForm={setViewNewProjectForm}
+            />
+          </CSSTransition>
+        )}
         <Switch>
           <Route path="/" exact={true}>
             <HomePage />
