@@ -79,3 +79,11 @@ a {
   margin-left: -15.76vw;
   transition: 200ms;
 }
+
+input {
+  border: 1px solid #333333;
+}
+
+input:focus {
+  outline: 1px solid #555555;
+}
