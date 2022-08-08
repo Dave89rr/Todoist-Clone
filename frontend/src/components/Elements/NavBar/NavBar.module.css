@@ -1,6 +1,6 @@
 .falseNav,
 .trueNav {
-  height: 4.07vh;
+  height: 44px;
   display: flex;
   justify-content: center;
   position: sticky;
@@ -19,7 +19,7 @@
   align-items: center;
   flex-direction: row;
   display: flex;
-  width: 80%;
+  width: 96%;
 }
 .userInteractions {
   display: flex;
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  gap: 5%;
+  width: fit-content;
 }
 .logoContainer > span {
   color: #e44332;
@@ -81,4 +81,18 @@
 
 .addTask:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.homeIcon,
+.menuIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 3px;
+}
+.homeIcon:hover,
+.menuIcon:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }

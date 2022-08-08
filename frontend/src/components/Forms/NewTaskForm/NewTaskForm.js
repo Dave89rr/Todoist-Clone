@@ -5,23 +5,39 @@ import { thunkCreateTask } from '../../../store/tasks';
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
+  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
+  let recentProjId = defaultId;
+  if (localStorage.getItem('recentProjId') !== null) {
+    recentProjId = localStorage.getItem('recentProjId');
+  }
 
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [position, setPosition] = useState('');
-  const [projectId, setProjectId] = useState(defaultId);
+  const [position, setPosition] = useState(1);
+  const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState(4);
   const [dueDate, setDueDate] = useState(
     new Date().toISOString().split('.')[0]
   );
 
   const projArr = Object.values(projects);
+  const taskArr = Object.values(tasks);
 
+  const handleProjIdChange = (e) => {
+    setProjectId(e.target.value);
+    localStorage.setItem('recentProjId', e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
+
+    let newPosition =
+      taskArr.filter((task) => {
+        return task.projectId === parseInt(recentProjId, 10);
+      }).length + 1;
+    setPosition(newPosition);
 
     const task = {
       ownerId: user.id,
@@ -47,7 +63,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setName('');
         setDescription('');
         setPosition('');
-        setProjectId(defaultId);
+        setProjectId(recentProjId);
         setPriority(2);
         setDueDate(new Date().toISOString().split('.')[0]);
         setViewNewTaskForm(false);
@@ -86,20 +102,8 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
           />
         </div>
         <div>
-          <label htmlFor="position">Position</label>
-          <input
-            name="position"
-            type="text"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-          />
-        </div>
-        <div>
           <label htmlFor="projectId">Project</label>
-          <select
-            defaultValue={defaultId}
-            onChange={(e) => setProjectId(e.target.value)}
-          >
+          <select defaultValue={recentProjId} onChange={handleProjIdChange}>
             <option value="">Select a project</option>
             {projArr.map((project, id) => {
               return (
@@ -109,12 +113,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               );
             })}
           </select>
-          <input
-            name="projectId"
-            type="text"
-            value={projectId}
-            onChange={(e) => setProjectId(e.target.value)}
-          />
         </div>
         <div>
           <label htmlFor="priority">Priority</label>

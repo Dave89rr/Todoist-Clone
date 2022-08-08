@@ -1,9 +1,12 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import classes from './SideMenu.module.css';
+import { ReactComponent as InboxSvg } from './inbox.svg';
+import { ReactComponent as CalendarSvg } from './calendar.svg';
 
 const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
   const user = useSelector((state) => state.session.user);
+  const themeState = useSelector((state) => state.session.user.theme);
   const projects = useSelector((state) => state.projects);
   const history = useHistory();
   const theme = (name) => {
@@ -25,11 +28,16 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
               history.push(`/projects/${projArr[0].id}`);
             }}
           >
-            <span>📥</span>
+            <InboxSvg fill={themeState ? '#5297ff' : '#416DB5'} />
             <span className={`${theme('SideBtnText')}`}>Inbox</span>
           </div>
-          <div className={classes.sideBtn}>
-            <span>📅</span>
+          <div
+            className={classes.sideBtn}
+            onClick={() => {
+              history.push('/today');
+            }}
+          >
+            <CalendarSvg fill={themeState ? '#25b84c' : '#058527'} />
             <span className={`${theme('SideBtnText')}`}>Today</span>
           </div>
           <div className={classes.sideItem}>
@@ -50,7 +58,6 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
                   return (
                     <div
                       className={`${classes.sideItem} ${theme('SideBtnText')}`}
-                      // className={`${theme('SideBtnText')}`}
                       key={project.id}
                       onClick={() => history.push(`/projects/${project.id}`)}
                     >

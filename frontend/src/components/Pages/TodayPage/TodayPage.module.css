@@ -1,14 +1,19 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
-  height: calc(100vh - 4.07vh);
+  height: calc(100vh - 44px);
   overflow-y: scroll;
 }
 .projectContainer {
   width: 50%;
-  margin-top: 5%;
+  margin-top: 2%;
   align-self: center;
   margin-bottom: 2%;
+}
+.falseSectionTitle {
+  color: var(--font-color-light);
+}
+.trueSectionTitle {
+  color: var(--font-color-dark);
 }

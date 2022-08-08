@@ -6,7 +6,12 @@ import { useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
+const NavBar = ({
+  setViewNewTaskForm,
+  viewNewTaskForm,
+  setViewSideMenu,
+  viewSideMenu,
+}) => {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const theme = (name) => {
@@ -16,6 +21,8 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
     return `${classes.navSplash}`;
   };
 
+  const home = <img src="/static/icons/home.svg" alt="" />;
+  const menuIcon = <img src="/static/icons/menu.svg" alt="" />;
   const logoLoggedout = (
     <div
       className={classes.logoContainer}
@@ -34,7 +41,15 @@ const NavBar = ({ setViewNewTaskForm, viewNewTaskForm }) => {
 
   const logoLoggedIn = (
     <div className={classes.logoContainer}>
-      <span style={{ color: 'white' }}>Home</span>
+      <div
+        className={classes.menuIcon}
+        onClick={() => setViewSideMenu(!viewSideMenu)}
+      >
+        {menuIcon}
+      </div>
+      <div className={classes.homeIcon} onClick={() => history.push('/today')}>
+        {home}
+      </div>
     </div>
   );
   return (

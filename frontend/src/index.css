@@ -64,3 +64,18 @@ a {
   overflow: hidden;
   height: 100%;
 }
+
+.sideMenu-enter {
+  margin-left: -15.76vw;
+}
+.sideMenu-enter-active {
+  margin-left: 0;
+  transition: 200ms;
+}
+.sideMenu-exit {
+  margin-left: 0;
+}
+.sideMenu-exit-active {
+  margin-left: -15.76vw;
+  transition: 200ms;
+}
