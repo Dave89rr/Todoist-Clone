@@ -1,3 +1,4 @@
+import classes from '../Forms.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkCreateProject } from '../../../store/projects';
@@ -13,7 +14,11 @@ function NewProjectForm({ setViewNewProjectForm }) {
   const [view, setView] = useState('false');
 
   const colorsArr = Object.values(colors);
-
+  const theme = (name) => {
+    if (user) {
+      return `${user.theme}${name}`;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -52,73 +57,86 @@ function NewProjectForm({ setViewNewProjectForm }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {validationErrors.length > 0 ? (
-        <div>
-          {validationErrors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-      ) : null}
-      <div>
-        <span>Add project</span>
-      </div>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          name="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="color">Color</label>
-        <select
-          defaultValue={'#808080'}
-          onChange={(e) => setColorState(e.target.value)}
-        >
-          {colorsArr.map((color, id) => {
-            return (
-              <option key={id} value={color[1]}>
-                {color[0]}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="viewList">
-          <span>List</span>
-          <input
-            name="viewList"
-            type="radio"
-            value="false"
-            checked={view === 'false'}
-            onChange={(e) => setView(e.target.value)}
-          />
-        </label>
-        <label htmlFor="viewSection">
-          <span>Boards</span>
-          <input
-            name="viewSection"
-            type="radio"
-            value="true"
-            checked={view === 'true'}
-            onChange={(e) => setView(e.target.value)}
-          />
-        </label>
-      </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setViewNewProjectForm(false);
-        }}
+    <div className={classes.modalBgDarkGray}>
+      <form
+        className={classes[`${theme('FormContainer')}`]}
+        onSubmit={handleSubmit}
       >
-        Cancel
-      </button>
-      <button type="submit">Add</button>
-    </form>
+        {validationErrors.length > 0 ? (
+          <div>
+            {validationErrors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+        ) : null}
+        <div className={classes[`${theme('FormTitle')}`]}>
+          <span>Add project</span>
+        </div>
+        <div className={classes[`${theme('InputContainer')}`]}>
+          <div className={classes[`${theme('Input')}`]}>
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className={classes[`${theme('Input')}`]}>
+          <label htmlFor="color">Color</label>
+          <select
+            defaultValue={'#808080'}
+            onChange={(e) => setColorState(e.target.value)}
+          >
+            {colorsArr.map((color, id) => {
+              return (
+                <option key={id} value={color[1]}>
+                  {color[0]}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        {/* <div>
+          <label htmlFor="viewList">
+            <span>List</span>
+            <input
+              name="viewList"
+              type="radio"
+              value="false"
+              checked={view === 'false'}
+              onChange={(e) => setView(e.target.value)}
+            />
+          </label>
+          <label htmlFor="viewSection">
+            <span>Boards</span>
+            <input
+              name="viewSection"
+              type="radio"
+              value="true"
+              checked={view === 'true'}
+              onChange={(e) => setView(e.target.value)}
+            />
+          </label>
+        </div> */}
+        <div className={classes[`${theme('BtnHolder')}`]}>
+          <button
+            className={classes[`${theme('CancelBtn')}`]}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setViewNewProjectForm(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button className={classes[`${theme('Confirmation')}`]} type="submit">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

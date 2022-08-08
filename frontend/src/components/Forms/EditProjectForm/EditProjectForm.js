@@ -1,4 +1,4 @@
-import classes from './EditProjectForm.module.css';
+import classes from '../Forms.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkUpdateProject } from '../../../store/projects';
@@ -52,7 +52,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
     }
   };
   return (
-    <div className={classes.editContainer}>
+    <div className={classes.modalBgDarkGray}>
       <form
         className={classes[`${theme('FormContainer')}`]}
         onSubmit={handleSubmit}
