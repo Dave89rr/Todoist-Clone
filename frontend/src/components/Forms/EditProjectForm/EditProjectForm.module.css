@@ -63,7 +63,7 @@
 .falseInputContainer,
 .trueInputContainer {
   width: 100%;
-  height: 36.83vh;
+  height: fit-content;
 }
 .falseInput,
 .trueInput {
@@ -132,4 +132,54 @@
 }
 .viewChoice {
   margin: 1%;
+}
+
+.falseBtnHolder,
+.trueBtnHolder {
+  display: flex;
+  align-items: center;
+  padding-right: 5%;
+  justify-content: flex-end;
+  margin-top: 8%;
+  border-radius: 0px 0px 10px 10px;
+  height: 5vh;
+  gap: 3%;
+}
+.falseBtnHolder {
+  border-top: 1px solid #dddddd;
+}
+.trueBtnHolder {
+  border-top: 1px solid #333333;
+}
+
+.trueCancelBtn,
+.falseCancelBtn,
+.falseConfirmation,
+.trueConfirmation {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 17px;
+  cursor: pointer;
+  padding: 6px 12px 7px;
+  border-radius: 3px;
+}
+.falseCancelBtn {
+  border: 1px solid var(--modal-cancel-btn-border-light);
+  background: var(--modal-cancel-btn-bg-light);
+  color: var(--font-color-light);
+  transition: border 200ms;
+}
+.falseCancelBtn:hover {
+  border: 1px solid #999999;
+  transition: border 200ms;
+}
+.trueCancelBtn {
+  border: 1px solid var(--modal-cancel-btn-border-light);
+  background: var(--modal-cancel-btn-bg-light);
+  color: var(--font-color-dark);
+}
+.falseConfirmation {
+  background: #db4c3f;
+  color: white;
+  border: none;
 }

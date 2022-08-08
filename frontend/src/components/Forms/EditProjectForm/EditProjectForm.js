@@ -53,47 +53,46 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
   };
   return (
     <div className={classes.editContainer}>
-      <div>
-        <form
-          className={classes[`${theme('FormContainer')}`]}
-          onSubmit={handleSubmit}
-        >
-          {validationErrors.length > 0 ? (
-            <div>
-              {validationErrors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
-            </div>
-          ) : null}
-          <div className={classes[`${theme('FormTitle')}`]}>
-            <span>Edit project</span>
+      <form
+        className={classes[`${theme('FormContainer')}`]}
+        onSubmit={handleSubmit}
+      >
+        {validationErrors.length > 0 ? (
+          <div>
+            {validationErrors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
           </div>
-          <div className={classes[`${theme('InputContainer')}`]}>
-            <div className={classes[`${theme('Input')}`]}>
-              <label htmlFor="name">Name</label>
-              <input
-                name="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className={classes[`${theme('Input')}`]}>
-              <label htmlFor="color">Color</label>
-              <select
-                defaultValue={'#808080'}
-                onChange={(e) => setColorState(e.target.value)}
-              >
-                {colorsArr.map((color, id) => {
-                  return (
-                    <option key={id} value={color[1]}>
-                      {color[0]}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className={classes[`${theme('Input')}`]}>
+        ) : null}
+        <div className={classes[`${theme('FormTitle')}`]}>
+          <span>Edit project</span>
+        </div>
+        <div className={classes[`${theme('InputContainer')}`]}>
+          <div className={classes[`${theme('Input')}`]}>
+            <label htmlFor="name">Name</label>
+            <input
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className={classes[`${theme('Input')}`]}>
+            <label htmlFor="color">Color</label>
+            <select
+              defaultValue={'#808080'}
+              onChange={(e) => setColorState(e.target.value)}
+            >
+              {colorsArr.map((color, id) => {
+                return (
+                  <option key={id} value={color[1]}>
+                    {color[0]}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          {/* <div className={classes[`${theme('Input')}`]}>
               <span className={classes[`${theme('View')}`]}>View</span>
               <div className={classes.viewChoices}>
                 <label className={classes.viewChoice} htmlFor="viewList">
@@ -110,7 +109,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
                       checked={view === false}
                       onChange={(e) => setView(e.target.value)}
                     />
-                    <span>List</span>
+                    <span>List</span>  
                   </div>
                 </label>
                 <label className={classes.viewChoice} htmlFor="viewSection">
@@ -131,9 +130,11 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
                   </div>
                 </label>
               </div>
-            </div>
-          </div>
+            </div> */}
+        </div>
+        <div className={classes[`${theme('BtnHolder')}`]}>
           <button
+            className={classes[`${theme('CancelBtn')}`]}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -142,9 +143,11 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
           >
             Cancel
           </button>
-          <button type="submit">Save</button>
-        </form>
-      </div>
+          <button className={classes[`${theme('Confirmation')}`]} type="submit">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

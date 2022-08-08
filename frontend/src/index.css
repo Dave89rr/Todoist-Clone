@@ -35,7 +35,9 @@ a {
   --font-color-light: #202020;
   --modal-header-bg-light: #fafafa;
   --modal-input-bg-dark: #ffffff;
-  --modal-cancel-btn-light: #f3f3f3;
+  --modal-cancel-btn-bg-light: #f3f3f3;
+  --modal-cancel-btn-border-light: #dddddd;
+  --save-btn-bg-light: #DB4C3F;
 
   /****************** Dark Mode *******************/
   --nav-bar-dark: #282828;
@@ -78,4 +80,12 @@ a {
 .sideMenu-exit-active {
   margin-left: -15.76vw;
   transition: 200ms;
+}
+
+input {
+  border: 1px solid #333333;
+}
+
+input:focus {
+  outline: 1px solid #555555;
 }
