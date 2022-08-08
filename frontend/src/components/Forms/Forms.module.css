@@ -146,12 +146,27 @@
   transition: border 200ms;
 }
 .trueCancelBtn {
-  border: 1px solid var(--modal-cancel-btn-border-light);
-  background: var(--modal-cancel-btn-bg-light);
+  border: none;
+  background: var(--modal-cancel-btn-bg-dark);
   color: var(--font-color-dark);
 }
 .falseConfirmation {
   background: #db4c3f;
   color: white;
   border: none;
+}
+.trueConfirmation {
+  background: #de4c4a;
+  color: white;
+  border: none;
+}
+
+.trueConfirmation:disabled {
+  background: #5e3332;
+  color: #686868;
+  pointer-events: none;
+}
+.falseConfirmation:disabled {
+  background: #f4cac6;
+  pointer-events: none;
 }

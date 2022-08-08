@@ -143,7 +143,11 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
           >
             Cancel
           </button>
-          <button className={classes[`${theme('Confirmation')}`]} type="submit">
+          <button
+            className={classes[`${theme('Confirmation')}`]}
+            type="submit"
+            disabled={name.length < 1 ? true : false}
+          >
             Save
           </button>
         </div>

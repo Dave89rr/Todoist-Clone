@@ -37,7 +37,7 @@ a {
   --modal-input-bg-dark: #ffffff;
   --modal-cancel-btn-bg-light: #f3f3f3;
   --modal-cancel-btn-border-light: #dddddd;
-  --save-btn-bg-light: #DB4C3F;
+  --save-btn-bg-light: #db4c3f;
 
   /****************** Dark Mode *******************/
   --nav-bar-dark: #282828;
@@ -46,7 +46,7 @@ a {
   --font-color-dark: #e2e2e2;
   --modal-header-bg-dark: #202020;
   --modal-input-bg-dark: #202020;
-  --modal-cancel-btn-dark: #353535;
+  --modal-cancel-btn-bg-dark: #353535;
 }
 
 .falsesiteContainer,
