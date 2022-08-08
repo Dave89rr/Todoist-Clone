@@ -93,7 +93,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
                 })}
               </select>
             </div>
-            <div className={classes[`${theme('Input')}`]}>
+            {/* <div className={classes[`${theme('Input')}`]}>
               <span className={classes[`${theme('View')}`]}>View</span>
               <div className={classes.viewChoices}>
                 <label className={classes.viewChoice} htmlFor="viewList">
@@ -110,7 +110,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
                       checked={view === false}
                       onChange={(e) => setView(e.target.value)}
                     />
-                    <span>List</span>
+                    <span>List</span>  
                   </div>
                 </label>
                 <label className={classes.viewChoice} htmlFor="viewSection">
@@ -131,18 +131,20 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
                   </div>
                 </label>
               </div>
-            </div>
+            </div> */}
           </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setViewEditProject(false);
-            }}
-          >
-            Cancel
-          </button>
-          <button type="submit">Save</button>
+          <div className={classes[`${theme('BtnHolder')}`]}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setViewEditProject(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button type="submit">Save</button>
+          </div>
         </form>
       </div>
     </div>
