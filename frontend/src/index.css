@@ -89,3 +89,18 @@ input {
 input:focus {
   outline: 1px solid #555555;
 }
+
+.newProjectForm-enter {
+  opacity: 0;
+}
+.newProjectForm-enter-active {
+  opacity: 1;
+  transition: 200ms;
+}
+.newProjectForm-exit {
+  margin-left: 1;
+}
+.newProjectForm-exit-active {
+  opacity: 0;
+  transition: 0ms;
+}
