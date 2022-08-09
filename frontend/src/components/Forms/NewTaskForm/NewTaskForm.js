@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkCreateTask } from '../../../store/tasks';
 import TextArea from 'react-textarea-autosize';
+import { ReactComponent as FlagSvg } from './flag.svg';
+import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -19,7 +21,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
-  const [priority, setPriority] = useState(4);
+  const [priority, setPriority] = useState('4');
   const [dueDate, setDueDate] = useState(
     new Date().toISOString().split('.')[0]
   );
@@ -79,10 +81,14 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   };
 
   return (
-    <div className={classes.modalBgTransparent}>
+    <div
+      className={classes.modalBgTransparent}
+      onClick={() => setViewNewTaskForm(false)}
+    >
       <form
         className={classes[`${theme('NewTaskFormContainer')}`]}
         onSubmit={handleSubmit}
+        onClick={(e) => e.stopPropagation()}
       >
         {validationErrors.length > 0 ? (
           <div>
@@ -137,13 +143,38 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               </select>
             </div>
           </div>
-          <div>
-            <input
+          <div
+            className={classes[`${theme('PriorityBtn')}`]}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (priority !== '4')
+                setPriority((parseInt(priority) + 1).toString());
+              if (priority === '4') setPriority('1');
+            }}
+          >
+            {priority && priority !== '4' ? (
+              <FilledFlagSvg
+                fill={
+                  priority === '1'
+                    ? '#d1453b'
+                    : priority === '2'
+                    ? '#eb8909'
+                    : priority === '3'
+                    ? '#246fe0'
+                    : 'white'
+                }
+              />
+            ) : (
+              <FlagSvg fill={'#666666'} />
+            )}
+
+            {/* <input
               name="priority"
               type="text"
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         <div className={classes.BtnHolder}>

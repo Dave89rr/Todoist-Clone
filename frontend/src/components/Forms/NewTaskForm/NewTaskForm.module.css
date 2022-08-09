@@ -151,3 +151,20 @@
   background: #f4cac6;
   pointer-events: none;
 }
+
+.falsePriorityBtn,
+.truePriorityBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.falsePriorityBtn:hover {
+  background-color: #eee;
+}
+.truePriorityBtn:hover {
+  background-color: #4d4d4d;
+}
