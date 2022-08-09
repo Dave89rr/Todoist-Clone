@@ -1,4 +1,4 @@
-import classes from './EditProjectForm.module.css';
+import classes from '../Forms.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkUpdateProject } from '../../../store/projects';
@@ -52,7 +52,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
     }
   };
   return (
-    <div className={classes.editContainer}>
+    <div className={classes.modalBgDarkGray}>
       <form
         className={classes[`${theme('FormContainer')}`]}
         onSubmit={handleSubmit}
@@ -135,6 +135,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
         <div className={classes[`${theme('BtnHolder')}`]}>
           <button
             className={classes[`${theme('CancelBtn')}`]}
+            type="button"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -143,7 +144,11 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
           >
             Cancel
           </button>
-          <button className={classes[`${theme('Confirmation')}`]} type="submit">
+          <button
+            className={classes[`${theme('Confirmation')}`]}
+            type="submit"
+            disabled={name.length < 1 ? true : false}
+          >
             Save
           </button>
         </div>

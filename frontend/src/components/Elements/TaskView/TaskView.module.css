@@ -4,14 +4,21 @@
 .trueTaskTitle {
   color: var(--font-color-dark);
 }
-.taskContainer {
+.falseTaskContainer,
+.trueTaskContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
   padding: 0.5%;
+  height: 6vh;
 }
-
+.falseTaskContainer {
+  border-top: 1px solid #f0f0f0;
+}
+.trueTaskContainer {
+  border-top: 1px solid #363636;
+}
 .taskTitle {
   display: flex;
   flex-direction: row;

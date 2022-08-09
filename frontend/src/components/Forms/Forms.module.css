@@ -1,4 +1,4 @@
-.editContainer {
+.modalBgDarkGray {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -10,7 +10,6 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .falseFormContainer,
 .trueFormContainer {
   background-color: white;
@@ -21,14 +20,12 @@
   display: flex;
   flex-direction: column;
 }
-
 .falseFormContainer {
   background-color: var(--bg-light);
 }
 .trueFormContainer {
   background-color: var(--nav-bar-dark);
 }
-
 .falseFormTitle,
 .trueFormTitle {
   height: 5.09vh;
@@ -67,7 +64,7 @@
 }
 .falseInput,
 .trueInput {
-  width: calc(100% - 2.1vw);
+  width: 100%;
   padding-left: 1.05vw;
   padding-right: 1.05vw;
   display: flex;
@@ -94,7 +91,7 @@
 .trueInput > select {
   height: 2em;
   padding-left: 2%;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 .trueInput > select {
@@ -107,31 +104,6 @@
 }
 .trueInput > span {
   color: var(--font-color-dark);
-}
-.trueView,
-.falseView {
-  font-weight: bold;
-  font-size: 0.9em;
-  margin-bottom: 3%;
-}
-.viewChoices {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.viewImg {
-  height: 122px;
-  width: 162px;
-  margin-top: 4%;
-  border-radius: 8px;
-  border: 1px solid #3e3e3e;
-  background-color: var(--bg-dark);
-}
-.viewChoice:active > .viewImg {
-  border: 1px solid red;
-}
-.viewChoice {
-  margin: 1%;
 }
 
 .falseBtnHolder,
@@ -174,12 +146,27 @@
   transition: border 200ms;
 }
 .trueCancelBtn {
-  border: 1px solid var(--modal-cancel-btn-border-light);
-  background: var(--modal-cancel-btn-bg-light);
+  border: none;
+  background: var(--modal-cancel-btn-bg-dark);
   color: var(--font-color-dark);
 }
 .falseConfirmation {
   background: #db4c3f;
   color: white;
   border: none;
+}
+.trueConfirmation {
+  background: #de4c4a;
+  color: white;
+  border: none;
+}
+
+.trueConfirmation:disabled {
+  background: #5e3332;
+  color: #686868;
+  pointer-events: none;
+}
+.falseConfirmation:disabled {
+  background: #f4cac6;
+  pointer-events: none;
 }

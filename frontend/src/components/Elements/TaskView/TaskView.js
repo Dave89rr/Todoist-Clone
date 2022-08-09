@@ -20,7 +20,7 @@ function TaskView({ task }) {
   return (
     <div
       key={task.id}
-      className={classes.taskContainer}
+      className={`${theme('TaskContainer')}`}
       onMouseEnter={() => setShowtaskUserInteractions(true)}
       onMouseLeave={() => setShowtaskUserInteractions(false)}
     >

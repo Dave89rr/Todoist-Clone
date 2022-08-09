@@ -65,9 +65,14 @@ function App() {
         viewSideMenu={viewSideMenu}
       />
       <div className={`${theme('siteContainer')}`}>
-        {viewNewProjectForm ? (
+        <CSSTransition
+          in={viewNewProjectForm}
+          timeout={200}
+          classNames={'newProjectForm'}
+          unmountOnExit
+        >
           <NewProjectForm setViewNewProjectForm={setViewNewProjectForm} />
-        ) : null}
+        </CSSTransition>
         {viewNewTaskForm ? (
           <NewTaskForm
             defaultId={defaultId}

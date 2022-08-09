@@ -1,6 +1,10 @@
+import classes from './NewTaskForm.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkCreateTask } from '../../../store/tasks';
+import TextArea from 'react-textarea-autosize';
+import { ReactComponent as FlagSvg } from './flag.svg';
+import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -17,7 +21,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
-  const [priority, setPriority] = useState(4);
+  const [priority, setPriority] = useState('4');
   const [dueDate, setDueDate] = useState(
     new Date().toISOString().split('.')[0]
   );
@@ -28,6 +32,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const handleProjIdChange = (e) => {
     setProjectId(e.target.value);
     localStorage.setItem('recentProjId', e.target.value);
+  };
+  const theme = (name) => {
+    if (user) {
+      return `${user.theme}${name}`;
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +58,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
       due_date: dueDate,
     };
 
-    if (name.length === 0) {
+    if (name.length < 1 && name.length > 30) {
       errors.push('Name must be between 1 and 30 characters long.');
     }
     if (errors.length > 0) {
@@ -72,9 +81,15 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   };
 
   return (
-    <>
-      <h1>New Task</h1>
-      <form onSubmit={handleSubmit}>
+    <div
+      className={classes.modalBgTransparent}
+      onClick={() => setViewNewTaskForm(false)}
+    >
+      <form
+        className={classes[`${theme('NewTaskFormContainer')}`]}
+        onSubmit={handleSubmit}
+        onClick={(e) => e.stopPropagation()}
+      >
         {validationErrors.length > 0 ? (
           <div>
             {validationErrors.map((error, ind) => (
@@ -82,62 +97,107 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             ))}
           </div>
         ) : null}
-        <div>
-          <span>Add task</span>
-        </div>
-        <div>
-          <label htmlFor="name">Name</label>
+        <div className={classes[`${theme('InputContainer')}`]}>
           <input
+            autoFocus
+            className={classes[`${theme('TaskInput')}`]}
             name="name"
             type="text"
+            placeholder="Task name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
+        <div className={classes[`${theme('InputContainer')}`]}>
+          <TextArea
+            minRows={2}
+            maxRows={9}
+            className={classes[`${theme('Textarea')}`]}
+            placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="projectId">Project</label>
-          <select defaultValue={recentProjId} onChange={handleProjIdChange}>
-            <option value="">Select a project</option>
-            {projArr.map((project, id) => {
-              return (
-                <option key={id} value={project.id}>
-                  {project.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="priority">Priority</label>
-          <input
-            name="priority"
-            type="text"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="due_date">Due Date</label>
-          <input
-            name="due_date"
-            type="datetime-local"
-            value={dueDate}
-            onChange={(e) => {
-              setDueDate(e.target.value);
+        <div className={classes.optionContainer}>
+          <div>
+            <div>
+              <input
+                name="due_date"
+                type="datetime-local"
+                value={dueDate}
+                onChange={(e) => {
+                  setDueDate(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <select defaultValue={recentProjId} onChange={handleProjIdChange}>
+                <option value="">Select a project</option>
+                {projArr.map((project, id) => {
+                  return (
+                    <option key={id} value={project.id}>
+                      {project.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <div
+            className={classes[`${theme('PriorityBtn')}`]}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (priority !== '4')
+                setPriority((parseInt(priority) + 1).toString());
+              if (priority === '4') setPriority('1');
             }}
-          />
+          >
+            {priority && priority !== '4' ? (
+              <FilledFlagSvg
+                fill={
+                  priority === '1'
+                    ? '#d1453b'
+                    : priority === '2'
+                    ? '#eb8909'
+                    : priority === '3'
+                    ? '#246fe0'
+                    : 'white'
+                }
+              />
+            ) : (
+              <FlagSvg fill={'#666666'} />
+            )}
+
+            {/* <input
+              name="priority"
+              type="text"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            /> */}
+          </div>
         </div>
-        <button>Cancel</button>
-        <button type="submit">Add</button>
+        <div className={classes.BtnHolder}>
+          <button
+            className={classes[`${theme('CancelBtn')}`]}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setViewNewTaskForm(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className={classes[`${theme('Confirmation')}`]}
+            type="submit"
+            disabled={name.length < 1 ? true : false}
+          >
+            Add
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 
