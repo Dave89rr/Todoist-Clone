@@ -25,6 +25,23 @@ function ProjectView() {
       return `${classes[`${user.theme}${name}`]}`;
     }
   };
+  const projActions = (
+    <div className={classes.projActions}>
+      <span>
+        <button
+          onClick={() => {
+            dispatch(thunkDeleteProject(project.id));
+            dispatch(actionDeleteTasksByProjId(project.id));
+          }}
+        >
+          Del Proj
+        </button>
+        <button onClick={() => setViewEditProject(!viewEditProject)}>
+          Edit Project
+        </button>{' '}
+      </span>
+    </div>
+  );
   if (!project) return null;
   return (
     <div className={classes.mainContainer}>
@@ -47,21 +64,7 @@ function ProjectView() {
         <div key={project.id} className={classes.projContainer}>
           <div className={classes.projTitle}>
             <span className={`${theme('ProjHeader')}`}>{project.name}</span>
-            <div className={classes.projActions}>
-              <span>
-                <button
-                  onClick={() => {
-                    dispatch(thunkDeleteProject(project.id));
-                    dispatch(actionDeleteTasksByProjId(project.id));
-                  }}
-                >
-                  Del Proj
-                </button>
-                <button onClick={() => setViewEditProject(!viewEditProject)}>
-                  Edit Project
-                </button>{' '}
-              </span>
-            </div>
+            {project.name !== 'Inbox' ? projActions : null}
           </div>
           {taskArr.map((task) => {
             if (task.projectId === project.id) {
