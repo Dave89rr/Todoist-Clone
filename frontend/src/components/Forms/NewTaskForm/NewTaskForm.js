@@ -58,7 +58,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
       due_date: dueDate,
     };
 
-    if (name.length < 1 && name.length > 30) {
+    if (name.length < 1 || name.length > 30) {
       errors.push('Name must be between 1 and 30 characters long.');
     }
     if (errors.length > 0) {

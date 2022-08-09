@@ -28,8 +28,8 @@ function EditTaskForm({ taskProp }) {
       due_date: dueDate,
     };
 
-    if (name.length === 0) {
-      errors.push('Name for a project cannot be left blank');
+    if (name.length < 1 || name.length > 30) {
+      errors.push('Name for a task must be between 1 and 30 characters');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);

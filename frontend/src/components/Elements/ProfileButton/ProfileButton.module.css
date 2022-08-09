@@ -1,4 +1,5 @@
-.profBtn {
+.profBtn,
+.profBtnHeader {
   cursor: pointer;
   border-radius: 100%;
   border: 1px solid #e8435a;
@@ -10,6 +11,80 @@
   align-items: center;
   box-shadow: 0px 0px 1px 0.5px white;
 }
+.profBtnHeader {
+  height: 46px;
+  width: 46px;
+  cursor: inherit;
+}
 .profBtnLetter {
   color: #e8435a;
+}
+.falseProfMenuContainer,
+.trueProfMenuContainer {
+  position: absolute;
+  top: 44px;
+  min-width: 10vw;
+  min-height: 10vh;
+  border-radius: 10px;
+  padding-bottom: 0.5%;
+}
+.falseProfMenuContainer {
+  border: 1px solid #cccccc;
+  background-color: var(--bg-light);
+}
+.trueProfMenuContainer {
+  border: 1px solid #484848;
+  background-color: var(--bg-dark);
+}
+.falseProfMenuHeader,
+.trueProfMenuHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 6%;
+  padding: 3% 5%;
+}
+.falseProfMenuHeader {
+  border-bottom: 1px solid #f0f0f0;
+}
+.trueProfMenuContainer {
+  border-bottom: 1px solid #363636;
+}
+.falseUserInfo,
+.trueUserInfo {
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 1%; */
+}
+.falseUserInfo > span {
+  color: var(--font-color-light);
+}
+.trueUserInfo > span {
+  color: var(--font-color-dark);
+}
+
+.trueProfMenuActions,
+.falseProfMenuActions {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  height: 2em;
+  padding: 2%;
+  align-items: center;
+  gap: 4%;
+  margin-left: 3%;
+  margin-right: 3%;
+  border-radius: 3px;
+}
+
+.falseProfMenuActions:hover {
+  background-color: #f3f3f3;
+}
+.trueProfMenuActions:hover {
+  background-color: #4d4d4d;
+}
+.falseProfMenuActions > span {
+  color: var(--font-color-light);
+}
+.trueProfMenuActions > span {
+  color: var(--font-color-dark);
 }
