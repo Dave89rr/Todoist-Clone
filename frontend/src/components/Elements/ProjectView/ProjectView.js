@@ -47,6 +47,7 @@ function ProjectView() {
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
         <CSSTransition
+          timeout={100}
           in={viewEditProject}
           classNames={{
             enterActive: classes.editFormEnterActive,
