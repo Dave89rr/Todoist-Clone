@@ -135,6 +135,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
         <div className={classes[`${theme('BtnHolder')}`]}>
           <button
             className={classes[`${theme('CancelBtn')}`]}
+            type="button"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();

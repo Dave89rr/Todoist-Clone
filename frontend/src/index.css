@@ -16,6 +16,7 @@
 }
 * {
   font-family: 'Graphik Web Regular Regular';
+  box-sizing: border-box;
 }
 body {
   margin: 0;

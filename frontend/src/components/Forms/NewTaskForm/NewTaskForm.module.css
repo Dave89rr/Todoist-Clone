@@ -1,0 +1,153 @@
+.modalBgTransparent {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.falseNewTaskFormContainer,
+.trueNewTaskFormContainer {
+  background-color: white;
+  margin-top: 12.5vh;
+  height: fit-content;
+  width: 28.91vw;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 35%);
+  align-items: center;
+}
+.falseNewTaskFormContainer {
+  background-color: var(--bg-light);
+}
+.trueNewTaskFormContainer {
+  border: 1px solid #383838;
+  background-color: var(--bg-dark);
+}
+
+.falseInputContainer,
+.trueInputContainer {
+  width: 100%;
+  height: fit-content;
+}
+
+.falseTaskInput,
+.trueTaskInput {
+  border: none;
+  width: 100%;
+  padding-left: 1.05vw;
+  padding-right: 1.05vw;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+  height: 1.5em;
+  resize: none;
+  font-weight: bold;
+}
+.falseTaskInput:focus,
+.trueTaskInput:focus {
+  border: none;
+  outline: none;
+}
+.falseTaskInput {
+  background-color: var(--bg-light);
+}
+.trueTaskInput {
+  color: white;
+  caret-color: white;
+  background-color: var(--bg-dark);
+}
+.falseTextarea,
+.trueTextarea {
+  margin-top: 2%;
+  width: 100%;
+  padding-left: 1.05vw;
+  padding-right: 1.05vw;
+  resize: none;
+  border: none;
+  font-size: 0.8125em;
+}
+
+.falseTextarea:focus,
+.trueTextarea:focus {
+  border: none;
+  outline: none;
+}
+.falseTextarea {
+  background-color: var(--bg-light);
+}
+.trueTextarea {
+  color: white;
+  background-color: var(--bg-dark);
+  caret-color: white;
+}
+
+.optionContainer {
+  padding-left: 1.05vw;
+  padding-right: 1.05vw;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.BtnHolder {
+  padding-right: 1.05vw;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 3%;
+  gap: 3%;
+}
+.trueCancelBtn,
+.falseCancelBtn,
+.falseConfirmation,
+.trueConfirmation {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 17px;
+  cursor: pointer;
+  padding: 6px 12px 7px;
+  border-radius: 3px;
+}
+.falseCancelBtn {
+  border: 1px solid var(--modal-cancel-btn-border-light);
+  background: var(--modal-cancel-btn-bg-light);
+  color: var(--font-color-light);
+  transition: border 200ms;
+}
+.falseCancelBtn:hover {
+  border: 1px solid #999999;
+  transition: border 200ms;
+}
+.trueCancelBtn {
+  border: none;
+  background: var(--modal-cancel-btn-bg-dark);
+  color: var(--font-color-dark);
+}
+.falseConfirmation {
+  background: #db4c3f;
+  color: white;
+  border: none;
+}
+.trueConfirmation {
+  background: #de4c4a;
+  color: white;
+  border: none;
+}
+
+.trueConfirmation:disabled {
+  background: #5e3332;
+  color: #686868;
+  pointer-events: none;
+}
+.falseConfirmation:disabled {
+  background: #f4cac6;
+  pointer-events: none;
+}
