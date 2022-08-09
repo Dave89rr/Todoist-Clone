@@ -64,7 +64,7 @@
 }
 .falseInput,
 .trueInput {
-  width: calc(100% - 2.1vw);
+  width: 100%;
   padding-left: 1.05vw;
   padding-right: 1.05vw;
   display: flex;
