@@ -37,8 +37,8 @@ function NewProjectForm({ setViewNewProjectForm }) {
       view: viewBool,
     };
 
-    if (name.length === 0) {
-      errors.push('Name must be between 1 and 50 characters long.');
+    if (name.length < 1 || name.length > 30) {
+      errors.push('Name must be between 1 and 30 characters long.');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
