@@ -1,7 +1,6 @@
 import classes from './NavBar.module.css';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from '../LogoutButton/';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -82,9 +81,6 @@ const NavBar = ({
               />
             </div>
             <ProfileButton />
-            <div>
-              <LogoutButton />
-            </div>
           </div>
         )}
       </div>

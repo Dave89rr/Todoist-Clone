@@ -19,7 +19,7 @@
   align-items: center;
   flex-direction: row;
   display: flex;
-  width: 96%;
+  width: 94%;
 }
 .userInteractions {
   display: flex;
@@ -27,6 +27,7 @@
   height: 100%;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
   gap: 5%;
 }
 
