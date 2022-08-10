@@ -16,7 +16,6 @@ function TodayPage() {
     }
   };
   const today = new Date().toString().split(' ').slice(0, 3).join(' ');
-  console.log(today);
   return (
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
