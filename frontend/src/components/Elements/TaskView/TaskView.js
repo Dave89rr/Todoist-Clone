@@ -56,7 +56,8 @@ function TaskView({ task }) {
               })
               .split(' ')
               .slice(0, 2)
-              .join(' ')}{' '}
+              .join(' ')}
+            {' · '}
             {new Date(task.due_date)
               .toLocaleString('en-US', {
                 month: 'long',

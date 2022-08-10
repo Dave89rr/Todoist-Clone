@@ -53,6 +53,15 @@
   margin-left: 2.7%;
   font-size: 0.7em;
 }
+.falseTaskLowerInfo > span {
+  color: var(--font-color-light);
+}
+.trueTaskLowerInfo > span {
+  color: var(--font-color-dark);
+}
+.trueTaskLowerInfo > .projectNameContainer > span {
+  color: var(--font-color-dark);
+}
 .littleCircle {
   height: 8px;
   width: 8px;
