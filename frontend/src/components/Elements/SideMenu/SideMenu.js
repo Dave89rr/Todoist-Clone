@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import classes from './SideMenu.module.css';
 import { ReactComponent as InboxSvg } from './inbox.svg';
 import { ReactComponent as CalendarSvg } from './calendar.svg';
+import { ReactComponent as PlusSvg } from './plus.svg';
 
 const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
   const user = useSelector((state) => state.session.user);
@@ -40,15 +41,16 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
             <CalendarSvg fill={themeState ? '#25b84c' : '#058527'} />
             <span className={`${theme('SideBtnText')}`}>Today</span>
           </div>
-          <div className={classes.sideItem}>
-            <span className={`${theme('SideBtnText')}`}>V</span>
-            <span className={`${theme('SideBtnText')}`}>Projects</span>
-            <div onClick={() => setViewNewProjectForm(!viewNewProjectForm)}>
-              <img
-                className={classes.addProjBtn}
-                src="/static/icons/plus.svg"
-                alt="add project button"
-              />
+          <div className={`${classes.sideItem} ${classes.projectsItem}`}>
+            <span className={`${theme('SideBtnText')}`}>V Projects</span>
+            <div
+              className={`${theme('addProjBtn')}`}
+              onClick={() => setViewNewProjectForm(!viewNewProjectForm)}
+            >
+              <PlusSvg fill={themeState ? '#9F9F9F' : '#666666'} />
+              <div className={`${theme('Tooltip')}`}>
+                <span>Add project</span>
+              </div>
             </div>
           </div>
           {projArr &&
