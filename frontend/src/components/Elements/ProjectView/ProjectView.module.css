@@ -59,3 +59,30 @@
 .editFormExit {
   opacity: 0;
 }
+
+.falseTaskTitle {
+  color: var(--font-color-light);
+}
+.trueTaskTitle {
+  color: var(--font-color-dark);
+}
+.falseTaskContainer,
+.trueTaskContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5%;
+  height: 6vh;
+}
+.falseTaskContainer {
+  border-top: 1px solid #f0f0f0;
+}
+.trueTaskContainer {
+  border-top: 1px solid #363636;
+}
+.falseTaskContainer:hover > span,
+.trueTaskContainer:hover > span {
+  color: #dd4b39;
+}

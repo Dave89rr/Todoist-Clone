@@ -5,6 +5,7 @@ import { thunkCreateTask } from '../../../store/tasks';
 import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from './flag.svg';
 import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
+import { useLocation } from 'react-router-dom';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -12,8 +13,10 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   let recentProjId = defaultId;
-  if (localStorage.getItem('recentProjId') !== null) {
-    recentProjId = localStorage.getItem('recentProjId');
+  let location = useLocation();
+
+  if (location.pathname.split('/')[1] === 'projects') {
+    recentProjId = location.pathname.split('/')[2];
   }
 
   const [validationErrors, setValidationErrors] = useState([]);

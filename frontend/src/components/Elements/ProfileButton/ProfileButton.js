@@ -27,35 +27,43 @@ const ProfileButton = () => {
     await dispatch(logout());
     dispatch(actionLogoutProjects());
     dispatch(actionLogoutTasks());
+    localStorage.clear();
   };
   const profMenu = (
-    <div className={`${theme('ProfMenuContainer')}`}>
-      <div className={`${theme('ProfMenuHeader')}`}>
-        <div className={classes.profBtnHeader}>
-          <span className={classes.profBtnLetter}>{letter}</span>
-        </div>
-        <div className={`${theme('UserInfo')}`}>
-          <span style={{ fontWeight: 'bold' }}>{user.username}</span>
-          <span>{user.email}</span>
-        </div>
-      </div>
+    <div onClick={() => setProfileMenu(false)} className={classes.bgModal}>
       <div
-        className={`${theme('ProfMenuActions')}`}
-        onClick={() => {
-          userUpdate.theme = !user.theme;
-          dispatch(updateUserTheme(userUpdate));
-          setProfileMenu(false);
-        }}
+        onClick={(e) => e.stopPropagation()}
+        className={`${theme('ProfMenuContainer')}`}
       >
-        <PaintSvg fill={user.theme ? '#808080' : '#9D9D9D'} />
-        <span>Theme</span>
-      </div>
-      <div className={`${theme('ProfMenuActions')}`} onClick={onLogout}>
-        <LogoutIcon
-          stroke={user.theme ? '#808080' : '#9D9D9D'}
-          fill={user.theme ? '#808080' : '#9D9D9D'}
-        />
-        <span>Logout</span>
+        <div className={`${theme('ProfMenuHeader')}`}>
+          <div className={classes.letterInMenu}>
+            <div className={classes.iconCircle}>
+              <span className={classes.iconLetter}>{letter}</span>
+            </div>
+          </div>
+          <div className={`${theme('UserInfo')}`}>
+            <span style={{ fontWeight: 'bold' }}>{user.username}</span>
+            <span>{user.email}</span>
+          </div>
+        </div>
+        <div
+          className={`${theme('ProfMenuActions')}`}
+          onClick={() => {
+            userUpdate.theme = !user.theme;
+            dispatch(updateUserTheme(userUpdate));
+            setProfileMenu(false);
+          }}
+        >
+          <PaintSvg fill={user.theme ? '#808080' : '#9D9D9D'} />
+          <span>Theme</span>
+        </div>
+        <div className={`${theme('ProfMenuActions')}`} onClick={onLogout}>
+          <LogoutIcon
+            stroke={user.theme ? '#808080' : '#9D9D9D'}
+            fill={user.theme ? '#808080' : '#9D9D9D'}
+          />
+          <span>Logout</span>
+        </div>
       </div>
     </div>
   );
@@ -63,12 +71,12 @@ const ProfileButton = () => {
   return (
     <>
       <div
-        className={classes.profBtn}
+        className={classes.navCircle}
         onClick={() => {
           setProfileMenu(!profileMenu);
         }}
       >
-        <span className={classes.profBtnLetter}>{letter}</span>
+        <span className={classes.iconLetter}>{letter}</span>
       </div>
       {profileMenu && profMenu}
     </>

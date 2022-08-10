@@ -7,8 +7,9 @@ import { useState } from 'react';
 import TaskView from '../TaskView/TaskView';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { CSSTransition } from 'react-transition-group';
+import { ReactComponent as PlusSvg } from '../SideMenu/plus.svg';
 
-function ProjectView() {
+function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
   const { projectId } = useParams();
   const [viewEditProject, setViewEditProject] = useState(false);
   const project = useSelector((state) => state.projects[projectId]);
@@ -73,6 +74,15 @@ function ProjectView() {
             }
             return null;
           })}
+          <div
+            className={`${theme('TaskContainer')}`}
+            onClick={() => setViewNewTaskForm(!viewNewTaskForm)}
+          >
+            {/* <div className={classes.addTaskPlus}> */}
+            <PlusSvg fill="#DD4B39" height="24px" />
+            {/* </div> */}
+            <span className={`${theme('TaskTitle')}`}>Add task</span>
+          </div>
         </div>
       </div>
     </div>

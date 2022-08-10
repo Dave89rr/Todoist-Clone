@@ -11,9 +11,21 @@
   align-self: center;
   margin-bottom: 2%;
 }
-.falseSectionTitle {
+.titleHolder {
+  margin-bottom: 5%;
+}
+.falsePageHeader,
+.truePageHeader {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+.falsePageHeader {
   color: var(--font-color-light);
 }
-.trueSectionTitle {
+.truePageHeader {
   color: var(--font-color-dark);
+}
+.todayDate {
+  font-size: 0.8em;
+  color: #808080;
 }

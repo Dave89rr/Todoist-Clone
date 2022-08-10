@@ -97,3 +97,26 @@
 .menuIcon:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+.falseTooltip,
+.trueTooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50px;
+  border-radius: 5px;
+  padding: 0.5%;
+  color: var(--font-color-dark);
+}
+.falseTooltip {
+  background-color: #242424;
+}
+.trueTooltip {
+  background-color: #333333;
+}
+.addTaskContainer:hover .falseTooltip,
+.addTaskContainer:hover .trueTooltip {
+  opacity: 1;
+  visibility: visible;
+  transition: 200ms;
+  transition-delay: 200ms;
+}

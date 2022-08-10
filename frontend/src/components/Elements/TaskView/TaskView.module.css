@@ -12,6 +12,7 @@
   cursor: pointer;
   padding: 0.5%;
   height: 6vh;
+  align-items: center;
 }
 .falseTaskContainer {
   border-top: 1px solid #f0f0f0;
@@ -32,4 +33,8 @@
 }
 .taskUserInteractions:hover {
   opacity: 1;
+}
+.addTaskPlus {
+  height: 24px;
+  width: 24px;
 }

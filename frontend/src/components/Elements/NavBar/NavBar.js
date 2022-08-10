@@ -79,6 +79,9 @@ const NavBar = ({
                 src="/static/icons/plus.svg"
                 alt="add task icon"
               />
+              <div className={`${theme('Tooltip')}`}>
+                <span>Add task</span>
+              </div>
             </div>
             <ProfileButton />
           </div>

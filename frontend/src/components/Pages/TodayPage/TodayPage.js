@@ -15,10 +15,15 @@ function TodayPage() {
       return `${user.theme}${name}`;
     }
   };
+  const today = new Date().toString().split(' ').slice(0, 3).join(' ');
+  console.log(today);
   return (
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
-        <h1 className={classes[`${theme('SectionTitle')}`]}>Overdue</h1>
+        <div className={classes.titleHolder}>
+          <span className={classes[`${theme('PageHeader')}`]}>Today </span>{' '}
+          <span className={classes.todayDate}> {today}</span>
+        </div>
         {taskArr.map((task) => {
           if (new Date() > new Date(task.due_date)) {
             return <TaskView task={task} key={task.id} />;

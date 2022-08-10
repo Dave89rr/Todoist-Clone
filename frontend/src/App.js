@@ -103,7 +103,10 @@ function App() {
             <SignUpForm />
           </Route>
           <ProtectedRoute path="/projects/:projectId" exact={true}>
-            <ProjectView />
+            <ProjectView
+              setViewNewTaskForm={setViewNewTaskForm}
+              viewNewTaskForm={viewNewTaskForm}
+            />
           </ProtectedRoute>
           <ProtectedRoute path="/today" exact={true}>
             <TodayPage
