@@ -1,5 +1,58 @@
-.profBtn,
-.profBtnHeader {
+/* Website Blocker */
+.bgModal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 47px;
+  padding-right: 3vw;
+}
+/* Menu Main Container */
+.falseProfMenuContainer,
+.trueProfMenuContainer {
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 8%);
+  top: 44px;
+  width: fit-content;
+  border-radius: 10px;
+  padding: 0.5%;
+  height: fit-content;
+}
+.falseProfMenuContainer {
+  border: 1px solid #cccccc;
+  background-color: var(--bg-light);
+}
+.trueProfMenuContainer {
+  border: 1px solid #484848;
+  background-color: var(--bg-dark);
+}
+/* Header Container */
+.falseProfMenuHeader,
+.trueProfMenuHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.falseProfMenuHeader {
+  border-bottom: 1px solid #f0f0f0;
+}
+.trueProfMenuHeader {
+  border-bottom: 1px solid #363636;
+}
+
+/* Icon Container */
+.letterInMenu {
+  min-width: 55px;
+  min-height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Icon Builder / Styles */
+.navCircle,
+.iconCircle {
   cursor: pointer;
   border-radius: 100%;
   border: 1px solid #e8435a;
@@ -11,48 +64,20 @@
   align-items: center;
   box-shadow: 0px 0px 1px 0.5px white;
 }
-.profBtnHeader {
+.iconCircle {
   height: 46px;
   width: 46px;
   cursor: inherit;
 }
-.profBtnLetter {
+.iconLetter {
   color: #e8435a;
 }
-.falseProfMenuContainer,
-.trueProfMenuContainer {
-  position: absolute;
-  top: 44px;
-  min-width: 10vw;
-  min-height: 10vh;
-  border-radius: 10px;
-  padding-bottom: 0.5%;
-}
-.falseProfMenuContainer {
-  border: 1px solid #cccccc;
-  background-color: var(--bg-light);
-}
-.trueProfMenuContainer {
-  border: 1px solid #484848;
-  background-color: var(--bg-dark);
-}
-.falseProfMenuHeader,
-.trueProfMenuHeader {
-  display: flex;
-  flex-direction: row;
-  gap: 6%;
-  padding: 3% 5%;
-}
-.falseProfMenuHeader {
-  border-bottom: 1px solid #f0f0f0;
-}
-.trueProfMenuContainer {
-  border-bottom: 1px solid #363636;
-}
+
 .falseUserInfo,
 .trueUserInfo {
   display: flex;
   flex-direction: column;
+  width: fit-content;
   /* margin-right: 1%; */
 }
 .falseUserInfo > span {
