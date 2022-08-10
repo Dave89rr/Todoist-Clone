@@ -99,6 +99,7 @@
 }
 .falseTooltip,
 .trueTooltip {
+  visibility: hidden;
   opacity: 0;
   position: absolute;
   top: 50px;
@@ -115,6 +116,7 @@
 .addTaskContainer:hover .falseTooltip,
 .addTaskContainer:hover .trueTooltip {
   opacity: 1;
+  visibility: visible;
   transition: 200ms;
   transition-delay: 200ms;
 }

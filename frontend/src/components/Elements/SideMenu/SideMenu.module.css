@@ -79,6 +79,7 @@
 .falseTooltip,
 .trueTooltip {
   opacity: 0;
+  visibility: hidden;
   position: absolute;
   margin-left: -2vw;
   border-radius: 5px;
@@ -97,6 +98,7 @@
 .falseaddProjBtn:hover .trueTooltip,
 .trueaddProjBtn:hover .falseTooltip,
 .trueaddProjBtn:hover .trueTooltip {
+  visibility: visible;
   opacity: 1;
   transition: 200ms;
   transition-delay: 200ms;
