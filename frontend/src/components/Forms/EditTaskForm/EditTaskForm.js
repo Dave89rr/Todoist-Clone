@@ -118,17 +118,14 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             <div>
               <div>
                 <select
+                  className={classes.option}
                   defaultValue={taskProp.projectId}
                   onChange={(e) => setProjectId(e.target.value)}
                 >
                   <option value="">Select a project</option>
                   {projArr.map((project, id) => {
                     return (
-                      <option
-                        className={classes.option}
-                        key={id}
-                        value={project.id}
-                      >
+                      <option key={id} value={project.id}>
                         {project.name}
                       </option>
                     );
