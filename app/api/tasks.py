@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from ..models import db, Task
-from ..forms import TaskForm
+from ..forms import TaskForm, UpdateTaskForm
 from .auth_routes import validation_errors_to_error_messages
 from datetime import datetime
 
@@ -38,8 +38,9 @@ def create():
 
 @task.route('/update', methods=['PATCH'])
 def update():
-    form = TaskForm()
+    form = UpdateTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data)
     if form.validate_on_submit():
         task = Task.query.get(form.data['id'])
         task.ownerId = form.data['ownerId'],

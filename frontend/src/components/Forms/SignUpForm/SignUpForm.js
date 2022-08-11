@@ -40,6 +40,8 @@ const SignUpForm = () => {
         setErrors([]);
         setFormStep(formStep + 1);
       }
+    } else {
+      setErrors(["Passwords don't match"]);
     }
   };
 

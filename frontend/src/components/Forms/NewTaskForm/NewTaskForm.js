@@ -122,7 +122,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
           />
         </div>
         <div className={classes.optionContainer}>
-          <div>
+          <div className={classes.leftOptions}>
             <div>
               <input
                 name="due_date"
@@ -134,16 +134,21 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               />
             </div>
             <div>
-              <select defaultValue={recentProjId} onChange={handleProjIdChange}>
-                <option value="">Select a project</option>
-                {projArr.map((project, id) => {
-                  return (
-                    <option key={id} value={project.id}>
-                      {project.name}
-                    </option>
-                  );
-                })}
-              </select>
+              <div>
+                <select
+                  defaultValue={recentProjId}
+                  onChange={handleProjIdChange}
+                >
+                  <option value="">Select a project</option>
+                  {projArr.map((project, id) => {
+                    return (
+                      <option key={id} value={project.id}>
+                        {project.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
           </div>
           <div

@@ -42,7 +42,7 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
             <span className={`${theme('SideBtnText')}`}>Today</span>
           </div>
           <div className={`${classes.sideItem} ${classes.projectsItem}`}>
-            <span className={`${theme('SideBtnText')}`}>V Projects</span>
+            <span className={`${theme('SideBtnText')}`}>Projects</span>
             <div
               className={`${theme('addProjBtn')}`}
               onClick={() => setViewNewProjectForm(!viewNewProjectForm)}
@@ -56,15 +56,23 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
           {projArr &&
             projArr.map((project) => {
               if (project.name !== 'Inbox') {
-                if (project.name.length <= 14) {
+                if (project.name.length <= 12) {
                   return (
-                    <div
-                      className={`${classes.sideItem} ${theme('SideBtnText')}`}
-                      key={project.id}
-                      onClick={() => history.push(`/projects/${project.id}`)}
-                    >
-                      {project.name}
-                    </div>
+                    <>
+                      <div
+                        className={`${classes.sideItem} ${theme(
+                          'SideBtnText'
+                        )}`}
+                        key={project.id}
+                        onClick={() => history.push(`/projects/${project.id}`)}
+                      >
+                        <div
+                          className={classes.dot}
+                          style={{ backgroundColor: `${project.color}` }}
+                        ></div>{' '}
+                        {project.name}
+                      </div>
+                    </>
                   );
                 } else {
                   return (
@@ -72,7 +80,13 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
                       className={`${classes.sideItem} ${theme('SideBtnText')}`}
                       key={project.id}
                       onClick={() => history.push(`/projects/${project.id}`)}
-                    >{`${project.name.slice(0, 14)}...`}</div>
+                    >
+                      <div
+                        className={classes.dot}
+                        style={{ backgroundColor: `${project.color}` }}
+                      ></div>
+                      {`${project.name.slice(0, 12)}...`}
+                    </div>
                   );
                 }
               }

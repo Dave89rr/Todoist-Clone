@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: default;
 }
 
 .falseNewTaskFormContainer,
@@ -94,6 +95,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border: 1px;
 }
 
 .BtnHolder {
@@ -167,4 +169,13 @@
 }
 .truePriorityBtn:hover {
   background-color: #4d4d4d;
+}
+.leftOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  word-break: break-all;
+  width: 100px;
 }
