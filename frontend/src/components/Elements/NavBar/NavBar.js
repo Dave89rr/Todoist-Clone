@@ -57,13 +57,15 @@ const NavBar = ({
         {!user ? logoLoggedout : logoLoggedIn}
         {!user ? (
           <div className={classes.loggedOutuserInteractions}>
-            <div>
-              <NavLink to="/login" exact={true}>
-                Login
-              </NavLink>
+            <div
+              className={classes.login}
+              onClick={() => history.push('/login')}
+            >
+              <span>Login</span>
             </div>
             <div className={classes.signUpContainer}>
               <button
+                onClick={() => history.push('/sign-up')}
                 className={authClasses.formBtn}
                 style={{ marginTop: '0' }}
               >

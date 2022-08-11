@@ -126,10 +126,19 @@
   transition: 200ms;
   transition-delay: 200ms;
 }
-.userInteractions > div > a {
-  color: #575757;
-  text-decoration: none;
-}
 .signUpContainer {
   width: 35%;
+}
+
+.login {
+  padding: 3.5%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.login:hover {
+  background-color: #f2f2f2;
+}
+
+.login > span {
+  color: #575757;
 }
