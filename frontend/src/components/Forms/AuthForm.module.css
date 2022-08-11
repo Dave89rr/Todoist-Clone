@@ -26,7 +26,7 @@
 .inputContainer .filled {
   transform: translate(1rem, 0.8rem) scale(0.8);
 }
-.loginForm {
+.form {
   width: 100%;
 }
 .inputContainer input:focus {
