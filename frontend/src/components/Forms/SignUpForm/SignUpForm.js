@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { thunkCreateProject } from '../../../store/projects';
-import { signUp } from '../../../store/session';
+import { signUp, updateUserTheme } from '../../../store/session';
 import classes from '../AuthForm.module.css';
 import signUpClasses from './SignUpForm.module.css';
 import { ReactComponent as Checkmark } from './machenist-logo.svg';
@@ -61,7 +61,7 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (formStep > 4) {
+  if (formStep > 3) {
     return <Redirect to="/" />;
   }
 
@@ -174,8 +174,8 @@ const SignUpForm = () => {
   };
   const step2 = (
     <div className={signUpClasses.step2Container}>
-      <div className={signUpClasses.step2TitleSection}>
-        <span className={signUpClasses.step2Title}>
+      <div className={signUpClasses.stepTitleSection}>
+        <span className={signUpClasses.stepTitle}>
           How do you plan to use Machenist?
         </span>
         <span>Choose all that apply</span>
@@ -273,30 +273,70 @@ const SignUpForm = () => {
             setFormStep(formStep + 1);
           }}
         >
-          Next
+          {personalCreated || workCreated || educationCreated ? 'Next' : 'Skip'}
         </button>
       </div>
     </div>
   );
+  const updateUser = user;
   const step3 = (
     <>
-      <div>
-        <label>Theme</label>
-        <input
-          type="checkbox"
-          name="theme"
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-        />
+      <div className={signUpClasses.stepTitleSection}>
+        <span className={signUpClasses.stepTitle}>
+          Which theme would you like to start off with?
+        </span>
+        <span style={{ marginBottom: '0%' }}>
+          "The light blinds us. It is only in the dark that we see clearly..."
+        </span>
+        <span>-Darth Revan</span>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setFormStep(formStep + 1);
-        }}
-      >
-        Next
-      </button>
+      <div className={signUpClasses.themeContainer}>
+        <div
+          onClick={() => {
+            updateUser.theme = false;
+            dispatch(updateUserTheme(updateUser));
+            setTheme(false);
+          }}
+          className={`${signUpClasses.lightTheme} ${
+            !theme ? signUpClasses.selected : null
+          }`}
+        >
+          <img
+            className={signUpClasses.img}
+            src="/static/images/machenist-light.png"
+            alt=""
+          />
+          <span>Light</span>
+        </div>
+        <div
+          onClick={() => {
+            updateUser.theme = true;
+            dispatch(updateUserTheme(updateUser));
+            setTheme(true);
+          }}
+          className={`${signUpClasses.darkTheme} ${
+            theme ? signUpClasses.selected : null
+          }`}
+        >
+          <img
+            className={signUpClasses.img}
+            src="/static/images/machenist-dark.png"
+            alt=""
+          />
+          <span>Dark</span>
+        </div>
+      </div>
+      <div className={signUpClasses.nextBtnHolder}>
+        <button
+          className={classes.formBtn}
+          onClick={(e) => {
+            e.preventDefault();
+            setFormStep(formStep + 1);
+          }}
+        >
+          Launch Machenist
+        </button>
+      </div>
     </>
   );
   const step4 = (
@@ -335,7 +375,7 @@ const SignUpForm = () => {
       </form>
       {formStep === 2 ? step2 : null}
       {formStep === 3 ? step3 : null}
-      {formStep === 4 ? step4 : null}
+      {/* {formStep === 4 ? step4 : null} */}
     </>
   );
 };
