@@ -29,21 +29,21 @@ function Homepage() {
           <div className={classes.sideIndivContainer}>
             <img
               className={classes.sideImg}
-              src="/media/images/homepageimg-left.png"
+              src="/static/images/homepageimg-left.png"
               alt=""
             />
           </div>
           <div className={classes.centerImgContainer}>
             <img
               className={classes.centerImg}
-              src="/media/images/mainimghome.png"
+              src="/static/images/mainimghome.png"
               atl=""
             />
           </div>
           <div className={classes.sideIndivContainer}>
             <img
               className={classes.sideImg}
-              src="/media/images/homepageimg-right.png"
+              src="/static/images/homepageimg-right.png"
               alt=""
             />
           </div>

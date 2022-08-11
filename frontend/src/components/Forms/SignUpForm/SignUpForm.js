@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [iconUrl, setIconUrl] = useState('/media/images/blankuser.png');
+  const [iconUrl, setIconUrl] = useState('/static/images/blankuser.png');
   const [theme, setTheme] = useState(false);
   const [formStep, setFormStep] = useState(1);
   const [personalCreated, setPersonalCreated] = useState(false);
