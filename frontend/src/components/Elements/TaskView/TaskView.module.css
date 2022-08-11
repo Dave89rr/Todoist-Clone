@@ -78,3 +78,18 @@
 .projectName {
   width: 5vw;
 }
+.taskManipulate {
+  display: flex;
+  flex-direction: row;
+}
+
+.falseUserInteractionBtn,
+.trueUserInteractionBtn {
+  border-radius: 5px;
+}
+.falseUserInteractionBtn:hover {
+  background-color: #EEEEEE;
+}
+.trueUserInteractionBtn:hover {
+  background-color: #4d4d4d;
+}
