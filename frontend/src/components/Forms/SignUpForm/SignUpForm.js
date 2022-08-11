@@ -5,6 +5,7 @@ import { thunkCreateProject } from '../../../store/projects';
 import { signUp } from '../../../store/session';
 import classes from '../AuthForm.module.css';
 import signUpClasses from './SignUpForm.module.css';
+import { ReactComponent as Checkmark } from './machenist-logo.svg';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -15,6 +16,12 @@ const SignUpForm = () => {
   const [iconUrl, setIconUrl] = useState('/media/images/blankuser.png');
   const [theme, setTheme] = useState(false);
   const [formStep, setFormStep] = useState(1);
+  const [personalCreated, setPersonalCreated] = useState(false);
+  const [workCreated, setWorkCreated] = useState(false);
+  const [educationCreated, setEducationCreated] = useState(false);
+  const [workFill, setWorkFill] = useState('white');
+  const [personalFill, setPersonalFill] = useState('white');
+  const [educationFill, setEducationFill] = useState('white');
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -30,6 +37,7 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data);
       } else {
+        setErrors([]);
         setFormStep(formStep + 1);
       }
     }
@@ -105,7 +113,11 @@ const SignUpForm = () => {
         </label>
       </div>
       <div>
-        <button className={classes.formBtn} type="submit">
+        <button
+          className={classes.formBtn}
+          type="submit"
+          disabled={email && password && repeatPassword ? false : true}
+        >
           Sign up with Email
         </button>
         <div className={classes.extraText}>
@@ -137,6 +149,29 @@ const SignUpForm = () => {
       view: false,
     };
   }
+
+  const handlePersonalCreation = () => {
+    if (!personalCreated) {
+      dispatch(thunkCreateProject(personal));
+    }
+    setPersonalCreated(true);
+    setPersonalFill('#e44332');
+  };
+  const handleEducationCreation = () => {
+    if (!educationCreated) {
+      dispatch(thunkCreateProject(education));
+    }
+    setEducationCreated(true);
+    setEducationFill('#e44332');
+  };
+
+  const handleWorkCreation = () => {
+    if (!workCreated) {
+      dispatch(thunkCreateProject(work));
+    }
+    setWorkCreated(true);
+    setWorkFill('#e44332');
+  };
   const step2 = (
     <div className={signUpClasses.step2Container}>
       <div className={signUpClasses.step2TitleSection}>
@@ -147,13 +182,22 @@ const SignUpForm = () => {
       </div>
       <div className={signUpClasses.usageContainer}>
         <div
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            dispatch(thunkCreateProject(personal));
-          }}
+          onClick={(e) => handlePersonalCreation()}
           className={signUpClasses.usageOption}
+          onMouseEnter={() => {
+            if (!personalCreated) {
+              setPersonalFill('#b17b75');
+            }
+          }}
+          onMouseLeave={() => {
+            if (!personalCreated) {
+              setPersonalFill('white');
+            }
+          }}
         >
+          <div className={signUpClasses.checkContainer}>
+            <Checkmark fill={personalFill} />
+          </div>
           <div className={signUpClasses.usageImgContainer}>
             <img
               className={signUpClasses.usageImg}
@@ -164,12 +208,22 @@ const SignUpForm = () => {
           <span>Personal</span>
         </div>
         <div
-          onClick={(e) => {
-            e.stopPropagation();
-            dispatch(thunkCreateProject(work));
-          }}
+          onClick={(e) => handleWorkCreation()}
           className={signUpClasses.usageOption}
+          onMouseEnter={() => {
+            if (!workCreated) {
+              setWorkFill('#b17b75');
+            }
+          }}
+          onMouseLeave={() => {
+            if (!workCreated) {
+              setWorkFill('white');
+            }
+          }}
         >
+          <div className={signUpClasses.checkContainer}>
+            <Checkmark fill={workFill} />
+          </div>
           <div className={signUpClasses.usageImgContainer}>
             <img
               className={signUpClasses.usageImg}
@@ -180,13 +234,22 @@ const SignUpForm = () => {
           <span>Work</span>
         </div>
         <div
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            dispatch(thunkCreateProject(education));
-          }}
+          onClick={(e) => handleEducationCreation()}
           className={signUpClasses.usageOption}
+          onMouseEnter={() => {
+            if (!educationCreated) {
+              setEducationFill('#b17b75');
+            }
+          }}
+          onMouseLeave={() => {
+            if (!educationCreated) {
+              setEducationFill('white');
+            }
+          }}
         >
+          <div className={signUpClasses.checkContainer}>
+            <Checkmark fill={educationFill} />
+          </div>
           <div className={signUpClasses.usageImgContainer}>
             <img
               className={signUpClasses.usageImg}
@@ -203,14 +266,16 @@ const SignUpForm = () => {
           with Machenist. 😀
         </span>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setFormStep(formStep + 1);
-        }}
-      >
-        Next
-      </button>
+      <div className={signUpClasses.nextBtnHolder}>
+        <button
+          className={classes.formBtn}
+          onClick={() => {
+            setFormStep(formStep + 1);
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
   const step3 = (
