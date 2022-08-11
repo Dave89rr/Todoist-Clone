@@ -1,0 +1,56 @@
+.homePageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.homePageHeader {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  font-size: 1.5em;
+  align-items: center;
+}
+.homePageHeader > h1 {
+  margin: 0;
+  padding: 0;
+}
+.homePageHeader > span {
+  margin-top: 3%;
+  font-size: 0.8em;
+}
+.CTAcontainer {
+  width: 8%;
+}
+.splash {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+}
+.sideImgContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sideIndivContainer {
+  width: 40%;
+  /* border: 1px solid red; */
+}
+.sideImg {
+  width: 100%;
+}
+.centerImg {
+  width: 100%;
+  height: 100%;
+}
+.centerImgContainer {
+  width: 100%;
+  left: 0;
+  bottom: -10px;
+  position: fixed;
+  align-self: center;
+  padding-left: 23%;
+  padding-right: 23%;
+}

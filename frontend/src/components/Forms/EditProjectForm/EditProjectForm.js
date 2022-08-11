@@ -80,7 +80,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
           <div className={classes[`${theme('Input')}`]}>
             <label htmlFor="color">Color</label>
             <select
-              defaultValue={'#808080'}
+              defaultValue={colorState}
               onChange={(e) => setColorState(e.target.value)}
             >
               {colorsArr.map((color, id) => {

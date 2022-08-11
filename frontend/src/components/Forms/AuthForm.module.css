@@ -1,0 +1,76 @@
+.inputContainer {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 1em;
+}
+.inputContainer input {
+  border: 1px solid rgb(175, 175, 175);
+}
+.inputContainer label {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(1rem, 1.5rem) scale(1);
+  transform-origin: top left;
+  transition: 200ms 0ms;
+  color: rgb(145, 145, 145);
+  font-size: 16px;
+  line-height: 1;
+  left: 1rem;
+}
+.inputContainer:focus-within label {
+  transform: translate(1rem, 0.8rem) scale(0.8);
+  color: #0a53e4;
+}
+.inputContainer .filled {
+  transform: translate(1rem, 0.8rem) scale(0.8);
+}
+.form {
+  width: 100%;
+}
+.inputContainer input:focus {
+  border: 0.1px solid rgb(175, 175, 175);
+  box-shadow: 0 0 0 2px #79b1ff;
+  outline: none;
+}
+.userInput {
+  border-radius: 10px;
+  height: 4rem;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  font-size: 16px;
+  border: 1px solid rgb(175, 175, 175);
+}
+.formBtn {
+  margin-top: 1rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  height: 3rem;
+  border: none;
+  cursor: pointer;
+  background-color: var(--nav-bar-light);
+}
+.formBtn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+.extraText {
+  margin-top: 4%;
+}
+.errorContainer > div {
+  color: red;
+  font-size: 0.8em;
+}
+.formBtn:hover {
+  background-color: #ee5244;
+}
+.formBtn:disabled:hover {
+  background-color: #808080;
+}
+.formBtn:active {
+  box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}

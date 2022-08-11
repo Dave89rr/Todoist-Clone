@@ -3,8 +3,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton/ProfileButton';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { useHistory } from 'react-router-dom';
+import authClasses from '../../Forms/AuthForm.module.css';
 const NavBar = ({
   setViewNewTaskForm,
   viewNewTaskForm,
@@ -53,19 +53,24 @@ const NavBar = ({
   );
   return (
     <nav className={`${theme('Nav')}`}>
-      <div className={classes.container}>
+      <div className={classes[user ? 'loggedIncontainer' : 'container']}>
         {!user ? logoLoggedout : logoLoggedIn}
         {!user ? (
-          <div className={classes.userInteractions}>
-            <div>
-              <NavLink to="/login" exact={true} activeClassName="active">
-                Login
-              </NavLink>
+          <div className={classes.loggedOutuserInteractions}>
+            <div
+              className={classes.login}
+              onClick={() => history.push('/login')}
+            >
+              <span>Login</span>
             </div>
-            <div>
-              <NavLink to="/sign-up" exact={true} activeClassName="active">
-                Sign Up
-              </NavLink>
+            <div className={classes.signUpContainer}>
+              <button
+                onClick={() => history.push('/sign-up')}
+                className={authClasses.formBtn}
+                style={{ marginTop: '0' }}
+              >
+                Start for free
+              </button>
             </div>
           </div>
         ) : (

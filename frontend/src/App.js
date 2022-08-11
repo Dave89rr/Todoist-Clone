@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginPage from './components/Pages/LoginPage';
 import TodayPage from './components/Pages/TodayPage';
 import HomePage from './components/Pages/HomePage';
-import SignUpForm from './components/Forms/SignUpForm';
 import NavBar from './components/Elements/NavBar';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import SideMenu from './components/Elements/SideMenu';
@@ -16,6 +15,7 @@ import NewProjectForm from './components/Forms/NewProjectForm';
 import NewTaskForm from './components/Forms/NewTaskForm/';
 import { CSSTransition } from 'react-transition-group';
 import './index.css';
+import SignUpPage from './components/Pages/SignUpPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -100,7 +100,7 @@ function App() {
             <LoginPage />
           </Route>
           <Route path="/sign-up" exact={true}>
-            <SignUpForm />
+            <SignUpPage />
           </Route>
           <ProtectedRoute path="/projects/:projectId" exact={true}>
             <ProjectView

@@ -20,11 +20,11 @@
 .trueTaskContainer {
   border-top: 1px solid #363636;
 }
-.taskTitle {
+.infoContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1.5%;
-  width: 70%;
+  width: 100%;
 }
 
 .taskUserInteractions {
@@ -37,4 +37,44 @@
 .addTaskPlus {
   height: 24px;
   width: 24px;
+}
+.falseTaskInfo,
+.trueTaskInfo,
+.trueTaskLowerInfo,
+.falseTaskLowerInfo {
+  height: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.trueTaskLowerInfo,
+.falseTaskLowerInfo {
+  margin-left: 2.7%;
+  font-size: 0.7em;
+}
+.falseTaskLowerInfo > span {
+  color: var(--font-color-light);
+}
+.trueTaskLowerInfo > span {
+  color: var(--font-color-dark);
+}
+.trueTaskLowerInfo > .projectNameContainer > span {
+  color: var(--font-color-dark);
+}
+.littleCircle {
+  height: 8px;
+  width: 8px;
+  margin-left: 2%;
+  border-radius: 100%;
+}
+.projectNameContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+}
+.projectName {
+  width: 5vw;
 }

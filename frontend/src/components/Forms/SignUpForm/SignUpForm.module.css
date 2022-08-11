@@ -1,0 +1,132 @@
+/* Step 1 CSS */
+.step1Container {
+  width: 50%;
+}
+
+/* Step 2 CSS */
+.step2Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stepTitleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stepTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.stepTitleSection > span {
+  margin-bottom: 4%;
+}
+.usageContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.usageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.checkContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 50px;
+  margin-top: 3%;
+  margin-right: 6%;
+  margin-bottom: 16%;
+  /* background-color: #b17b75; */
+}
+.usageOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35vh;
+  width: 30%;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.usageOption > span,
+.lightTheme > span,
+.darkTheme > span {
+  font-weight: bold;
+}
+.usageImgContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.usageImg {
+  width: 65%;
+}
+.tip {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  width: 100%;
+  background-color: #fbeddf;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  border-radius: 5px;
+  padding: 2% 5%;
+}
+.tip > span {
+  font-size: 0.8em;
+}
+.nextBtnHolder {
+  align-self: center;
+  width: 25%;
+}
+.themeContainer {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.darkTheme,
+.lightTheme {
+  background-color: white;
+  width: 48%;
+  height: fit-content;
+  padding: 3%;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img {
+  width: 100%;
+  transition: 150ms;
+}
+.img:active {
+  width: 90%;
+  transition: 150ms;
+}
+
+.lightTheme:hover {
+  background-color: rgb(228, 228, 228);
+}
+.darkTheme:hover {
+  background-color: rgb(82, 82, 82);
+}
+.lightTheme > span,
+.darkTheme > span {
+  margin-top: 3%;
+}
+.darkTheme:hover > span {
+  color: white;
+}
+.selected {
+  border: 3px solid #ddd;
+}
