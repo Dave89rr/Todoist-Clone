@@ -94,6 +94,7 @@
 .falseUserInteractionBtn,
 .trueUserInteractionBtn {
   border-radius: 5px;
+  cursor: pointer;
 }
 .falseUserInteractionBtn:hover {
   background-color: #eeeeee;
