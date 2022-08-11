@@ -89,7 +89,7 @@ function TaskView({ task }) {
       </div>
       {viewEditTask && (
         <div className={classes.editForm}>
-          <EditTaskForm taskProp={task} />
+          <EditTaskForm taskProp={task} setViewEditTask={setViewEditTask} />
         </div>
       )}
     </div>
