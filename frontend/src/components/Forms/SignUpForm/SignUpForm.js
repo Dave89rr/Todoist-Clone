@@ -132,7 +132,7 @@ const SignUpForm = () => {
   if (user) {
     personal = {
       ownerId: user.id,
-      name: 'Personal 🙂',
+      name: 'Personal 😄',
       color: '#808080',
       view: false,
     };
