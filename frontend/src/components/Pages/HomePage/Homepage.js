@@ -17,7 +17,12 @@ function Homepage() {
         <span>Become focused, organized, and calm with Machenist.</span>
       </div>
       <div className={classes.CTAcontainer}>
-        <button className={formClasses.formBtn}>Start for free</button>
+        <button
+          className={formClasses.formBtn}
+          onClick={() => history.push('/sign-up')}
+        >
+          Start for free
+        </button>
       </div>
       <div className={classes.splash}>
         <div className={classes.sideImgContainer}>

@@ -65,3 +65,12 @@
   color: red;
   font-size: 0.8em;
 }
+.formBtn:hover {
+  background-color: #ee5244;
+}
+.formBtn:disabled:hover {
+  background-color: #808080;
+}
+.formBtn:active {
+  box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
