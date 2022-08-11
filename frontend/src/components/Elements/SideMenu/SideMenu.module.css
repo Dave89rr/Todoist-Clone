@@ -58,6 +58,7 @@
   width: 25px;
   opacity: 0;
   border-radius: 3px;
+  cursor: pointer;
 }
 .falseaddProjBtn:hover {
   background-color: #eeeeee;
@@ -102,4 +103,13 @@
   opacity: 1;
   transition: 200ms;
   transition-delay: 200ms;
+}
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  margin-right: 1%;
+}
+.projectsItem {
+  cursor: inherit;
 }
