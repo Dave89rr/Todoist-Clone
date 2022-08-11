@@ -86,3 +86,18 @@
 .trueTaskContainer:hover > span {
   color: #dd4b39;
 }
+.projManipulate {
+  display: flex;
+  flex-direction: row;
+}
+
+.falseUserInteractionBtn,
+.trueUserInteractionBtn {
+  border-radius: 5px;
+}
+.falseUserInteractionBtn:hover {
+  background-color: #eeeeee;
+}
+.trueUserInteractionBtn:hover {
+  background-color: #4d4d4d;
+}

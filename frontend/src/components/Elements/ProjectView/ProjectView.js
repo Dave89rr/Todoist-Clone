@@ -8,6 +8,8 @@ import TaskView from '../TaskView/TaskView';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { CSSTransition } from 'react-transition-group';
 import { ReactComponent as PlusSvg } from '../SideMenu/plus.svg';
+import { ReactComponent as EditIcon } from '../TaskView/editicon.svg';
+import { ReactComponent as TrashIcon } from '../TaskView/trashcan.svg';
 
 function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
   const { projectId } = useParams();
@@ -28,19 +30,25 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
   };
   const projActions = (
     <div className={classes.projActions}>
-      <span>
-        <button
-          onClick={() => {
-            dispatch(thunkDeleteProject(project.id));
-            dispatch(actionDeleteTasksByProjId(project.id));
-          }}
-        >
-          Del Proj
-        </button>
-        <button onClick={() => setViewEditProject(!viewEditProject)}>
-          Edit Project
-        </button>{' '}
-      </span>
+      <div className={classes.projManipulate}>
+        <div className={`${theme('UserInteractionBtn')}`}>
+          <EditIcon
+            fill={user.theme ? '#9D9D9D' : '#808080'}
+            stroke={user.theme ? '#9D9D9D' : '#808080'}
+            onClick={() => setViewEditProject(!viewEditProject)}
+          />
+        </div>
+        <div className={`${theme('UserInteractionBtn')}`}>
+          <TrashIcon
+            fill={user.theme ? '#9D9D9D' : '#808080'}
+            stroke={user.theme ? '#9D9D9D' : '#808080'}
+            onClick={() => {
+              dispatch(thunkDeleteProject(project.id));
+              dispatch(actionDeleteTasksByProjId(project.id));
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
   if (!project) return null;

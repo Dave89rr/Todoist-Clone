@@ -16,6 +16,8 @@ import NewTaskForm from './components/Forms/NewTaskForm/';
 import { CSSTransition } from 'react-transition-group';
 import './index.css';
 import SignUpPage from './components/Pages/SignUpPage';
+import PageNotFound from './components/Pages/PageNotFound';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -116,6 +118,13 @@ function App() {
               setViewNewProjectForm={setViewNewProjectForm}
             />
           </ProtectedRoute>
+          {!user ? (
+            <Route>
+              <PageNotFound />
+            </Route>
+          ) : (
+            <Redirect to="/" />
+          )}
         </Switch>
       </div>
     </BrowserRouter>

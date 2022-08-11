@@ -3,7 +3,9 @@ import EditTaskForm from '../../Forms/EditTaskForm';
 import { thunkDeleteTask } from '../../../store/tasks';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
+import { ReactComponent as EditIcon } from './editicon.svg';
+import { ReactComponent as TrashIcon } from './trashcan.svg';
 
 function TaskView({ task }) {
   const [showtaskUserInteractions, setShowtaskUserInteractions] =
@@ -34,14 +36,22 @@ function TaskView({ task }) {
           </div>
           <div className={classes.taskUserInteractions}>
             {showtaskUserInteractions && (
-              <span>
-                <button onClick={() => dispatch(thunkDeleteTask(task.id))}>
-                  Delete
-                </button>
-                <button onClick={() => setViewEditTask(!viewEditTask)}>
-                  Edit Task
-                </button>
-              </span>
+              <div className={classes.taskManipulate}>
+                <div className={`${theme('UserInteractionBtn')}`}>
+                  <EditIcon
+                    fill={user.theme ? '#9D9D9D' : '#808080'}
+                    stroke={user.theme ? '#9D9D9D' : '#808080'}
+                    onClick={() => setViewEditTask(!viewEditTask)}
+                  />
+                </div>
+                <div className={`${theme('UserInteractionBtn')}`}>
+                  <TrashIcon
+                    fill={user.theme ? '#9D9D9D' : '#808080'}
+                    stroke={user.theme ? '#9D9D9D' : '#808080'}
+                    onClick={() => dispatch(thunkDeleteTask(task.id))}
+                  />
+                </div>
+              </div>
             )}
           </div>
         </div>
