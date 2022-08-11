@@ -1,0 +1,23 @@
+.mainContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainContainer > h1 {
+  margin-bottom: 0.25%;
+}
+.mainContainer > span {
+  font-size: 1.2em;
+}
+.imgContainer {
+  margin-top: 7%;
+  width: 25%;
+}
+.img {
+  width: 100%;
+}
+.btnHolder {
+  margin-top: 1%;
+  width: 7%;
+}
