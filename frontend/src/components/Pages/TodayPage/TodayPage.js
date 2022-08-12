@@ -1,8 +1,10 @@
 import classes from './TodayPage.module.css';
 import { useSelector } from 'react-redux';
 import TaskView from '../../Elements/TaskView/TaskView';
+import { ReactComponent as PlusSvg } from '../../Elements/SideMenu/plus.svg';
+import projectClasses from '../../Elements/ProjectView/ProjectView.module.css';
 
-function TodayPage() {
+function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
   // const projects = useSelector((state) => state.projects);
   const user = useSelector((state) => state.session.user);
   const tasks = useSelector((state) => state.tasks);
@@ -16,6 +18,12 @@ function TodayPage() {
     }
   };
   const today = new Date().toString().split(' ').slice(0, 3).join(' ');
+  const overdueTasks = taskArr.filter(
+    (task) => new Date() > new Date(task.due_date)
+  );
+  const todayTasks = taskArr.filter(
+    (task) => new Date() === new Date(task.due_date)
+  );
   return (
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
@@ -23,12 +31,35 @@ function TodayPage() {
           <span className={classes[`${theme('PageHeader')}`]}>Today </span>{' '}
           <span className={classes.todayDate}> {today}</span>
         </div>
-        {taskArr.map((task) => {
-          if (new Date() > new Date(task.due_date)) {
-            return <TaskView task={task} key={task.id} />;
-          }
-          return null;
-        })}
+        {overdueTasks.length > 0 && (
+          <>
+            <div className={classes[`${theme('SubHeader')}`]}>
+              <span>Overdue</span>
+            </div>
+            {overdueTasks.map((task) => (
+              <TaskView task={task} key={task.id} />
+            ))}
+          </>
+        )}
+      </div>
+      <div className={classes.projectContainer}>
+        <div className={classes.titleHolder}>
+          <div className={classes[`${theme('SubHeader')}`]}>
+            <span>Today</span>
+          </div>
+          {todayTasks.map((task) => (
+            <TaskView task={task} key={task.id} />
+          ))}
+        </div>
+        <div
+          className={projectClasses[`${theme('TaskContainer')}`]}
+          onClick={() => setViewNewTaskForm(!viewNewTaskForm)}
+        >
+          <PlusSvg fill="#DD4B39" height="24px" />
+          <span className={projectClasses[`${theme('TaskTitle')}`]}>
+            Add task
+          </span>
+        </div>
       </div>
     </div>
   );
