@@ -17,19 +17,29 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
       return `${user.theme}${name}`;
     }
   };
-  const today = new Date().toString().split(' ').slice(0, 3).join(' ');
-  const overdueTasks = taskArr.filter(
-    (task) => new Date() > new Date(task.due_date)
+  const now = new Date();
+  console.log('now', now);
+  console.log('nowYear', now.getYear());
+  const nowString = now.toString().split(' ').slice(0, 3).join(' ');
+  const tomorrow = new Date(
+    now.getYear() + 1900,
+    now.getMonth(),
+    now.getDate() + 1
   );
-  const todayTasks = taskArr.filter(
-    (task) => new Date() === new Date(task.due_date)
-  );
+  console.log('tomorrow', tomorrow);
+  const overdueTasks = taskArr.filter((task) => now > new Date(task.due_date));
+
+  const todayTasks = taskArr.filter((task) => {
+    let taskDate = new Date(task.due_date);
+    console.log('taskDate', taskDate);
+    return now < taskDate && tomorrow > taskDate;
+  });
   return (
     <div className={classes.mainContainer}>
       <div className={classes.projectContainer}>
         <div className={classes.titleHolder}>
           <span className={classes[`${theme('PageHeader')}`]}>Today </span>{' '}
-          <span className={classes.todayDate}> {today}</span>
+          <span className={classes.todayDate}> {nowString}</span>
         </div>
         {overdueTasks.length > 0 && (
           <>
