@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import classes from './ProjectSelector.module.css';
 import { ReactComponent as InboxSvg } from '../SideMenu/inbox.svg';
 
-const ProjectSelector = ({ recentProjId, handleProjIdChange, projectId }) => {
+const ProjectSelector = ({ handleProjIdChange, projectId }) => {
   const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
   const [optionsVisible, setOptionsVisible] = useState(false);
@@ -15,7 +15,6 @@ const ProjectSelector = ({ recentProjId, handleProjIdChange, projectId }) => {
       return `${user.theme}${name}`;
     }
   };
-  const thisProj = projects[recentProjId];
   return (
     <div
       onClick={() => setOptionsVisible(true)}
@@ -61,7 +60,6 @@ const ProjectSelector = ({ recentProjId, handleProjIdChange, projectId }) => {
                       style={{ backgroundColor: project.color }}
                     ></div>
                   ) : (
-                    // <div>
                     <InboxSvg
                       fill={true ? '#5297ff' : '#416DB5'}
                       style={{
@@ -69,12 +67,8 @@ const ProjectSelector = ({ recentProjId, handleProjIdChange, projectId }) => {
                         marginLeft: '0',
                       }}
                     />
-                    // </div>
                   )}
                   <span style={{ pointerEvents: 'none' }}>{project.name}</span>
-                  {/* {project.name === 'Inbox' ? (
-                    <InboxSvg fill={true ? '#5297ff' : '#416DB5'} />
-                  ) : null} */}
                 </div>
               );
             })}

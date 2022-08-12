@@ -15,12 +15,14 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState(taskProp.name);
   const [description, setDescription] = useState(taskProp.description);
-  const [position, setPosition] = useState(taskProp.position);
   const [projectId, setProjectId] = useState(taskProp.projectId);
   const [priority, setPriority] = useState(taskProp.priority);
   const [dueDate, setDueDate] = useState(
     new Date(taskProp.due_date).toISOString().split('.')[0]
   );
+
+  const position = taskProp.position;
+  const completed = taskProp.completed;
 
   const theme = (name) => {
     if (user) {
@@ -43,6 +45,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
       projectId,
       priority,
       due_date: dueDate,
+      completed,
     };
 
     if (name.length < 1 || name.length > 30) {
