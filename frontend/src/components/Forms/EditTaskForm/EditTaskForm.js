@@ -5,10 +5,10 @@ import classes from '../NewTaskForm/NewTaskForm.module.css';
 import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from '../NewTaskForm/flag.svg';
 import { ReactComponent as FilledFlagSvg } from '../NewTaskForm/filledflag.svg';
+import ProjectSelector from '../../Elements/ProjectSelector';
 
 function EditTaskForm({ taskProp, setViewEditTask }) {
   const user = useSelector((state) => state.session.user);
-  const projects = useSelector((state) => state.projects);
 
   const dispatch = useDispatch();
 
@@ -22,12 +22,14 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
     new Date(taskProp.due_date).toISOString().split('.')[0]
   );
 
-  const projArr = Object.values(projects);
-
   const theme = (name) => {
     if (user) {
       return `${user.theme}${name}`;
     }
+  };
+  const handleProjIdChange = (e) => {
+    setProjectId(e.target.dataset.value);
+    localStorage.setItem('recentProjId', e.target.dataset.value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +75,6 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
           </div>
         ) : null}
         <div className={classes[`${theme('InputContainer')}`]}>
-          {/* <label htmlFor="name">Name</label> */}
           <input
             autoFocus
             className={classes[`${theme('TaskInput')}`]}
@@ -85,7 +86,6 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
           />
         </div>
         <div className={classes[`${theme('InputContainer')}`]}>
-          {/* <label htmlFor="description">Description</label> */}
           <TextArea
             minRows={2}
             maxRows={9}
@@ -95,19 +95,9 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        {/* <div>
-        <label htmlFor="position">Position</label>
-        <input
-        name="position"
-        type="text"
-        value={position}
-        onChange={(e) => setPosition(e.target.value)}
-        />
-      </div> */}
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
             <div>
-              {/* <label htmlFor="due_date">Due Date</label> */}
               <input
                 name="due_date"
                 type="datetime-local"
@@ -117,20 +107,11 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             </div>
             <div>
               <div>
-                <select
-                  className={classes.option}
-                  defaultValue={taskProp.projectId}
-                  onChange={(e) => setProjectId(e.target.value)}
-                >
-                  <option value="">Select a project</option>
-                  {projArr.map((project, id) => {
-                    return (
-                      <option key={id} value={project.id}>
-                        {project.name}
-                      </option>
-                    );
-                  })}
-                </select>
+                <ProjectSelector
+                  recentProjId={taskProp.projectId}
+                  handleProjIdChange={handleProjIdChange}
+                  projectId={projectId}
+                />
               </div>
             </div>
           </div>
@@ -159,24 +140,8 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             ) : (
               <FlagSvg fill={'#666666'} />
             )}
-
-            {/* <input
-              name="priority"
-              type="text"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-            /> */}
           </div>
         </div>
-        {/* <div>
-            <label htmlFor="priority">Priority</label>
-            <input
-            name="priority"
-            type="text"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-            />
-          </div> */}
         <div className={classes.BtnHolder}>
           <button
             className={classes[`${theme('CancelBtn')}`]}

@@ -13,7 +13,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   let recentProjId = defaultId;
-  let location = useLocation();
+  const location = useLocation();
 
   if (location.pathname.split('/')[1] === 'projects') {
     recentProjId = location.pathname.split('/')[2];
