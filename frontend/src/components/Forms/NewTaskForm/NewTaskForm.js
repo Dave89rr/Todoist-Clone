@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import ProjectSelector from '../../Elements/ProjectSelector';
 import DateTimePicker from 'react-datetime-picker';
 // import DueDate from '../../Elements/DueDate';
+import './DateTimePicker.css';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -20,14 +21,14 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   if (location.pathname.split('/')[1] === 'projects') {
     recentProjId = location.pathname.split('/')[2];
   }
-
+  const now = new Date();
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState('4');
-  const [dueDate, setDueDate] = useState(new Date());
+  const [dueDate, setDueDate] = useState(now);
   const taskArr = Object.values(tasks);
 
   const handleProjIdChange = (e) => {
@@ -63,6 +64,12 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     if (name.length < 1 || name.length > 30) {
       errors.push('Name must be between 1 and 30 characters long.');
     }
+    if (!dueDate) {
+      errors.push('Due date cannot be blank');
+    } else if (now > dueDate) {
+      errors.push('Due date must be set in the future');
+    }
+
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {

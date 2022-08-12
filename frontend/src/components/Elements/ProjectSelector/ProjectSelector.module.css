@@ -13,13 +13,16 @@
   padding-right: 1%;
   padding: 1%;
   white-space: nowrap;
+  border: 1px solid #808080;
+  background-color: #cccccc;
 }
-.falseButtonShape {
+/* TODO Correct colors. Uncomment once date picker is custom*/
+/* .falseButtonShape {
   border: 1px solid #cccccc;
 }
 .trueButtonShape {
   border: 1px solid #555555;
-}
+} */
 .falseButtonShape:hover {
   background-color: #eeeeee;
 }
@@ -32,6 +35,8 @@
 }
 .trueButtonShape > span {
   color: var(--font-color-dark);
+  /*TODO Once Date Picker is Custom delete line below*/
+  color: var(--font-color-light);
 }
 
 .optionModalBg {
