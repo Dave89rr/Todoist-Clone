@@ -11,7 +11,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState(projectProp.name);
   const [colorState, setColorState] = useState(projectProp.color);
-  const [view, setView] = useState(projectProp.view);
+  // const [view, setView] = useState(projectProp.view);
 
   const colorsArr = Object.values(colors);
   const theme = (name) => {
@@ -22,18 +22,18 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = [];
-    let viewBool;
-    if (view === 'false') {
-      viewBool = false;
-    } else {
-      viewBool = true;
-    }
+    // let viewBool;
+    // if (view === 'false') {
+    //   viewBool = false;
+    // } else {
+    //   viewBool = true;
+    // }
     const project = {
       id: projectProp.id,
       ownerId: user.id,
       name,
       color: colorState,
-      view: viewBool,
+      view: /* viewBool */ false,
     };
 
     if (name.length < 1 || name.length > 30) {
