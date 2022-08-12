@@ -28,6 +28,7 @@ def create():
             projectId=form.data['projectId'],
             priority=form.data['priority'],
             due_date=due_date,
+            completed=form.data['completed']
         )
         db.session.add(newtask)
         db.session.commit()

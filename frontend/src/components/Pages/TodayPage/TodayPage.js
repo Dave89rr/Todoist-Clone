@@ -5,7 +5,6 @@ import { ReactComponent as PlusSvg } from '../../Elements/SideMenu/plus.svg';
 import projectClasses from '../../Elements/ProjectView/ProjectView.module.css';
 
 function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
-  // const projects = useSelector((state) => state.projects);
   const user = useSelector((state) => state.session.user);
   const tasks = useSelector((state) => state.tasks);
   let taskArr;
@@ -18,20 +17,16 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
     }
   };
   const now = new Date();
-  console.log('now', now);
-  console.log('nowYear', now.getYear());
   const nowString = now.toString().split(' ').slice(0, 3).join(' ');
   const tomorrow = new Date(
     now.getYear() + 1900,
     now.getMonth(),
     now.getDate() + 1
   );
-  console.log('tomorrow', tomorrow);
   const overdueTasks = taskArr.filter((task) => now > new Date(task.due_date));
 
   const todayTasks = taskArr.filter((task) => {
     let taskDate = new Date(task.due_date);
-    console.log('taskDate', taskDate);
     return now < taskDate && tomorrow > taskDate;
   });
   return (

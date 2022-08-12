@@ -58,6 +58,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
       projectId,
       priority,
       due_date: dueDate,
+      completed: false,
     };
 
     if (name.length < 1 || name.length > 30) {
