@@ -122,6 +122,7 @@ function NewProjectForm({ setViewNewProjectForm }) {
         </div> */}
         <div className={classes[`${theme('BtnHolder')}`]}>
           <button
+            type="button"
             className={classes[`${theme('CancelBtn')}`]}
             onClick={(e) => {
               e.preventDefault();
