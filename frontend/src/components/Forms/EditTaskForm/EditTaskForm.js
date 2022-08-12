@@ -6,6 +6,7 @@ import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from '../NewTaskForm/flag.svg';
 import { ReactComponent as FilledFlagSvg } from '../NewTaskForm/filledflag.svg';
 import ProjectSelector from '../../Elements/ProjectSelector';
+import DateTimePicker from 'react-datetime-picker';
 
 function EditTaskForm({ taskProp, setViewEditTask }) {
   const user = useSelector((state) => state.session.user);
@@ -17,9 +18,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
   const [description, setDescription] = useState(taskProp.description);
   const [projectId, setProjectId] = useState(taskProp.projectId);
   const [priority, setPriority] = useState(taskProp.priority);
-  const [dueDate, setDueDate] = useState(
-    new Date(taskProp.due_date).toISOString().split('.')[0]
-  );
+  const [dueDate, setDueDate] = useState(new Date(taskProp.due_date));
 
   const position = taskProp.position;
   const completed = taskProp.completed;
@@ -101,11 +100,10 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
             <div>
-              <input
-                name="due_date"
-                type="datetime-local"
+              <DateTimePicker
+                onChange={setDueDate}
                 value={dueDate}
-                onChange={(e) => setDueDate(e.target.value)}
+                minDate={new Date()}
               />
             </div>
             <div>

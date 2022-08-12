@@ -18,7 +18,6 @@ def getEverything(ownerId):
 def create():
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    due_date = datetime.strptime(form.data['due_date'], '%Y-%m-%dT%H:%M:%S')
     if form.validate_on_submit():
         newtask = Task(
             ownerId=form.data['ownerId'],
@@ -27,7 +26,7 @@ def create():
             position=form.data['position'],
             projectId=form.data['projectId'],
             priority=form.data['priority'],
-            due_date=due_date,
+            due_date=form.data['due_date'],
             completed=form.data['completed']
         )
         db.session.add(newtask)

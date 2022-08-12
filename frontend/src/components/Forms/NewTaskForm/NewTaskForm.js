@@ -7,6 +7,8 @@ import { ReactComponent as FlagSvg } from './flag.svg';
 import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 import { useLocation } from 'react-router-dom';
 import ProjectSelector from '../../Elements/ProjectSelector';
+import DateTimePicker from 'react-datetime-picker';
+// import DueDate from '../../Elements/DueDate';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -25,10 +27,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState('4');
-  const [dueDate, setDueDate] = useState(
-    new Date().toISOString().split('.')[0]
-  );
-
+  const [dueDate, setDueDate] = useState(new Date());
   const taskArr = Object.values(tasks);
 
   const handleProjIdChange = (e) => {
@@ -77,7 +76,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setPosition('');
         setProjectId(recentProjId);
         setPriority(2);
-        setDueDate(new Date().toISOString().split('.')[0]);
+        setDueDate(new Date());
         setViewNewTaskForm(false);
       }
     }
@@ -123,25 +122,17 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
-            <div>
-              <input
-                name="due_date"
-                type="datetime-local"
-                value={dueDate}
-                onChange={(e) => {
-                  setDueDate(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <div>
-                <ProjectSelector
-                  recentProjId={recentProjId}
-                  handleProjIdChange={handleProjIdChange}
-                  projectId={projectId}
-                />
-              </div>
-            </div>
+            <DateTimePicker
+              onChange={setDueDate}
+              value={dueDate}
+              minDate={new Date()}
+            />
+            {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
+            <ProjectSelector
+              recentProjId={recentProjId}
+              handleProjIdChange={handleProjIdChange}
+              projectId={projectId}
+            />
           </div>
           <div
             className={classes[`${theme('PriorityBtn')}`]}
