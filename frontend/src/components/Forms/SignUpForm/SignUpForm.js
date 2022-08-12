@@ -27,9 +27,7 @@ const SignUpForm = () => {
 
   const handleStep1 = async (e) => {
     e.preventDefault();
-    console.log(email);
     setUsername(email.split('@')[0]);
-    console.log(username);
     if (password === repeatPassword) {
       const data = await dispatch(
         signUp(username, email, password, iconUrl, theme)
@@ -51,7 +49,6 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value.split('@')[0].slice(0, 12));
     setUsername(e.target.value.split('@')[0].slice(0, 12));
   };
 

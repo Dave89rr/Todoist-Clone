@@ -10,7 +10,6 @@ import ProjectSelector from '../../Elements/ProjectSelector';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
-  const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   let recentProjId = defaultId;
@@ -30,12 +29,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     new Date().toISOString().split('.')[0]
   );
 
-  const projArr = Object.values(projects);
   const taskArr = Object.values(tasks);
 
   const handleProjIdChange = (e) => {
-    setProjectId(e.target.value);
-    localStorage.setItem('recentProjId', e.target.value);
+    setProjectId(e.target.dataset.value);
+    localStorage.setItem('recentProjId', e.target.dataset.value);
   };
   const theme = (name) => {
     if (user) {
@@ -139,21 +137,8 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
                 <ProjectSelector
                   recentProjId={recentProjId}
                   handleProjIdChange={handleProjIdChange}
-                  projArr={projArr}
+                  projectId={projectId}
                 />
-                {/* <select
-                  defaultValue={recentProjId}
-                  onChange={handleProjIdChange}
-                >
-                  <option value="">Select a project</option>
-                  {projArr.map((project, id) => {
-                    return (
-                      <option key={id} value={project.id}>
-                        {project.name}
-                      </option>
-                    );
-                  })}
-                </select> */}
               </div>
             </div>
           </div>
@@ -182,13 +167,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             ) : (
               <FlagSvg fill={'#666666'} />
             )}
-
-            {/* <input
-              name="priority"
-              type="text"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-            /> */}
           </div>
         </div>
         <div className={classes.BtnHolder}>

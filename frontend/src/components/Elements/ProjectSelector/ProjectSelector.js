@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import classes from './ProjectSelector.module.css';
 import { ReactComponent as InboxSvg } from '../SideMenu/inbox.svg';
 
-const ProjectSelector = ({ recentProjId, handleProjIdChange }) => {
+const ProjectSelector = ({ recentProjId, handleProjIdChange, projectId }) => {
   const user = useSelector((state) => state.session.user);
   const projects = useSelector((state) => state.projects);
   const [optionsVisible, setOptionsVisible] = useState(false);
@@ -21,15 +21,27 @@ const ProjectSelector = ({ recentProjId, handleProjIdChange }) => {
       onClick={() => setOptionsVisible(true)}
       className={classes[`${theme('ButtonShape')}`]}
     >
-      <span>{thisProj.name}</span>{' '}
-      {thisProj.name === 'Inbox' ? (
-        <InboxSvg fill={true ? '#5297ff' : '#416DB5'} />
-      ) : null}
+      {projects && projects[projectId].name !== 'Inbox' ? (
+        <>
+          <div
+            className={classes.dot}
+            style={{ backgroundColor: projects[projectId].color }}
+          ></div>
+          <span>{projects[projectId].name}</span>
+        </>
+      ) : (
+        <>
+          <InboxSvg
+            fill={true ? '#5297ff' : '#416DB5'}
+            style={{ minWidth: '24px', minHeight: '24px' }}
+          />
+          <span>{projects[projectId].name}</span>
+        </>
+      )}
       {optionsVisible && (
         <div
           onClick={(e) => {
             e.stopPropagation();
-            console.log('modal was clicked');
             setOptionsVisible(false);
           }}
           className={classes.optionModalBg}
@@ -40,12 +52,29 @@ const ProjectSelector = ({ recentProjId, handleProjIdChange }) => {
                 <div
                   className={classes[`${theme('Option')}`]}
                   key={id}
-                  value={project.id}
+                  data-value={project.id}
+                  onClick={(e) => handleProjIdChange(e)}
                 >
-                  <span>{project.name}</span>
-                  {project.name === 'Inbox' ? (
+                  {project.name !== 'Inbox' ? (
+                    <div
+                      className={classes.dotDropdown}
+                      style={{ backgroundColor: project.color }}
+                    ></div>
+                  ) : (
+                    // <div>
+                    <InboxSvg
+                      fill={true ? '#5297ff' : '#416DB5'}
+                      style={{
+                        paddingLeft: '0',
+                        marginLeft: '0',
+                      }}
+                    />
+                    // </div>
+                  )}
+                  <span style={{ pointerEvents: 'none' }}>{project.name}</span>
+                  {/* {project.name === 'Inbox' ? (
                     <InboxSvg fill={true ? '#5297ff' : '#416DB5'} />
-                  ) : null}
+                  ) : null} */}
                 </div>
               );
             })}
