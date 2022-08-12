@@ -1,0 +1,72 @@
+.falseButtonShape,
+.trueButtonShape {
+  border-radius: 3px;
+  height: 28px;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  padding: 1%;
+}
+.falseButtonShape {
+  border: 1px solid #cccccc;
+}
+.trueButtonShape {
+  border: 1px solid #555555;
+}
+.falseButtonShape:hover {
+  background-color: #eeeeee;
+}
+.trueButtonShape:hover {
+  background-color: #363636;
+}
+.falseButtonShape > span {
+  color: var(--font-color-light);
+}
+.trueButtonShape > span {
+  color: var(--font-color-dark);
+}
+.optionModalBg {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 13.5%;
+  cursor: default;
+}
+.falseOptions,
+.trueOptions {
+  background-color: white;
+  width: 50vh;
+  border-radius: 5px;
+  /* padding: 0.5%; */
+  max-height: 205px;
+  overflow-y: auto;
+  padding-right: 2%;
+  box-shadow: 2px 2px 4px rgb(122, 122, 122);
+}
+.falseOption,
+.trueOption {
+  /* border: 1px solid red; */
+  /* margin-left: 1%; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 4%;
+  border-radius: 0px 3px 3px 0px;
+}
+.falseOption:hover {
+  background-color: #f3f3f3;
+}
+.trueOption:hover {
+  background-color: #363636;
+}

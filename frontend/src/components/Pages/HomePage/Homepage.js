@@ -37,7 +37,7 @@ function Homepage() {
             <img
               className={classes.centerImg}
               src="/static/images/mainimghome.png"
-              atl=""
+              alt=""
             />
           </div>
           <div className={classes.sideIndivContainer}>

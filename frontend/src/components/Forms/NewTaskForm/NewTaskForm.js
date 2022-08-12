@@ -6,6 +6,7 @@ import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from './flag.svg';
 import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 import { useLocation } from 'react-router-dom';
+import ProjectSelector from '../../Elements/ProjectSelector';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -135,7 +136,12 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             </div>
             <div>
               <div>
-                <select
+                <ProjectSelector
+                  recentProjId={recentProjId}
+                  handleProjIdChange={handleProjIdChange}
+                  projArr={projArr}
+                />
+                {/* <select
                   defaultValue={recentProjId}
                   onChange={handleProjIdChange}
                 >
@@ -147,7 +153,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
                       </option>
                     );
                   })}
-                </select>
+                </select> */}
               </div>
             </div>
           </div>

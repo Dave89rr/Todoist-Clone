@@ -1,6 +1,5 @@
 import classes from './NavBar.module.css';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import { useHistory } from 'react-router-dom';
