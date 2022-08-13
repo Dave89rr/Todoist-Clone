@@ -23,11 +23,13 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
     now.getMonth(),
     now.getDate() + 1
   );
-  const overdueTasks = taskArr.filter((task) => now > new Date(task.due_date));
+  const overdueTasks = taskArr.filter(
+    (task) => now > new Date(task.due_date) && !task.completed
+  );
 
   const todayTasks = taskArr.filter((task) => {
     let taskDate = new Date(task.due_date);
-    return now < taskDate && tomorrow > taskDate;
+    return now < taskDate && tomorrow > taskDate && !task.completed;
   });
   return (
     <div className={classes.mainContainer}>
