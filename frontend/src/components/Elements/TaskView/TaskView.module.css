@@ -11,7 +11,7 @@
   justify-content: space-between;
   cursor: pointer;
   padding: 0.5%;
-  height: 6vh;
+  height: fit-content;
   align-items: center;
 }
 .falseTaskContainer {
@@ -48,6 +48,18 @@
   justify-content: space-between;
 }
 
+.descripContainer {
+  width: 100%;
+  padding-left: 2.5%;
+  padding-right: 4%;
+  height: 1.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.5%;
+  font-size: 0.7em;
+  color: #808080;
+}
 .trueTaskLowerInfo,
 .falseTaskLowerInfo {
   margin-left: 2.7%;
@@ -88,7 +100,7 @@
   border-radius: 5px;
 }
 .falseUserInteractionBtn:hover {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 .trueUserInteractionBtn:hover {
   background-color: #4d4d4d;

@@ -27,12 +27,11 @@ const SignUpForm = () => {
 
   const handleStep1 = async (e) => {
     e.preventDefault();
-    console.log(email);
-    setUsername(email.split('@')[0]);
-    console.log(username);
     if (password === repeatPassword) {
+      let ranUserName = Math.random();
+      ranUserName = (ranUserName.toFixed(12) * 1000000000000).toString();
       const data = await dispatch(
-        signUp(username, email, password, iconUrl, theme)
+        signUp(ranUserName, email, password, iconUrl, theme)
       );
       if (data) {
         setErrors(data);
@@ -51,8 +50,6 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value.split('@')[0].slice(0, 12));
-    setUsername(e.target.value.split('@')[0].slice(0, 12));
   };
 
   const updatePassword = (e) => {
@@ -63,7 +60,7 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (formStep > 3) {
+  if (formStep > 4) {
     return <Redirect to="/" />;
   }
 
@@ -82,14 +79,6 @@ const SignUpForm = () => {
         />
         <label className={email && classes.filled}>Email</label>
       </div>
-      <input
-        className={classes.userInput}
-        type="text"
-        name="username"
-        onChange={updateUsername}
-        value={username}
-        style={{ display: 'none' }}
-      />
       <div className={classes.inputContainer}>
         <input
           className={classes.userInput}
@@ -336,11 +325,23 @@ const SignUpForm = () => {
             setFormStep(formStep + 1);
           }}
         >
-          Launch Machenist
+          Next
         </button>
       </div>
     </>
   );
+  const handleUserNameUpdate = async (e) => {
+    e.preventDefault();
+    const userUpdt = { ...user };
+    userUpdt.username = username;
+    const data = await dispatch(updateUserTheme(userUpdt));
+    console.log('data', data);
+    if (data) {
+      setErrors(data);
+    } else {
+      setFormStep(formStep + 1);
+    }
+  };
   const step4 = (
     <>
       <div className={classes.inputContainer}>
@@ -362,7 +363,13 @@ const SignUpForm = () => {
           onChange={(e) => setIconUrl(e.target.value)}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button
+        className={classes.formBtn}
+        onClick={handleUserNameUpdate}
+        disabled={username.length < 1 || username.length > 12 ? true : false}
+      >
+        Launch Machenist
+      </button>
     </>
   );
   return (
@@ -377,7 +384,7 @@ const SignUpForm = () => {
       </form>
       {formStep === 2 ? step2 : null}
       {formStep === 3 ? step3 : null}
-      {/* {formStep === 4 ? step4 : null} */}
+      {formStep === 4 ? step4 : null}
     </>
   );
 };

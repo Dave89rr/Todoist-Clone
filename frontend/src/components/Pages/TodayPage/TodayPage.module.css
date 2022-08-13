@@ -29,3 +29,18 @@
   font-size: 0.8em;
   color: #808080;
 }
+.falseSubHeader,
+.trueSubHeader {
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 0.5%;
+}
+
+.falseSubHeader > span {
+  font-size: 0.85em;
+  color: var(--font-color-light);
+}
+.trueSubHeader > span {
+  font-size: 0.85em;
+  color: var(--font-color-dark);
+}

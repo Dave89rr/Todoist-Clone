@@ -27,7 +27,8 @@
   margin-top: 1%;
 }
 .userInteractions,
-.loggedOutuserInteractions {
+.loggedOutuserInteractions,
+.leftContainer {
   display: flex;
   width: 35%;
   height: 100%;
@@ -141,4 +142,7 @@
 
 .login > span {
   color: #575757;
+}
+.leftContainer {
+  justify-content: flex-start;
 }

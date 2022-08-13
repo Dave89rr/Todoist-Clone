@@ -6,35 +6,34 @@ import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from './flag.svg';
 import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 import { useLocation } from 'react-router-dom';
+import ProjectSelector from '../../Elements/ProjectSelector';
+import DateTimePicker from 'react-datetime-picker';
+// import DueDate from '../../Elements/DueDate';
+import './DateTimePicker.css';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
-  const projects = useSelector((state) => state.projects);
   const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   let recentProjId = defaultId;
-  let location = useLocation();
+  const location = useLocation();
 
   if (location.pathname.split('/')[1] === 'projects') {
     recentProjId = location.pathname.split('/')[2];
   }
-
+  const now = new Date();
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState('4');
-  const [dueDate, setDueDate] = useState(
-    new Date().toISOString().split('.')[0]
-  );
-
-  const projArr = Object.values(projects);
+  const [dueDate, setDueDate] = useState(now);
   const taskArr = Object.values(tasks);
 
   const handleProjIdChange = (e) => {
-    setProjectId(e.target.value);
-    localStorage.setItem('recentProjId', e.target.value);
+    setProjectId(e.target.dataset.value);
+    localStorage.setItem('recentProjId', e.target.dataset.value);
   };
   const theme = (name) => {
     if (user) {
@@ -59,11 +58,18 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
       projectId,
       priority,
       due_date: dueDate,
+      completed: false,
     };
 
     if (name.length < 1 || name.length > 30) {
       errors.push('Name must be between 1 and 30 characters long.');
     }
+    if (!dueDate) {
+      errors.push('Due date cannot be blank');
+    } else if (now > dueDate) {
+      errors.push('Due date must be set in the future');
+    }
+
     if (errors.length > 0) {
       setValidationErrors(errors);
     } else {
@@ -77,7 +83,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setPosition('');
         setProjectId(recentProjId);
         setPriority(2);
-        setDueDate(new Date().toISOString().split('.')[0]);
+        setDueDate(new Date());
         setViewNewTaskForm(false);
       }
     }
@@ -123,33 +129,17 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
-            <div>
-              <input
-                name="due_date"
-                type="datetime-local"
-                value={dueDate}
-                onChange={(e) => {
-                  setDueDate(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <div>
-                <select
-                  defaultValue={recentProjId}
-                  onChange={handleProjIdChange}
-                >
-                  <option value="">Select a project</option>
-                  {projArr.map((project, id) => {
-                    return (
-                      <option key={id} value={project.id}>
-                        {project.name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
+            <DateTimePicker
+              onChange={setDueDate}
+              value={dueDate}
+              minDate={new Date()}
+            />
+            {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
+            <ProjectSelector
+              recentProjId={recentProjId}
+              handleProjIdChange={handleProjIdChange}
+              projectId={projectId}
+            />
           </div>
           <div
             className={classes[`${theme('PriorityBtn')}`]}
@@ -176,13 +166,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             ) : (
               <FlagSvg fill={'#666666'} />
             )}
-
-            {/* <input
-              name="priority"
-              type="text"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-            /> */}
           </div>
         </div>
         <div className={classes.BtnHolder}>

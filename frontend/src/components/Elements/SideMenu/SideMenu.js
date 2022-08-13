@@ -56,39 +56,21 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
           {projArr &&
             projArr.map((project) => {
               if (project.name !== 'Inbox') {
-                if (project.name.length <= 12) {
-                  return (
-                    <>
-                      <div
-                        className={`${classes.sideItem} ${theme(
-                          'SideBtnText'
-                        )}`}
-                        key={project.id}
-                        onClick={() => history.push(`/projects/${project.id}`)}
-                      >
-                        <div
-                          className={classes.dot}
-                          style={{ backgroundColor: `${project.color}` }}
-                        ></div>{' '}
-                        {project.name}
-                      </div>
-                    </>
-                  );
-                } else {
-                  return (
+                return (
+                  <div
+                    className={`${classes.sideItem} ${classes.sideBtn}`}
+                    key={project.id}
+                    onClick={() => history.push(`/projects/${project.id}`)}
+                  >
                     <div
-                      className={`${classes.sideItem} ${theme('SideBtnText')}`}
-                      key={project.id}
-                      onClick={() => history.push(`/projects/${project.id}`)}
-                    >
-                      <div
-                        className={classes.dot}
-                        style={{ backgroundColor: `${project.color}` }}
-                      ></div>
-                      {`${project.name.slice(0, 12)}...`}
-                    </div>
-                  );
-                }
+                      className={classes.dot}
+                      style={{ backgroundColor: `${project.color}` }}
+                    ></div>{' '}
+                    <span className={`${theme('SideBtnText')}`}>
+                      {project.name}
+                    </span>
+                  </div>
+                );
               }
               return null;
             })}

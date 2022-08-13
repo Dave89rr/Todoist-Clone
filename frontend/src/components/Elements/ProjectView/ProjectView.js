@@ -5,7 +5,10 @@ import { actionDeleteTasksByProjId } from '../../../store/tasks';
 import { thunkDeleteProject } from '../../../store/projects';
 import { useState } from 'react';
 import TaskView from '../TaskView/TaskView';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import {
+  useHistory,
+  useParams,
+} from 'react-router-dom/cjs/react-router-dom.min';
 import { CSSTransition } from 'react-transition-group';
 import { ReactComponent as PlusSvg } from '../SideMenu/plus.svg';
 import { ReactComponent as EditIcon } from '../TaskView/editicon.svg';
@@ -18,10 +21,13 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
   const tasks = useSelector((state) => state.tasks);
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  let taskArr;
+  let incompleteTaskArr;
+  let completedTaskArr;
   if (tasks) {
-    taskArr = Object.values(tasks);
+    incompleteTaskArr = Object.values(tasks).filter((task) => !task.completed);
+    completedTaskArr = Object.values(tasks).filter((task) => task.completed);
   }
   const theme = (name) => {
     if (user) {
@@ -51,6 +57,9 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
       </div>
     </div>
   );
+  if (Object.values(tasks).length > 0 && project === undefined) {
+    history.push('/');
+  }
   if (!project) return null;
   return (
     <div className={classes.mainContainer}>
@@ -76,19 +85,24 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
             <span className={`${theme('ProjHeader')}`}>{project.name}</span>
             {project.name !== 'Inbox' ? projActions : null}
           </div>
-          {taskArr.map((task) => {
+          {incompleteTaskArr.map((task) => {
             if (task.projectId === project.id) {
               return <TaskView task={task} key={task.id} />;
             }
             return null;
           })}
+          {completedTaskArr.map((task) => {
+            if (task.projectId === project.id) {
+              return <TaskView task={task} key={task.id} />;
+            }
+            return null;
+          })}
+
           <div
             className={`${theme('TaskContainer')}`}
             onClick={() => setViewNewTaskForm(!viewNewTaskForm)}
           >
-            {/* <div className={classes.addTaskPlus}> */}
             <PlusSvg fill="#DD4B39" height="24px" />
-            {/* </div> */}
             <span className={`${theme('TaskTitle')}`}>Add task</span>
           </div>
         </div>
