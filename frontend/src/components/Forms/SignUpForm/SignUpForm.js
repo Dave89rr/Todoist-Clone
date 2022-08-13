@@ -277,9 +277,11 @@ const SignUpForm = () => {
           Which theme would you like to start off with?
         </span>
         <span style={{ marginBottom: '0%' }}>
-          "The light blinds us. It is only in the dark that we see clearly..."
+          {theme
+            ? 'If once you start down the dark path, forever will it dominate your destiny. Consume you, it will.'
+            : 'The light blinds us. It is only in the dark that we see clearly...'}
         </span>
-        <span>-Darth Revan</span>
+        <span>{theme ? '-Yoda' : '-Darth Revan'}</span>
       </div>
       <div className={signUpClasses.themeContainer}>
         <div
