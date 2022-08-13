@@ -41,6 +41,11 @@
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+  width: 100%;
+  /* border: 1px solid red; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sideBtn:hover {
   background-color: rgba(210, 210, 210, 0.479);
@@ -73,8 +78,14 @@
 
 .falseSideBtnText {
   color: var(--font-color-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .trueSideBtnText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--font-color-dark);
 }
 .falseTooltip,
@@ -107,6 +118,8 @@
 .dot {
   height: 10px;
   width: 10px;
+  min-height: 10px;
+  min-width: 10px;
   border-radius: 100%;
   margin-right: 1%;
 }
