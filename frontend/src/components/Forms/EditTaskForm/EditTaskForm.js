@@ -17,7 +17,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
   const [name, setName] = useState(taskProp.name);
   const [description, setDescription] = useState(taskProp.description);
   const [projectId, setProjectId] = useState(taskProp.projectId);
-  const [priority, setPriority] = useState(taskProp.priority);
+  const [priority, setPriority] = useState(taskProp.priority.toString());
   const [dueDate, setDueDate] = useState(new Date(taskProp.due_date));
 
   const position = taskProp.position;
