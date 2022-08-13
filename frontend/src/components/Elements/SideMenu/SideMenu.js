@@ -58,21 +58,19 @@ const SideMenu = ({ viewNewProjectForm, setViewNewProjectForm }) => {
               if (project.name !== 'Inbox') {
                 if (project.name.length <= 12) {
                   return (
-                    <>
+                    <div
+                      className={`${classes.sideItem} ${classes.sideBtn}`}
+                      key={project.id}
+                      onClick={() => history.push(`/projects/${project.id}`)}
+                    >
                       <div
-                        className={`${classes.sideItem} ${theme(
-                          'SideBtnText'
-                        )}`}
-                        key={project.id}
-                        onClick={() => history.push(`/projects/${project.id}`)}
-                      >
-                        <div
-                          className={classes.dot}
-                          style={{ backgroundColor: `${project.color}` }}
-                        ></div>{' '}
+                        className={classes.dot}
+                        style={{ backgroundColor: `${project.color}` }}
+                      ></div>{' '}
+                      <span className={`${theme('SideBtnText')}`}>
                         {project.name}
-                      </div>
-                    </>
+                      </span>
+                    </div>
                   );
                 } else {
                   return (
