@@ -25,18 +25,28 @@ const NavBar = ({
   const home = <img src="/static/icons/home.svg" alt="" />;
   const menuIcon = <img src="/static/icons/menu.svg" alt="" />;
   const logoLoggedout = (
-    <div
-      className={classes.logoContainer}
-      onClick={() => {
-        history.push('/');
-      }}
-    >
-      <img
-        className={classes.logo}
-        src="/static/icons/machenist-logo.svg"
-        alt="app icon"
-      />
-      <span>machenist</span>
+    <div className={classes.leftContainer}>
+      <div
+        className={classes.logoContainer}
+        onClick={() => {
+          history.push('/');
+        }}
+      >
+        <img
+          className={classes.logo}
+          src="/static/icons/machenist-logo.svg"
+          alt="app icon"
+        />
+        <span>machenist</span>
+      </div>
+      <div
+        className={classes.login}
+        onClick={() => {
+          window.open('https://github.com/dave89rr/', '_blank');
+        }}
+      >
+        <span>About</span>
+      </div>
     </div>
   );
 
