@@ -7,7 +7,7 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ownerId = db.Column(db.Integer, db.ForeignKey("users.id", ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(30), nullable=False)
-    description = db.Column(db.Text, nullable=True)
+    description = db.Column(db.String(2000), nullable=True)
     position = db.Column(db.Integer, nullable=False)
     projectId = db.Column(db.Integer, db.ForeignKey("projects.id", ondelete='CASCADE'), nullable=False)
     priority = db.Column(db.Integer, nullable=False)
