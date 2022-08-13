@@ -124,6 +124,12 @@ export const updateUserTheme = (user) => async (dispatch) => {
   if (response.ok) {
     const user = await response.json();
     dispatch(updateTheme(user));
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      console.log(data.errors);
+      return data.errors;
+    }
   }
 };
 
@@ -135,8 +141,8 @@ export default function reducer(state = initialState, action) {
       return { user: null };
     case UPDATE_THEME_USER: {
       const newState = JSON.parse(JSON.stringify(state));
-      const { theme } = action.payload;
-      newState.user.theme = theme;
+      const user = action.payload;
+      newState.user = { ...user };
       return newState;
     }
     default:

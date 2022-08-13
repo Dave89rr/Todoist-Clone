@@ -4,3 +4,4 @@ from .project_form import ProjectForm
 from .task_form import TaskForm
 from .update_project_form import UpdateProjectForm
 from .update_task_form import UpdateTaskForm
+from .update_user_theme_form import UpdateUserThemeForm
