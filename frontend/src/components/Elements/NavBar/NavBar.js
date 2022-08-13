@@ -1,9 +1,11 @@
 import classes from './NavBar.module.css';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from '../ProfileButton/ProfileButton';
 import { useHistory } from 'react-router-dom';
 import authClasses from '../../Forms/AuthForm.module.css';
+import { login } from '../../../store/session';
+
 const NavBar = ({
   setViewNewTaskForm,
   viewNewTaskForm,
@@ -12,6 +14,7 @@ const NavBar = ({
 }) => {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
+  const dispatch = useDispatch();
   const theme = (name) => {
     if (user) {
       return `${classes[`${user.theme}${name}`]}`;
@@ -50,12 +53,18 @@ const NavBar = ({
       </div>
     </div>
   );
+  const handleDemoLogin = async () => {
+    await dispatch(login('demo@aa.io', 'password'));
+  };
   return (
     <nav className={`${theme('Nav')}`}>
       <div className={classes[user ? 'loggedIncontainer' : 'container']}>
         {!user ? logoLoggedout : logoLoggedIn}
         {!user ? (
           <div className={classes.loggedOutuserInteractions}>
+            <div className={classes.login} onClick={handleDemoLogin}>
+              <span>Demo</span>
+            </div>
             <div
               className={classes.login}
               onClick={() => history.push('/login')}
