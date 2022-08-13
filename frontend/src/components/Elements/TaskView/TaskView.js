@@ -65,9 +65,11 @@ function TaskView({ task }) {
             )}
           </div>
         </div>
-        <div className={classes.descripContainer}>
-          <span>{task.description}</span>
-        </div>
+        {task.description.length > 0 && (
+          <div className={classes.descripContainer}>
+            <span>{task.description}</span>
+          </div>
+        )}
         <div className={`${theme('TaskLowerInfo')}`}>
           <span>
             {new Date(task.due_date)
