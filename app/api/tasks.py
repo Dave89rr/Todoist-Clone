@@ -40,7 +40,13 @@ def create():
 def update():
     form = UpdateTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('')
+    print('')
+    print('')
     print(form.data)
+    print('')
+    print('')
+    print('')
     if form.validate_on_submit():
         task = Task.query.get(form.data['id'])
         task.ownerId = form.data['ownerId'],
@@ -50,6 +56,7 @@ def update():
         task.projectId = form.data['projectId'],
         task.priority = form.data['priority'],
         task.due_date = form.data['due_date'],
+        task.completed = form.data['completed']
         db.session.commit()
         return task.toDict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

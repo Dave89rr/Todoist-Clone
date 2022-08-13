@@ -1,6 +1,6 @@
 import classes from './TaskView.module.css';
 import EditTaskForm from '../../Forms/EditTaskForm';
-import { thunkDeleteTask } from '../../../store/tasks';
+import { thunkDeleteTask, thunkUpdateTask } from '../../../store/tasks';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -21,6 +21,12 @@ function TaskView({ task }) {
       return `${classes[`${user.theme}${name}`]}`;
     }
   };
+  const handleDone = (e) => {
+    const updateTaskCompleted = { ...task };
+    updateTaskCompleted.completed = e.target.checked;
+
+    dispatch(thunkUpdateTask(updateTaskCompleted));
+  };
   return (
     <div
       key={task.id}
@@ -31,7 +37,11 @@ function TaskView({ task }) {
       <div className={classes.infoContainer}>
         <div className={`${theme('TaskInfo')}`}>
           <div>
-            <input type="checkbox"></input>
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={handleDone}
+            ></input>
             <span className={`${theme('TaskTitle')}`}>{task.name}</span>
           </div>
           <div className={classes.taskUserInteractions}>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DateTimeField
+from wtforms import StringField, IntegerField, DateTimeField, BooleanField
 from wtforms.validators import DataRequired, Length
 
 
@@ -12,3 +12,4 @@ class UpdateTaskForm(FlaskForm):
     priority = IntegerField('priority', validators=[DataRequired()])
     projectId = IntegerField('projectId', validators=[DataRequired()])
     due_date = StringField('due_date')
+    completed = BooleanField('completed')
