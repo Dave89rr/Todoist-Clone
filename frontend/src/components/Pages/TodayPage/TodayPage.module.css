@@ -37,8 +37,10 @@
 }
 
 .falseSubHeader > span {
+  font-size: 0.85em;
   color: var(--font-color-light);
 }
 .trueSubHeader > span {
+  font-size: 0.85em;
   color: var(--font-color-dark);
 }

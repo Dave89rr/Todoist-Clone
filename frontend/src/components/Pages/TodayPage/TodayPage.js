@@ -16,7 +16,20 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
       return `${user.theme}${name}`;
     }
   };
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
   const now = new Date();
+  const todayString =
+    now.toString().split(' ').slice(1, 3).join(' ') +
+    ' ‧ Today ‧ ' +
+    days[now.getDay()];
   const nowString = now.toString().split(' ').slice(0, 3).join(' ');
   const tomorrow = new Date(
     now.getYear() + 1900,
@@ -52,7 +65,7 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
       <div className={classes.projectContainer}>
         <div className={classes.titleHolder}>
           <div className={classes[`${theme('SubHeader')}`]}>
-            <span>Today</span>
+            <span>{todayString}</span>
           </div>
           {todayTasks.map((task) => (
             <TaskView task={task} key={task.id} />
