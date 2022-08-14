@@ -6,6 +6,7 @@ import classes from '../AuthForm.module.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
+  const [passwordErrors, setPasswordErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector((state) => state.session.user);
@@ -25,6 +26,11 @@ const LoginForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+    if (e.target.value.length > 60) {
+      setPasswordErrors(['Password must be at most 60 characters long']);
+    } else {
+      setPasswordErrors([]);
+    }
   };
 
   if (user) {
@@ -36,6 +42,9 @@ const LoginForm = () => {
       <form className={classes.form} onSubmit={onLogin}>
         <div className={classes.errorContainer}>
           {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+          {passwordErrors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
@@ -66,7 +75,14 @@ const LoginForm = () => {
         <button
           className={classes.formBtn}
           type="submit"
-          disabled={password && email ? false : true}
+          disabled={
+            email.length < 1 ||
+            email.length > 40 ||
+            password.length < 8 ||
+            password.length > 60
+              ? true
+              : false
+          }
         >
           Log in
         </button>
