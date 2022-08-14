@@ -46,6 +46,9 @@ const SignUpForm = () => {
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+    if (e.target.value.length >= 1 || e.target.value.length <= 12) {
+      setErrors([]);
+    }
   };
 
   const updateEmail = (e) => {
@@ -388,7 +391,11 @@ const SignUpForm = () => {
       <button
         className={classes.formBtn}
         onClick={handleUserNameUpdate}
-        disabled={username.length < 1 || username.length > 12 ? true : false}
+        disabled={
+          username.length < 1 || username.length > 12 || errors.length > 0
+            ? true
+            : false
+        }
       >
         Launch Machenist
       </button>

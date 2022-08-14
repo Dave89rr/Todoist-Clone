@@ -113,7 +113,7 @@ export const signUp =
   };
 
 export const updateUserTheme = (user) => async (dispatch) => {
-  const response = await fetch('/api/users/update-theme', {
+  const response = await fetch('/api/users/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ from ..models import db, User
 
 user = Blueprint("user", __name__, url_prefix='/api/users')
 
-@user.route('/update-theme', methods=['PATCH'])
+@user.route('/update', methods=['PATCH'])
 def update():
     data = request.json
     form = UpdateUserThemeForm()
