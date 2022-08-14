@@ -54,10 +54,21 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+    if (e.target.value === repeatPassword) {
+      setErrors([]);
+    }
   };
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+    if (
+      password.length === e.target.value.length &&
+      password !== e.target.value
+    ) {
+      setErrors(["Passwords don't match"]);
+    } else {
+      setErrors([]);
+    }
   };
 
   if (formStep > 4) {
@@ -107,7 +118,16 @@ const SignUpForm = () => {
         <button
           className={classes.formBtn}
           type="submit"
-          disabled={email && password && repeatPassword ? false : true}
+          disabled={
+            email.length < 1 ||
+            email.length > 40 ||
+            password.length < 1 ||
+            password.length > 60 ||
+            repeatPassword.length !== password.length ||
+            password !== repeatPassword
+              ? true
+              : false
+          }
         >
           Sign up with Email
         </button>
