@@ -57,16 +57,16 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
         className={classes[`${theme('FormContainer')}`]}
         onSubmit={handleSubmit}
       >
+        <div className={classes[`${theme('FormTitle')}`]}>
+          <span>Edit project</span>
+        </div>
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
         ) : null}
-        <div className={classes[`${theme('FormTitle')}`]}>
-          <span>Edit project</span>
-        </div>
         <div className={classes[`${theme('InputContainer')}`]}>
           <div className={classes[`${theme('Input')}`]}>
             <label htmlFor="name">Name</label>
