@@ -69,6 +69,9 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     } else if (now > dueDate) {
       errors.push('Due date must be set in the future');
     }
+    if (description.length > 2000) {
+      errors.push('Description must be at most 2000 characters long');
+    }
 
     if (errors.length > 0) {
       setValidationErrors(errors);
@@ -82,11 +85,21 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setDescription('');
         setPosition('');
         setProjectId(recentProjId);
-        setPriority(2);
+        setPriority('4');
         setDueDate(new Date());
         setViewNewTaskForm(false);
       }
     }
+  };
+  const charCountStyle = () => {
+    if (description.length < 1700) return classes.hiddenCounter;
+    if (description.length >= 1700 && description.length < 1800)
+      return classes.counterVisible;
+    if (description.length >= 1800 && description.length < 1900)
+      return classes.warning;
+    if (description.length >= 1900 && description.length <= 2000)
+      return classes.warning2;
+    if (description.length > 2000) return classes.warning3;
   };
 
   return (
@@ -100,7 +113,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         onClick={(e) => e.stopPropagation()}
       >
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -126,6 +139,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+        </div>
+        <div className={classes.descripCharCounter}>
+          <span className={`${charCountStyle()}`}>
+            {description.length}/2000
+          </span>
         </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
@@ -182,7 +200,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
           <button
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
-            disabled={name.length < 1 ? true : false}
+            disabled={
+              name.length < 1 || name.length > 30 || description.length > 2000
+                ? true
+                : false
+            }
           >
             Add
           </button>
