@@ -81,7 +81,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
         onSubmit={handleSubmit}
       >
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
