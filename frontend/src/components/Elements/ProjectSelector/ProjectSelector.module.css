@@ -4,7 +4,7 @@
   height: 28px;
   width: fit-content;
   min-width: 125px;
-  max-width: 250px;
+  max-width: 200px;
   display: flex;
   overflow: hidden;
   flex-direction: row;
@@ -16,6 +16,12 @@
   border: 1px solid #808080;
   background-color: #cccccc;
 }
+.trueButtonShape > span,
+.falseButtonShape > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* TODO Correct colors. Uncomment once date picker is custom*/
 /* .falseButtonShape {
   border: 1px solid #cccccc;
