@@ -6,6 +6,7 @@ from datetime import datetime
 
 task = Blueprint("task", __name__, url_prefix='/api/tasks')
 
+
 @task.route('/all/<ownerId>')
 def getEverything(ownerId):
     tasks = Task.query.filter_by(ownerId=ownerId).all()
@@ -13,6 +14,7 @@ def getEverything(ownerId):
     data = [task.toDict() for task in tasks]
 
     return {'tasks': data}
+
 
 @task.route('/create', methods=['POST'])
 def create():
@@ -35,18 +37,10 @@ def create():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-
 @task.route('/update', methods=['PATCH'])
 def update():
     form = UpdateTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('')
-    print('')
-    print('')
-    print(form.data)
-    print('')
-    print('')
-    print('')
     if form.validate_on_submit():
         task = Task.query.get(form.data['id'])
         task.ownerId = form.data['ownerId'],
@@ -60,6 +54,7 @@ def update():
         db.session.commit()
         return task.toDict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @task.route('/delete', methods=['DELETE'])
 def delete():
