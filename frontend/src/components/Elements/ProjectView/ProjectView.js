@@ -3,7 +3,7 @@ import EditProjectForm from '../../Forms/EditProjectForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionDeleteTasksByProjId } from '../../../store/tasks';
 import { thunkDeleteProject } from '../../../store/projects';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TaskView from '../TaskView/TaskView';
 import {
   useHistory,
@@ -14,7 +14,7 @@ import { ReactComponent as PlusSvg } from '../SideMenu/plus.svg';
 import { ReactComponent as EditIcon } from '../TaskView/editicon.svg';
 import { ReactComponent as TrashIcon } from '../TaskView/trashcan.svg';
 
-function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
+function ProjectView({ viewNewTaskForm, setViewNewTaskForm, userProp }) {
   const { projectId } = useParams();
   const [viewEditProject, setViewEditProject] = useState(false);
   const project = useSelector((state) => state.projects[projectId]);
@@ -22,7 +22,26 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = userProp;
 
+  useEffect(() => {
+    async function findProject() {
+      const response = await fetch(`/api/projects/${projectId}`);
+
+      if (response.ok) {
+        const { project } = await response.json();
+        if (!project[0]) {
+          return history.push('/');
+        }
+        if (id) {
+          if (project[0].ownerId !== id) history.push('/');
+        }
+      } else {
+        return history.push('/');
+      }
+    }
+    findProject();
+  }, [projectId, history, id]);
   let incompleteTaskArr;
   let completedTaskArr;
   if (tasks) {
@@ -57,9 +76,6 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm }) {
       </div>
     </div>
   );
-  if (Object.values(tasks).length > 0 && project === undefined) {
-    history.push('/');
-  }
   if (!project) return null;
   return (
     <div className={classes.mainContainer}>

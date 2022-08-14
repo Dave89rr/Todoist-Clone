@@ -13,6 +13,14 @@ def getEverything(ownerId):
 
     return {'projects': data}
 
+@project.route('/<id>')
+def findOne(id):
+    project = Project.query.filter_by(id=id)
+
+    data = [proj.toDict() for proj in project]
+
+    return {'project': data}
+
 @project.route('/create', methods=['POST'])
 def create():
     form = ProjectForm()
