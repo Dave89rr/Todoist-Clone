@@ -8,6 +8,13 @@ function LoginPage() {
         <h1>Login</h1>
         <LoginForm />
       </div>
+      <div className={classes.secondContainer}>
+        <img
+          className={classes.imgLogin}
+          src="/static/images/AuthFormImg.png"
+          alt=""
+        />
+      </div>
     </div>
   );
 }
