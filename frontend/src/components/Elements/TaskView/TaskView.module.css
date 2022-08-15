@@ -1,15 +1,22 @@
-.falseTaskTitle {
+.falseTaskTitle,
+.falseTaskTitleDone {
   color: var(--font-color-light);
 }
-.trueTaskTitle {
+.trueTaskTitle,
+.trueTaskTitleDone {
   color: var(--font-color-dark);
 }
+.trueTaskTitleDone,
+.falseTaskTitleDone {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
 .falseTaskContainer,
 .trueTaskContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  cursor: pointer;
   padding: 0.5%;
   height: fit-content;
   align-items: center;
@@ -98,6 +105,7 @@
 .falseUserInteractionBtn,
 .trueUserInteractionBtn {
   border-radius: 5px;
+  cursor: pointer;
 }
 .falseUserInteractionBtn:hover {
   background-color: #eeeeee;

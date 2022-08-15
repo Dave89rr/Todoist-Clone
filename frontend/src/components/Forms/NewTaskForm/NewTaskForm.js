@@ -22,6 +22,13 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     recentProjId = location.pathname.split('/')[2];
   }
   const now = new Date();
+  const future = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    now.getHours() + 3,
+    now.getMinutes()
+  );
   const minDate = new Date(
     now.getFullYear(),
     now.getMonth(),
@@ -29,15 +36,13 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     now.getHours(),
     now.getMinutes()
   );
-  console.log(now);
-  console.log(minDate);
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [position, setPosition] = useState(1);
   const [projectId, setProjectId] = useState(recentProjId);
   const [priority, setPriority] = useState('4');
-  const [dueDate, setDueDate] = useState(now);
+  const [dueDate, setDueDate] = useState(future);
   const taskArr = Object.values(tasks);
 
   const handleProjIdChange = (e) => {
@@ -161,7 +166,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               value={dueDate}
               minDate={minDate}
               disableClock={true}
-              required
               clearIcon={null}
               calendarIcon={null}
             />
@@ -214,10 +218,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
             disabled={
-              name.length < 1 ||
-              name.length > 30 ||
-              description.length > 2000 ||
-              minDate > dueDate
+              name.length < 1 || name.length > 30 || description.length > 2000
                 ? true
                 : false
             }

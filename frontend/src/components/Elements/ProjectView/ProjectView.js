@@ -108,13 +108,6 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm, userProp }) {
             }
             return null;
           })}
-          {completedTaskArr.map((task) => {
-            if (task.projectId === project.id) {
-              return <TaskView task={task} key={task.id} />;
-            }
-            return null;
-          })}
-
           <div
             className={`${theme('TaskContainer')}`}
             onClick={() => setViewNewTaskForm(!viewNewTaskForm)}
@@ -122,6 +115,12 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm, userProp }) {
             <PlusSvg fill="#DD4B39" height="24px" />
             <span className={`${theme('TaskTitle')}`}>Add task</span>
           </div>
+          {completedTaskArr.map((task) => {
+            if (task.projectId === project.id) {
+              return <TaskView task={task} key={task.id} />;
+            }
+            return null;
+          })}
         </div>
       </div>
     </div>

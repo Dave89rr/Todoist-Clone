@@ -1,7 +1,7 @@
 import classes from './SignUpPage.module.css';
 import SignUpForm from '../../Forms/SignUpForm';
 
-function SignUpPage() {
+function SignUpPage({ start }) {
   return (
     <div className={classes.pageContainer}>
       <div className={classes.workableArea}>
@@ -13,7 +13,7 @@ function SignUpPage() {
           />
           <span>machenist</span>
         </div>
-        <SignUpForm />
+        <SignUpForm start={start} />
       </div>
     </div>
   );

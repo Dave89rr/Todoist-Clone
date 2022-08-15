@@ -7,7 +7,7 @@ import classes from '../AuthForm.module.css';
 import signUpClasses from './SignUpForm.module.css';
 import { ReactComponent as Checkmark } from './machenist-logo.svg';
 
-const SignUpForm = () => {
+const SignUpForm = ({ start }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   // const [iconUrl, setIconUrl] = useState('');
   const [theme, setTheme] = useState(false);
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState(start);
   const [personalCreated, setPersonalCreated] = useState(false);
   const [workCreated, setWorkCreated] = useState(false);
   const [educationCreated, setEducationCreated] = useState(false);
@@ -153,19 +153,19 @@ const SignUpForm = () => {
     personal = {
       ownerId: user.id,
       name: 'Personal 😄',
-      color: '#808080',
+      color: '#FF9933',
       view: false,
     };
     work = {
       ownerId: user.id,
       name: 'Work 🎯',
-      color: '#808080',
+      color: '#DB4035',
       view: false,
     };
     education = {
       ownerId: user.id,
       name: 'Education 📚',
-      color: '#808080',
+      color: '#299438',
       view: false,
     };
   }
