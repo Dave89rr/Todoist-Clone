@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  cursor: pointer;
   padding: 0.5%;
   height: fit-content;
   align-items: center;
@@ -98,6 +97,7 @@
 .falseUserInteractionBtn,
 .trueUserInteractionBtn {
   border-radius: 5px;
+  cursor: pointer;
 }
 .falseUserInteractionBtn:hover {
   background-color: #eeeeee;

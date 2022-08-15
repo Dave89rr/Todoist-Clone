@@ -45,11 +45,6 @@ function TaskView({ task }) {
               priority={parseInt(task.priority)}
               theme={user.theme}
             />
-            {/* <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={handleDone}
-            ></input> */}
             <span className={`${theme('TaskTitle')}`}>{task.name}</span>
           </div>
           <div className={classes.taskUserInteractions}>
@@ -111,7 +106,9 @@ function TaskView({ task }) {
               }}
               className={classes.projectNameContainer}
             >
-              <span>{projects[task.projectId].name}</span>
+              <span style={{ cursor: 'pointer' }}>
+                {projects[task.projectId].name}
+              </span>
               <div
                 className={classes.littleCircle}
                 style={{
