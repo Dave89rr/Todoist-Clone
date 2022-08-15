@@ -70,6 +70,7 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm, userProp }) {
             onClick={() => {
               dispatch(thunkDeleteProject(project.id));
               dispatch(actionDeleteTasksByProjId(project.id));
+              history.push('/');
             }}
           />
         </div>
