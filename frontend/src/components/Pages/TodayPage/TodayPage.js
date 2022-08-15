@@ -83,7 +83,7 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
         {overdueTasks.length < 1 && todayTasks.length < 1 ? (
           <div className={classes.emptyDayContainer}>
             <div className={classes.emptySvgContainer}>
-              <EmptyDaySvg />
+              <EmptyDaySvg fill={user.theme ? 'white' : '#DB4C3F'} />
             </div>
             <span className={classes[`${theme('EmptyTitle')}`]}>
               Get a clear view of the day ahead
