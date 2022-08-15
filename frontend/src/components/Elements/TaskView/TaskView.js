@@ -27,6 +27,7 @@ function TaskView({ task }) {
 
     dispatch(thunkUpdateTask(updateTaskCompleted));
   };
+  const now = new Date();
   return (
     <div
       key={task.id}
@@ -71,7 +72,9 @@ function TaskView({ task }) {
           </div>
         )}
         <div className={`${theme('TaskLowerInfo')}`}>
-          <span>
+          <span
+            className={now > new Date(task.due_date) ? classes.overdue : null}
+          >
             {new Date(task.due_date)
               .toLocaleString('en-US', {
                 month: 'long',
