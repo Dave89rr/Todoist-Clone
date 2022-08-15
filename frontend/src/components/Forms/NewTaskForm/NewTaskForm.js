@@ -22,6 +22,15 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     recentProjId = location.pathname.split('/')[2];
   }
   const now = new Date();
+  const minDate = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    now.getHours(),
+    now.getMinutes()
+  );
+  console.log(now);
+  console.log(minDate);
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -66,7 +75,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     }
     if (!dueDate) {
       errors.push('Due date cannot be blank');
-    } else if (now > dueDate) {
+    } else if (minDate > dueDate) {
       errors.push('Due date must be set in the future');
     }
     if (description.length > 2000) {
@@ -150,7 +159,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             <DateTimePicker
               onChange={setDueDate}
               value={dueDate}
-              minDate={new Date()}
+              minDate={minDate}
+              disableClock={true}
+              required
+              clearIcon={null}
+              calendarIcon={null}
             />
             {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
             <ProjectSelector
@@ -201,7 +214,10 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
             disabled={
-              name.length < 1 || name.length > 30 || description.length > 2000
+              name.length < 1 ||
+              name.length > 30 ||
+              description.length > 2000 ||
+              minDate > dueDate
                 ? true
                 : false
             }
