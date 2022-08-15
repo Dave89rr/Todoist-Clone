@@ -6,11 +6,19 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  /* border: 1px solid red; */
   align-self: center;
 }
 .innerContainer {
   display: inline;
   /* border-radius: 1px solid red; */
   width: 50%;
+}
+.secondContainer {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgLogin {
+  max-width: 70%;
 }
