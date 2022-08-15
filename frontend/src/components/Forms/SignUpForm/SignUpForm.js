@@ -86,63 +86,72 @@ const SignUpForm = ({ start }) => {
 
   const step1 = (
     <div className={signUpClasses.step1Container}>
-      <h1>Sign Up</h1>
+      <div className={signUpClasses.secondContainer}>
+        <h1>Sign Up</h1>
 
-      <div className={classes.inputContainer}>
-        <input
-          className={classes.userInput}
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-          required
-        />
-        <label className={email && classes.filled}>Email</label>
-      </div>
-      <div className={classes.inputContainer}>
-        <input
-          className={classes.userInput}
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-          required
-        ></input>
-        <label className={password && classes.filled}>Password</label>
-      </div>
-      <div className={classes.inputContainer}>
-        <input
-          className={classes.userInput}
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-        <label className={repeatPassword && classes.filled}>
-          Repeat Password
-        </label>
-      </div>
-      <div>
-        <button
-          className={classes.formBtn}
-          type="submit"
-          disabled={
-            email.length < 1 ||
-            email.length > 40 ||
-            password.length < 1 ||
-            password.length > 60 ||
-            repeatPassword.length !== password.length ||
-            password !== repeatPassword
-              ? true
-              : false
-          }
-        >
-          Sign up with Email
-        </button>
-        <div className={classes.extraText}>
-          <span>Already signed up?</span> <Link to="/login">Go to login</Link>
+        <div className={classes.inputContainer}>
+          <input
+            className={classes.userInput}
+            type="text"
+            name="email"
+            onChange={updateEmail}
+            value={email}
+            required
+          />
+          <label className={email && classes.filled}>Email</label>
         </div>
+        <div className={classes.inputContainer}>
+          <input
+            className={classes.userInput}
+            type="password"
+            name="password"
+            onChange={updatePassword}
+            value={password}
+            required
+          ></input>
+          <label className={password && classes.filled}>Password</label>
+        </div>
+        <div className={classes.inputContainer}>
+          <input
+            className={classes.userInput}
+            type="password"
+            name="repeat_password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+          ></input>
+          <label className={repeatPassword && classes.filled}>
+            Repeat Password
+          </label>
+        </div>
+        <div>
+          <button
+            className={classes.formBtn}
+            type="submit"
+            disabled={
+              email.length < 1 ||
+              email.length > 40 ||
+              password.length < 1 ||
+              password.length > 60 ||
+              repeatPassword.length !== password.length ||
+              password !== repeatPassword
+                ? true
+                : false
+            }
+          >
+            Sign up with Email
+          </button>
+          <div className={classes.extraText}>
+            <span>Already signed up?</span> <Link to="/login">Go to login</Link>
+          </div>
+        </div>
+      </div>
+      <div className={signUpClasses.signUpImgContainer}>
+        <img
+          className={signUpClasses.imgSignUP}
+          src="/static/images/AuthFormImg.png"
+          alt=""
+        />
       </div>
     </div>
   );

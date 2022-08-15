@@ -1,6 +1,20 @@
 /* Step 1 CSS */
 .step1Container {
+  width: 100%;
+  display: flex;
+}
+.secondContainer {
   width: 50%;
+}
+.signUpImgContainer {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgSignUP {
+  max-width: 80%;
+  align-self: center;
 }
 
 /* Step 2 CSS */
