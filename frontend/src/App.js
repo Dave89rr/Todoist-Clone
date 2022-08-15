@@ -57,7 +57,8 @@ function App() {
       return `${user.theme}${name}`;
     }
   };
-
+  let start = 1;
+  if (user) start = 3;
   return (
     <BrowserRouter>
       <NavBar
@@ -102,7 +103,7 @@ function App() {
             <LoginPage />
           </Route>
           <Route path="/sign-up" exact={true}>
-            <SignUpPage />
+            <SignUpPage start={start} />
           </Route>
           <ProtectedRoute path="/projects/:projectId" exact={true}>
             <ProjectView

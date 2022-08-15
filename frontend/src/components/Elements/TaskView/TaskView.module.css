@@ -1,9 +1,17 @@
-.falseTaskTitle {
+.falseTaskTitle,
+.falseTaskTitleDone {
   color: var(--font-color-light);
 }
-.trueTaskTitle {
+.trueTaskTitle,
+.trueTaskTitleDone {
   color: var(--font-color-dark);
 }
+.trueTaskTitleDone,
+.falseTaskTitleDone {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
 .falseTaskContainer,
 .trueTaskContainer {
   display: flex;

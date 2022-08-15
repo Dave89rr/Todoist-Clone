@@ -166,7 +166,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               value={dueDate}
               minDate={minDate}
               disableClock={true}
-              required
               clearIcon={null}
               calendarIcon={null}
             />
@@ -219,10 +218,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
             disabled={
-              name.length < 1 ||
-              name.length > 30 ||
-              description.length > 2000 ||
-              minDate > dueDate
+              name.length < 1 || name.length > 30 || description.length > 2000
                 ? true
                 : false
             }

@@ -3,7 +3,7 @@ import EditTaskForm from '../../Forms/EditTaskForm';
 import { thunkDeleteTask, thunkUpdateTask } from '../../../store/tasks';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as EditIcon } from './editicon.svg';
 import { ReactComponent as TrashIcon } from './trashcan.svg';
 import Checkbox from '../Checkbox';
@@ -15,6 +15,7 @@ function TaskView({ task }) {
   const projects = useSelector((state) => state.projects);
   const dispatch = useDispatch();
   const [viewEditTask, setViewEditTask] = useState(false);
+  const location = useLocation();
   const history = useHistory();
 
   const theme = (name) => {
@@ -45,7 +46,11 @@ function TaskView({ task }) {
               priority={parseInt(task.priority)}
               theme={user.theme}
             />
-            <span className={`${theme('TaskTitle')}`}>{task.name}</span>
+            {task.completed ? (
+              <span className={`${theme('TaskTitleDone')}`}>{task.name}</span>
+            ) : (
+              <span className={`${theme('TaskTitle')}`}>{task.name}</span>
+            )}
           </div>
           <div className={classes.taskUserInteractions}>
             {showtaskUserInteractions && (
@@ -99,7 +104,7 @@ function TaskView({ task }) {
               .slice(3, 7)
               .join(' ')}
           </span>
-          {Object.values(projects).length ? (
+          {Object.values(projects).length && location.pathname === '/today' ? (
             <div
               onClick={() => {
                 history.push(`/projects/${task.projectId}`);
