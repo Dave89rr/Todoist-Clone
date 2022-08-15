@@ -44,3 +44,40 @@
   font-size: 0.85em;
   color: var(--font-color-dark);
 }
+
+.emptyDayContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.emptySvgContainer {
+  width: 30%;
+}
+.falseEmptyTitle,
+.trueEmptyTitle {
+  margin-bottom: 3%;
+}
+.falseEmptyTitle {
+  color: var(--font-color-light);
+}
+.trueEmptyTitle {
+  color: var(--font-color-dark);
+}
+.falseEmptyBlurb,
+.trueEmptyBlurb {
+  font-size: 0.9em;
+}
+.falseEmptyBlurb {
+  color: #7f7f7f;
+}
+.trueEmptyBlurb {
+  color: #a5a5a5;
+}
+.emptyBtnHolder {
+  margin-top: 5%;
+  width: 12%;
+  height: 3.5vh;
+
+  /* border: 1px solid white; */
+}
