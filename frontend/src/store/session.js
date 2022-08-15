@@ -113,7 +113,7 @@ export const signUp =
   };
 
 export const updateUserTheme = (user) => async (dispatch) => {
-  const response = await fetch('/api/users/update-theme', {
+  const response = await fetch('/api/users/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -127,7 +127,6 @@ export const updateUserTheme = (user) => async (dispatch) => {
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data.errors);
       return data.errors;
     }
   }

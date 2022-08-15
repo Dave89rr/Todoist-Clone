@@ -2,7 +2,9 @@ import classes from './TodayPage.module.css';
 import { useSelector } from 'react-redux';
 import TaskView from '../../Elements/TaskView/TaskView';
 import { ReactComponent as PlusSvg } from '../../Elements/SideMenu/plus.svg';
+import { ReactComponent as EmptyDaySvg } from './emptyday.svg';
 import projectClasses from '../../Elements/ProjectView/ProjectView.module.css';
+import btnClass from '../../Forms/AuthForm.module.css';
 
 function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -61,9 +63,7 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
             ))}
           </>
         )}
-      </div>
-      <div className={classes.projectContainer}>
-        <div className={classes.titleHolder}>
+        <div className={classes.titleHolder} style={{ marginTop: '5%' }}>
           <div className={classes[`${theme('SubHeader')}`]}>
             <span>{todayString}</span>
           </div>
@@ -80,6 +80,34 @@ function TodayPage({ viewNewTaskForm, setViewNewTaskForm }) {
             Add task
           </span>
         </div>
+        {overdueTasks.length < 1 && todayTasks.length < 1 ? (
+          <div className={classes.emptyDayContainer}>
+            <div className={classes.emptySvgContainer}>
+              <EmptyDaySvg fill={user.theme ? 'white' : '#DB4C3F'} />
+            </div>
+            <span className={classes[`${theme('EmptyTitle')}`]}>
+              Get a clear view of the day ahead
+            </span>
+            <span className={classes[`${theme('EmptyBlurb')}`]}>
+              All your tasks that are due today will show up here.
+            </span>
+            <div className={classes.emptyBtnHolder}>
+              <button
+                className={btnClass.formBtn}
+                onClick={() => setViewNewTaskForm(true)}
+                style={{
+                  marginTop: '0',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '3px',
+                  fontWeight: 'normal',
+                }}
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

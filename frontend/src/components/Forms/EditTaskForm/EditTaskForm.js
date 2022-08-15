@@ -59,6 +59,17 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
     }
   };
 
+  const charCountStyle = () => {
+    if (description.length < 1700) return classes.hiddenCounter;
+    if (description.length >= 1700 && description.length < 1800)
+      return classes.counterVisible;
+    if (description.length >= 1800 && description.length < 1900)
+      return classes.warning;
+    if (description.length >= 1900 && description.length <= 2000)
+      return classes.warning2;
+    if (description.length > 2000) return classes.warning3;
+  };
+
   return (
     <div
       className={classes.modalBgTransparent}
@@ -70,7 +81,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
         onSubmit={handleSubmit}
       >
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -96,6 +107,11 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+        </div>
+        <div className={classes.descripCharCounter}>
+          <span className={`${charCountStyle()}`}>
+            {description.length}/2000
+          </span>
         </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
@@ -157,7 +173,11 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
           <button
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
-            disabled={name.length < 1 ? true : false}
+            disabled={
+              name.length < 1 || name.length > 30 || description.length > 2000
+                ? true
+                : false
+            }
           >
             Save
           </button>

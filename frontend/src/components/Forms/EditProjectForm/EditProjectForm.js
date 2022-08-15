@@ -57,16 +57,16 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
         className={classes[`${theme('FormContainer')}`]}
         onSubmit={handleSubmit}
       >
+        <div className={classes[`${theme('FormTitle')}`]}>
+          <span>Edit project</span>
+        </div>
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
         ) : null}
-        <div className={classes[`${theme('FormTitle')}`]}>
-          <span>Edit project</span>
-        </div>
         <div className={classes[`${theme('InputContainer')}`]}>
           <div className={classes[`${theme('Input')}`]}>
             <label htmlFor="name">Name</label>
@@ -147,7 +147,7 @@ function EditProjectForm({ projectProp, setViewEditProject }) {
           <button
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
-            disabled={name.length < 1 ? true : false}
+            disabled={name.length < 1 || name.length > 30 ? true : false}
           >
             Save
           </button>

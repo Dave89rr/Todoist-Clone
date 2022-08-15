@@ -180,3 +180,49 @@
   word-break: break-all;
   width: 100px;
 }
+.errorContainer {
+  margin-top: 2%;
+}
+.errorContainer > div {
+  color: red;
+  font-size: 0.8em;
+}
+.descripCharCounter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 15px;
+  width: 100%;
+  margin-bottom: 2%;
+  padding-left: 1.05vw;
+  padding-right: 2.05vw;
+}
+
+.hiddenCounter {
+  font-size: 0.65em;
+  opacity: 0;
+  transition: opacity 200ms;
+  color: #808080;
+}
+.counterVisible {
+  font-size: 0.65em;
+  opacity: 1;
+  transition: 200ms;
+  color: #808080;
+}
+.warning {
+  font-size: 0.65em;
+  opacity: 1;
+  transition: 200ms;
+  color: rgb(230, 147, 14);
+}
+.warning2 {
+  font-size: 0.65em;
+  transition: 200ms;
+  color: rgb(255, 111, 0);
+}
+.warning3 {
+  transition: 200ms;
+  color: red;
+  font-size: 1em;
+}

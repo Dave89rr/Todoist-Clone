@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as EditIcon } from './editicon.svg';
 import { ReactComponent as TrashIcon } from './trashcan.svg';
+import Checkbox from '../Checkbox';
 
 function TaskView({ task }) {
   const [showtaskUserInteractions, setShowtaskUserInteractions] =
@@ -21,12 +22,13 @@ function TaskView({ task }) {
       return `${classes[`${user.theme}${name}`]}`;
     }
   };
-  const handleDone = (e) => {
+  const handleDone = () => {
     const updateTaskCompleted = { ...task };
-    updateTaskCompleted.completed = e.target.checked;
+    updateTaskCompleted.completed = !task.completed;
 
     dispatch(thunkUpdateTask(updateTaskCompleted));
   };
+  const now = new Date();
   return (
     <div
       key={task.id}
@@ -36,12 +38,18 @@ function TaskView({ task }) {
     >
       <div className={classes.infoContainer}>
         <div className={`${theme('TaskInfo')}`}>
-          <div>
-            <input
+          <div className={classes.leftContainer}>
+            <Checkbox
+              completed={task.completed}
+              handleDone={handleDone}
+              priority={parseInt(task.priority)}
+              theme={user.theme}
+            />
+            {/* <input
               type="checkbox"
               checked={task.completed}
               onChange={handleDone}
-            ></input>
+            ></input> */}
             <span className={`${theme('TaskTitle')}`}>{task.name}</span>
           </div>
           <div className={classes.taskUserInteractions}>
@@ -71,7 +79,9 @@ function TaskView({ task }) {
           </div>
         )}
         <div className={`${theme('TaskLowerInfo')}`}>
-          <span>
+          <span
+            className={now > new Date(task.due_date) ? classes.overdue : null}
+          >
             {new Date(task.due_date)
               .toLocaleString('en-US', {
                 month: 'long',

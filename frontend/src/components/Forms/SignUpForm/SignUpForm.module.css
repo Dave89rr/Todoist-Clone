@@ -130,3 +130,8 @@
 .selected {
   border: 3px solid #ddd;
 }
+
+.userNameInputContainer {
+  width: 50%;
+  align-self: center;
+}

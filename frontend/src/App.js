@@ -108,6 +108,7 @@ function App() {
             <ProjectView
               setViewNewTaskForm={setViewNewTaskForm}
               viewNewTaskForm={viewNewTaskForm}
+              userProp={user}
             />
           </ProtectedRoute>
           <ProtectedRoute path="/today" exact={true}>

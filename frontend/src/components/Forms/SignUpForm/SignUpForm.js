@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [iconUrl, setIconUrl] = useState('/static/images/blankuser.png');
+  // const [iconUrl, setIconUrl] = useState('');
   const [theme, setTheme] = useState(false);
   const [formStep, setFormStep] = useState(1);
   const [personalCreated, setPersonalCreated] = useState(false);
@@ -31,7 +31,13 @@ const SignUpForm = () => {
       let ranUserName = Math.random();
       ranUserName = (ranUserName.toFixed(12) * 1000000000000).toString();
       const data = await dispatch(
-        signUp(ranUserName, email, password, iconUrl, theme)
+        signUp(
+          ranUserName,
+          email,
+          password,
+          '/static/images/blankuser.png',
+          theme
+        )
       );
       if (data) {
         setErrors(data);
@@ -46,6 +52,9 @@ const SignUpForm = () => {
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+    if (e.target.value.length >= 1 || e.target.value.length <= 12) {
+      setErrors([]);
+    }
   };
 
   const updateEmail = (e) => {
@@ -54,10 +63,21 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+    if (e.target.value === repeatPassword) {
+      setErrors([]);
+    }
   };
 
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
+    if (
+      password.length === e.target.value.length &&
+      password !== e.target.value
+    ) {
+      setErrors(["Passwords don't match"]);
+    } else {
+      setErrors([]);
+    }
   };
 
   if (formStep > 4) {
@@ -107,7 +127,16 @@ const SignUpForm = () => {
         <button
           className={classes.formBtn}
           type="submit"
-          disabled={email && password && repeatPassword ? false : true}
+          disabled={
+            email.length < 1 ||
+            email.length > 40 ||
+            password.length < 1 ||
+            password.length > 60 ||
+            repeatPassword.length !== password.length ||
+            password !== repeatPassword
+              ? true
+              : false
+          }
         >
           Sign up with Email
         </button>
@@ -277,9 +306,11 @@ const SignUpForm = () => {
           Which theme would you like to start off with?
         </span>
         <span style={{ marginBottom: '0%' }}>
-          "The light blinds us. It is only in the dark that we see clearly..."
+          {theme
+            ? 'If once you start down the dark path, forever will it dominate your destiny. Consume you, it will.'
+            : 'The light blinds us. It is only in the dark that we see clearly...'}
         </span>
-        <span>-Darth Revan</span>
+        <span>{theme ? '-Yoda' : '-Darth Revan'}</span>
       </div>
       <div className={signUpClasses.themeContainer}>
         <div
@@ -335,7 +366,7 @@ const SignUpForm = () => {
     const userUpdt = { ...user };
     userUpdt.username = username;
     const data = await dispatch(updateUserTheme(userUpdt));
-    console.log('data', data);
+
     if (data) {
       setErrors(data);
     } else {
@@ -344,32 +375,46 @@ const SignUpForm = () => {
   };
   const step4 = (
     <>
-      <div className={classes.inputContainer}>
-        <input
-          className={classes.userInput}
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        />
-        <label className={username && classes.filled}>User Name</label>
+      <div
+        style={{ marginTop: '15%' }}
+        className={signUpClasses.stepTitleSection}
+      >
+        <span className={signUpClasses.stepTitle}>
+          Lastly, what shall we call you?
+        </span>
       </div>
-      <div>
+      <div className={signUpClasses.userNameInputContainer}>
+        <div className={classes.inputContainer}>
+          <input
+            className={classes.userInput}
+            type="text"
+            name="username"
+            onChange={updateUsername}
+            value={username}
+          />
+          <label className={username && classes.filled}>User Name</label>
+        </div>
+        {/* <div>
         <label>Icon Url</label>
         <input
-          type="text"
-          name="icon_url"
-          value={iconUrl}
-          onChange={(e) => setIconUrl(e.target.value)}
+        type="text"
+        name="icon_url"
+        value={iconUrl}
+        onChange={(e) => setIconUrl(e.target.value)}
         />
+      </div> */}
+        <button
+          className={classes.formBtn}
+          onClick={handleUserNameUpdate}
+          disabled={
+            username.length < 1 || username.length > 12 || errors.length > 0
+              ? true
+              : false
+          }
+        >
+          Launch Machenist
+        </button>
       </div>
-      <button
-        className={classes.formBtn}
-        onClick={handleUserNameUpdate}
-        disabled={username.length < 1 || username.length > 12 ? true : false}
-      >
-        Launch Machenist
-      </button>
     </>
   );
   return (

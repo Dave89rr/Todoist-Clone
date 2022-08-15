@@ -22,6 +22,15 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     recentProjId = location.pathname.split('/')[2];
   }
   const now = new Date();
+  const minDate = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    now.getHours(),
+    now.getMinutes()
+  );
+  console.log(now);
+  console.log(minDate);
   const [validationErrors, setValidationErrors] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -66,8 +75,11 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
     }
     if (!dueDate) {
       errors.push('Due date cannot be blank');
-    } else if (now > dueDate) {
+    } else if (minDate > dueDate) {
       errors.push('Due date must be set in the future');
+    }
+    if (description.length > 2000) {
+      errors.push('Description must be at most 2000 characters long');
     }
 
     if (errors.length > 0) {
@@ -82,11 +94,21 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         setDescription('');
         setPosition('');
         setProjectId(recentProjId);
-        setPriority(2);
+        setPriority('4');
         setDueDate(new Date());
         setViewNewTaskForm(false);
       }
     }
+  };
+  const charCountStyle = () => {
+    if (description.length < 1700) return classes.hiddenCounter;
+    if (description.length >= 1700 && description.length < 1800)
+      return classes.counterVisible;
+    if (description.length >= 1800 && description.length < 1900)
+      return classes.warning;
+    if (description.length >= 1900 && description.length <= 2000)
+      return classes.warning2;
+    if (description.length > 2000) return classes.warning3;
   };
 
   return (
@@ -100,7 +122,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
         onClick={(e) => e.stopPropagation()}
       >
         {validationErrors.length > 0 ? (
-          <div>
+          <div className={classes.errorContainer}>
             {validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
@@ -127,12 +149,21 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        <div className={classes.descripCharCounter}>
+          <span className={`${charCountStyle()}`}>
+            {description.length}/2000
+          </span>
+        </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
             <DateTimePicker
               onChange={setDueDate}
               value={dueDate}
-              minDate={new Date()}
+              minDate={minDate}
+              disableClock={true}
+              required
+              clearIcon={null}
+              calendarIcon={null}
             />
             {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
             <ProjectSelector
@@ -182,7 +213,14 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
           <button
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
-            disabled={name.length < 1 ? true : false}
+            disabled={
+              name.length < 1 ||
+              name.length > 30 ||
+              description.length > 2000 ||
+              minDate > dueDate
+                ? true
+                : false
+            }
           >
             Add
           </button>
