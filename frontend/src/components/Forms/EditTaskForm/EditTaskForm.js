@@ -120,6 +120,10 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
                 onChange={setDueDate}
                 value={dueDate}
                 minDate={new Date()}
+                disableClock={true}
+                required
+                clearIcon={null}
+                calendarIcon={null}
               />
             </div>
             <div>
