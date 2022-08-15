@@ -23,6 +23,16 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
   const position = taskProp.position;
   const completed = taskProp.completed;
 
+  const now = new Date();
+  const oldDueDate = new Date(taskProp.due_date);
+
+  const minDate = new Date(
+    oldDueDate.getFullYear(),
+    oldDueDate.getMonth(),
+    oldDueDate.getDate(),
+    oldDueDate.getHours(),
+    oldDueDate.getMinutes() - 5
+  );
   const theme = (name) => {
     if (user) {
       return `${user.theme}${name}`;
@@ -49,6 +59,18 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
 
     if (name.length < 1 || name.length > 30) {
       errors.push('Name for a task must be between 1 and 30 characters');
+    }
+    if (!dueDate) {
+      errors.push('Due date cannot be blank');
+    } else if (now > minDate) {
+      if (minDate > dueDate) {
+        errors.push('Task cannot be edited to have due date before today');
+      } /* else if (now > dueDate && dueDate < minDate) {
+        errors.push('This task was overdue. Please udpate');
+      } */
+    }
+    if (description.length > 2000) {
+      errors.push('Description must be at most 2000 characters long');
     }
     if (errors.length > 0) {
       setValidationErrors(errors);
@@ -119,9 +141,8 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
               <DateTimePicker
                 onChange={setDueDate}
                 value={dueDate}
-                minDate={new Date()}
+                minDate={now > minDate ? minDate : now}
                 disableClock={true}
-                required
                 clearIcon={null}
                 calendarIcon={null}
               />
