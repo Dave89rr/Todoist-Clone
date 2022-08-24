@@ -7,9 +7,9 @@ import { ReactComponent as FlagSvg } from './flag.svg';
 import { ReactComponent as FilledFlagSvg } from './filledflag.svg';
 import { useLocation } from 'react-router-dom';
 import ProjectSelector from '../../Elements/ProjectSelector';
-import DateTimePicker from 'react-datetime-picker';
+// import DateTimePicker from 'react-datetime-picker';
+import DateTimePicker from '../../../3rd-party/react-date-time-picker/DateTimePicker';
 // import DueDate from '../../Elements/DueDate';
-import './DateTimePicker.css';
 
 function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   const user = useSelector((state) => state.session.user);
@@ -168,6 +168,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               disableClock={true}
               clearIcon={null}
               calendarIcon={null}
+              theme={user.theme}
             />
             {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
             <ProjectSelector
