@@ -2,8 +2,6 @@ import classes from './Checkbox.module.css';
 import { ReactComponent as CheckSvg } from './check.svg';
 
 const Checkbox = ({ completed, handleDone, priority, theme }) => {
-  console.log('theme', theme);
-  console.log('priority', priority);
   let color;
 
   switch (true) {
@@ -25,7 +23,6 @@ const Checkbox = ({ completed, handleDone, priority, theme }) => {
     }
     case theme === false && priority === 1: {
       color = '#D1453B'; // lightRed
-      console.log('I was here');
       break;
     }
     case theme === false && priority === 2: {
