@@ -29,7 +29,7 @@ const SignUpForm = ({ start }) => {
     e.preventDefault();
     if (password === repeatPassword) {
       let ranUserName = Math.random();
-      ranUserName = (ranUserName.toFixed(12) * 1000000000000).toString();
+      ranUserName = (ranUserName * 100000000000000).toString().slice(0, 11);
       const data = await dispatch(
         signUp(
           ranUserName,
