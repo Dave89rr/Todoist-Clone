@@ -170,7 +170,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               calendarIcon={null}
               theme={user.theme}
             />
-            {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
             <ProjectSelector
               recentProjId={recentProjId}
               handleProjIdChange={handleProjIdChange}
