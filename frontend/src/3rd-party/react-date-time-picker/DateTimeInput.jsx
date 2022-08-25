@@ -346,7 +346,7 @@ export default class DateTimeInput extends PureComponent {
   }
 
   get commonInputProps() {
-    const { className, disabled, isWidgetOpen, maxDate, minDate, required, theme } = this.props;
+    const { className, disabled, isWidgetOpen, maxDate, minDate, required } = this.props;
     
     return {
       className,
