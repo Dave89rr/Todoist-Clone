@@ -1,0 +1,156 @@
+.false_react-datetime-picker,
+.true_react-datetime-picker {
+  display: inline-flex;
+  position: relative;
+}
+.false_react-datetime-picker,
+.false_react-datetime-picker *,
+.false_react-datetime-picker *:before,
+.false_react-datetime-picker *:after,
+.true_react-datetime-picker,
+.true_react-datetime-picker *,
+.true_react-datetime-picker *:before,
+.true_react-datetime-picker *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.false_react-datetime-picker--disabled,
+.true_react-datetime-picker--disabled {
+  background-color: #f0f0f0;
+  color: #6d6d6d;
+}
+.false_react-datetime-picker__wrapper,
+.true_react-datetime-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+.false_react-datetime-picker__wrapper {
+  border: thin solid #cccccc;
+}
+.true_react-datetime-picker__wrapper {
+  border: thin solid #555555;
+}
+
+.false_react-datetime-picker__inputGroup,
+.true_react-datetime-picker__inputGroup {
+  min-width: calc(4px + (4px * 3) + 0false_54em * 6 + 0false_217em * 2);
+  flex-grow: 1;
+  padding: 0 2px;
+}
+.false_react-datetime-picker__inputGroup {
+  color: var(--font-color-light);
+}
+.true_react-datetime-picker__inputGroup {
+  color: var(--font-color-dark);
+}
+.false_react-datetime-picker__inputGroup__divider,
+.true_react-datetime-picker__inputGroup__divider {
+  padding: 1px 0;
+  white-space: pre;
+}
+.false_react-datetime-picker__inputGroup__input,
+.true_react-datetime-picker__inputGroup__input {
+  min-width: 0false_54em;
+  height: calc(100% - 2px);
+  position: relative;
+  padding: 1px;
+  border: 0;
+  background: none;
+  font: inherit;
+  box-sizing: content-box;
+  -moz-appearance: textfield;
+}
+.false_react-datetime-picker__inputGroup__input {
+  color: var(--font-color-light);
+}
+.true_react-datetime-picker__inputGroup__input {
+  color: var(--font-color-dark);
+}
+.false_react-datetime-picker__inputGroup__input::-webkit-outer-spin-button,
+.false_react-datetime-picker__inputGroup__input::-webkit-inner-spin-button,
+.true_react-datetime-picker__inputGroup__input::-webkit-outer-spin-button,
+.true_react-datetime-picker__inputGroup__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.false_react-datetime-picker__inputGroup__input:invalid,
+.true_react-datetime-picker__inputGroup__input:invalid {
+  background: rgba(255, 0, 0, 0false_1);
+}
+.false_react-datetime-picker__inputGroup__input--hasLeadingZero,
+.true_react-datetime-picker__inputGroup__input--hasLeadingZero {
+  margin-left: -0false_54em;
+  padding-left: calc(1px + 0false_54em);
+}
+.false_react-datetime-picker__inputGroup__amPm,
+.true_react-datetime-picker__inputGroup__amPm {
+  font: inherit;
+  -moz-appearance: menulist;
+}
+.false_react-datetime-picker__button,
+.true_react-datetime-picker__button {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+}
+.false_react-datetime-picker__button:enabled,
+.true_react-datetime-picker__button:enabled {
+  cursor: pointer;
+}
+.false_react-datetime-picker__button:enabled:hover
+  .false_react-datetime-picker__button__icon,
+.false_react-datetime-picker__button:enabled:focus
+  .false_react-datetime-picker__button__icon,
+.true_react-datetime-picker__button:enabled:hover
+  .true_react-datetime-picker__button__icon,
+.true_react-datetime-picker__button:enabled:focus
+  .true_react-datetime-picker__button__icon {
+  stroke: #0078d7;
+}
+.false_react-datetime-picker__button:disabled
+  .false_react-datetime-picker__button__icon,
+.true_react-datetime-picker__button:disabled
+  .true_react-datetime-picker__button__icon {
+  stroke: #6d6d6d;
+}
+.false_react-datetime-picker__button svg,
+.true_react-datetime-picker__button svg {
+  display: inherit;
+}
+.false_react-datetime-picker__calendar,
+.false_react-datetime-picker__clock,
+.true_react-datetime-picker__calendar,
+.true_react-datetime-picker__clock {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+.false_react-datetime-picker__calendar--closed,
+.false_react-datetime-picker__clock--closed,
+.true_react-datetime-picker__calendar--closed,
+.true_react-datetime-picker__clock--closed {
+  display: none;
+}
+.false_react-datetime-picker__calendar,
+.true_react-datetime-picker__calendar {
+  width: 350px;
+  max-width: 100vw;
+}
+.false_react-datetime-picker__calendar .false_react-calendar,
+.true_react-datetime-picker__calendar .false_react-calendar {
+  border-width: thin;
+}
+.false_react-datetime-picker__clock,
+.true_react-datetime-picker__clock {
+  width: 200px;
+  height: 200px;
+  max-width: 100vw;
+  padding: 25px;
+  background-color: white;
+  border: thin solid #a0a096;
+}
