@@ -6,7 +6,8 @@ import TextArea from 'react-textarea-autosize';
 import { ReactComponent as FlagSvg } from '../NewTaskForm/flag.svg';
 import { ReactComponent as FilledFlagSvg } from '../NewTaskForm/filledflag.svg';
 import ProjectSelector from '../../Elements/ProjectSelector';
-import DateTimePicker from 'react-datetime-picker';
+// import DateTimePicker from 'react-datetime-picker';
+import DateTimePicker from '../../../3rd-party/react-date-time-picker';
 
 function EditTaskForm({ taskProp, setViewEditTask }) {
   const user = useSelector((state) => state.session.user);
@@ -137,25 +138,20 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
         </div>
         <div className={classes.optionContainer}>
           <div className={classes.leftOptions}>
-            <div>
-              <DateTimePicker
-                onChange={setDueDate}
-                value={dueDate}
-                minDate={now > minDate ? minDate : now}
-                disableClock={true}
-                clearIcon={null}
-                calendarIcon={null}
-              />
-            </div>
-            <div>
-              <div>
-                <ProjectSelector
-                  recentProjId={taskProp.projectId}
-                  handleProjIdChange={handleProjIdChange}
-                  projectId={projectId}
-                />
-              </div>
-            </div>
+            <DateTimePicker
+              onChange={setDueDate}
+              value={dueDate}
+              minDate={now > minDate ? minDate : now}
+              disableClock={true}
+              clearIcon={null}
+              calendarIcon={null}
+              theme={user.theme}
+            />
+            <ProjectSelector
+              recentProjId={taskProp.projectId}
+              handleProjIdChange={handleProjIdChange}
+              projectId={projectId}
+            />
           </div>
           <div
             className={classes[`${theme('PriorityBtn')}`]}

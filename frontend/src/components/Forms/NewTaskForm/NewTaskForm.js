@@ -119,12 +119,12 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
   return (
     <div
       className={classes.modalBgTransparent}
-      onClick={() => setViewNewTaskForm(false)}
+      onMouseDown={() => setViewNewTaskForm(false)}
     >
       <form
         className={classes[`${theme('NewTaskFormContainer')}`]}
         onSubmit={handleSubmit}
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
       >
         {validationErrors.length > 0 ? (
           <div className={classes.errorContainer}>
@@ -170,7 +170,6 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
               calendarIcon={null}
               theme={user.theme}
             />
-            {/* <DueDate dueDate={dueDate} setDueDate={setDueDate} /> */}
             <ProjectSelector
               recentProjId={recentProjId}
               handleProjIdChange={handleProjIdChange}
