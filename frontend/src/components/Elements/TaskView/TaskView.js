@@ -80,7 +80,11 @@ function TaskView({ task }) {
         )}
         <div className={`${theme('TaskLowerInfo')}`}>
           <span
-            className={now > new Date(task.due_date) ? classes.overdue : null}
+            className={
+              now > new Date(task.due_date) && !task.completed
+                ? classes.overdue
+                : null
+            }
           >
             {new Date(task.due_date)
               .toLocaleString('en-US', {
