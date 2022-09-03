@@ -75,8 +75,8 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
       completed: false,
     };
 
-    if (name.length < 1 || name.length > 30) {
-      errors.push('Name must be between 1 and 30 characters long.');
+    if (name.length < 1 || name.length > 500) {
+      errors.push('Name must be between 1 and 500 characters long.');
     }
     if (!dueDate) {
       errors.push('Due date cannot be blank');
@@ -218,7 +218,7 @@ function NewTaskForm({ defaultId, setViewNewTaskForm }) {
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
             disabled={
-              name.length < 1 || name.length > 30 || description.length > 2000
+              name.length < 1 || name.length > 500 || description.length > 2000
                 ? true
                 : false
             }

@@ -58,8 +58,8 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
       completed,
     };
 
-    if (name.length < 1 || name.length > 30) {
-      errors.push('Name for a task must be between 1 and 30 characters');
+    if (name.length < 1 || name.length > 500) {
+      errors.push('Name for a task must be between 1 and 500 characters');
     }
     if (!dueDate) {
       errors.push('Due date cannot be blank');
@@ -195,7 +195,7 @@ function EditTaskForm({ taskProp, setViewEditTask }) {
             className={classes[`${theme('Confirmation')}`]}
             type="submit"
             disabled={
-              name.length < 1 || name.length > 30 || description.length > 2000
+              name.length < 1 || name.length > 500 || description.length > 2000
                 ? true
                 : false
             }
