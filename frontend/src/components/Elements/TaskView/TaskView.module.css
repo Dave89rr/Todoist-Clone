@@ -12,6 +12,18 @@
   opacity: 0.8;
 }
 
+.falseTaskTitle,
+.falseTaskTitleDone,
+.trueTaskTitle,
+.trueTaskTitleDone {
+  height: 1.5em;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+}
+
 .falseTaskContainer,
 .trueTaskContainer {
   display: flex;
