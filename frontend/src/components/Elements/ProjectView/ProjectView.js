@@ -115,12 +115,14 @@ function ProjectView({ viewNewTaskForm, setViewNewTaskForm, userProp }) {
             <PlusSvg fill="#DD4B39" height="24px" />
             <span className={`${theme('TaskTitle')}`}>Add task</span>
           </div>
-          {completedTaskArr.map((task) => {
-            if (task.projectId === project.id) {
-              return <TaskView task={task} key={task.id} />;
-            }
-            return null;
-          })}
+          {project.toggleArchive
+            ? null
+            : completedTaskArr.map((task) => {
+                if (task.projectId === project.id) {
+                  return <TaskView task={task} key={task.id} />;
+                }
+                return null;
+              })}
         </div>
       </div>
     </div>
