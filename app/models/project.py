@@ -9,6 +9,7 @@ class Project(db.Model):
     name = db.Column(db.String(30), nullable=False)
     color = db.Column(db.String(15), nullable=False)
     view = db.Column(db.Boolean, nullable=False)
+    toggleArchive = db.Column(db.Boolean, nullable=True)
     createdAt = db.Column(db.DateTime(timezone=True), nullable=False, server_default=func.now())
     updatedAt = db.Column(db.DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
@@ -20,6 +21,7 @@ class Project(db.Model):
             name=self.name,
             color=self.color,
             view=self.view,
+            toggleArchive = self.toggleArchive,
             createdAt=self.createdAt,
             updatedAt=self.updatedAt,
         )
