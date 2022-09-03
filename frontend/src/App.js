@@ -18,6 +18,7 @@ import './index.css';
 import SignUpPage from './components/Pages/SignUpPage';
 import PageNotFound from './components/Pages/PageNotFound';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import updateCalendarDate from './utils';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +28,8 @@ function App() {
   const [viewNewTaskForm, setViewNewTaskForm] = useState(false);
   const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
   const [viewSideMenu, setViewSideMenu] = useState(true);
+
+  updateCalendarDate();
 
   // Missing a way to detect that a modal is open to prevent this listener from triggering
   // will probably have to use some state that is changed when modalIsOpen
