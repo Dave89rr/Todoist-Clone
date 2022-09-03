@@ -28,6 +28,20 @@ function App() {
   const [viewNewProjectForm, setViewNewProjectForm] = useState(false);
   const [viewSideMenu, setViewSideMenu] = useState(true);
 
+  // Missing a way to detect that a modal is open to prevent this listener from triggering
+  // will probably have to use some state that is changed when modalIsOpen
+  // useEffect(() => {
+  //   const listener = (event) => {
+  //     if (event.code === 'KeyQ' || event.code === 'NumpadEnter') {
+  //       console.log(`${event.code} was pressed.`);
+  //     }
+  //   };
+  //   document.addEventListener('keydown', listener);
+  //   return () => {
+  //     document.removeEventListener('keydown', listener);
+  //   };
+  // }, []);
+
   let defaultId;
   if (projects) {
     defaultId = Object.keys(projects)[0];
@@ -58,6 +72,7 @@ function App() {
     }
   };
   let start = 1;
+
   if (user) start = 3;
   return (
     <BrowserRouter>
